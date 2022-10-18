@@ -1,6 +1,8 @@
 package com.micker.aqhy.activity
 
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.micker.aqhy.R
 import com.micker.aqhy.dialog.UserPrivacyDialog
 import com.micker.core.base.BaseActivity
@@ -22,6 +24,14 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
     override fun doInitSubViews(view: View) {
         isShowPrivacy()
         initBg(view)
+        initRv(view)
+    }
+
+    private fun initRv(view: View){
+        view.recycleView?.setCanRefresh(false)
+        view.recycleView?.isEnableLoadMore = false
+        view.recycleView?.customRecycleView?.setLayoutManager(GridLayoutManager(this, 3))
+
     }
 
     private fun initBg(view: View){
