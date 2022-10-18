@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color_f8f8f8"
+>
+
+    <com.micker.core.widget.TitleBar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleText="登录"
+            app:statusBarPadding="true"
+            app:rightBtn2Text="注册"
+    />
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_dp30"
+    >
+
+        <include
+                android:id="@+id/input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="130dip"
+                layout="@layout/aqhy_view_input_layout"/>
+
+
+        <com.micker.user.widget.NbButton
+                android:id="@+id/main_btn_login"
+                android:layout_width="220dp"
+                android:layout_height="@dimen/margin_dp50"
+                android:layout_below="@+id/input_layout"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dip"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_dp20"
+                android:paddingRight="@dimen/margin_dp20"
+                android:enabled="false"
+                android:text="登录"
+                android:layout_marginLeft="@dimen/margin_dp40"
+                android:layout_marginRight="@dimen/margin_dp40"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="忘记密码"
+            android:layout_gravity="right"
+            android:paddingRight="@dimen/margin_dp20"
+            android:paddingLeft="@dimen/margin_dp20"
+            android:background="?android:selectableItemBackground"
+            android:layout_marginTop="@dimen/margin_dp20"
+            android:paddingTop="@dimen/margin_dp10"
+            android:paddingBottom="@dimen/margin_dp10"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_14"
+    />
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="virtualLine">
+        <attr name="isHorizontal" format="boolean" />
+        <attr name="lineColor" format="color|reference" />
+        <attr name="dashWidth" format="dimension" />
+        <attr name="dashGap" format="dimension" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WscnImageView">
+        <attr name="canLoadGif" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="actionbar">
+        <attr name="titleTextColor" format="color" />
+        <attr name="titleText" format="string" />
+        <attr name="iconBackColor" format="color" />
+        <attr name="iconBackText" format="string" />
+        <attr name="iconBackVisible" format="boolean" />
+        <attr name="rightBtn1Text" format="string" />
+        <attr name="rightBtn1Color" format="color" />
+        <attr name="rightBtn2Text" format="string" />
+        <attr name="rightBtn2Color" format="color" />
+        <attr name="isMarquee" format="boolean" />
+        <attr name="statusBarPadding" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="BallSloganHeader">
+        <!-- color for the top-left ball. -->
+        <attr name="colorScheme1" format="color" />
+        <!-- color for the top-right ball. -->
+        <attr name="colorScheme2" format="color" />
+        <!-- color for the bottom-left ball. -->
+        <attr name="colorScheme3" format="color" />
+        <!-- color for the bottom-right ball. -->
+        <attr name="colorScheme4" format="color" />
+        <!-- the background of slogan view. -->
+        <attr name="sloganDrawable" format="reference" />
+        <!-- whether allow rotation when the header is pulled down. -->
+        <attr name="rotateBallsOnPullDown" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SplashView">
+        <attr name="backgroudColor" format="color"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+>
+    <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_dp15"
+            android:layout_marginRight="@dimen/margin_dp15"
+            android:gravity="center"
+            android:ems="1"
+            android:textSize="@dimen/text_size_13"
+            android:textColor="@color/day_mode_text_color"
+            android:text="滑动 . 查看全部"
+    />
+</RelativeLayout>

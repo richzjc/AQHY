@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="@color/color_f8f8f8"
+              android:layout_height="match_parent">
+
+    <com.micker.core.widget.TitleBar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:statusBarPadding="true"
+            app:title="个人资料"
+    />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/color_f8f8f8"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+        <LinearLayout xmlns:custom="http://schemas.android.com/apk/res-auto"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:background="@color/white"
+                      android:orientation="vertical">
+
+            <com.micker.core.widget.SettingItemView
+                    android:id="@+id/headPic"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_70"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    custom:leftText="头像"
+                    custom:type="none">
+
+                <com.micker.core.imageloader.WscnImageView
+                        android:id="@+id/headImg"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_dp20"
+                        app:roundAsCircle="true"
+                        app:actualImageResource="@drawable/default_img"
+                />
+            </com.micker.core.widget.SettingItemView>
+
+
+            <com.micker.core.widget.SettingItemView
+                    android:id="@+id/nickName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    custom:leftText="昵称"
+                    custom:tvRightMargin="@dimen/margin_dp20"
+                    custom:type="none"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_f8f8f8"/>
+
+            <com.micker.core.widget.SettingItemView
+                    android:id="@+id/bindTel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    custom:leftText="手机号"
+                    custom:tvRightMargin="@dimen/margin_dp20"
+                    custom:type="none"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_f8f8f8"/>
+
+            <com.micker.core.widget.SettingItemView
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    custom:leftText="退出登录"
+                    custom:type="none"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

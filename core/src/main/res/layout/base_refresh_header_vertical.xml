@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/fl_inner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <com.micker.core.imageloader.WscnImageView
+            android:id="@+id/adIv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="80" />
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/margin_dp10">
+
+        <com.micker.core.imageloader.WscnImageView
+                android:id="@+id/iv_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:actualImageScaleType="fitCenter" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pull_to_refresh_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_refresh"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_dp5"
+                android:maxLines="1"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#666666"
+                android:visibility="gone" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/color_f8f8f8">
+
+    <LinearLayout
+            android:id="@+id/category_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/margin_dp10"
+            android:paddingRight="@dimen/margin_dp10"
+            android:paddingTop="@dimen/margin_dp15"
+            android:background="?android:selectableItemBackground"
+            android:paddingBottom="@dimen/margin_dp15"
+    >
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/left_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_18"
+        />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_aaaaaa"
+                android:textSize="@dimen/text_size_14"
+                android:paddingLeft="@dimen/margin_dp15"
+                android:text="查看全部"
+        />
+    </LinearLayout>
+
+    <com.micker.home.widget.HorizontalRecycleView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    />
+
+</LinearLayout>

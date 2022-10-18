@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.micker.home">
+    <application
+            android:allowBackup="true"
+            android:label="@string/app_name"
+            android:supportsRtl="true">
+
+
+        <activity android:name=".activity.HomeCategoryListActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.SvgDetailActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.FindInspirationActivity"
+                  android:screenOrientation="portrait"
+        />
+
+        <activity android:name=".activity.UserWorksActivity"
+                  android:screenOrientation="portrait"
+        />
+    </application>
+</manifest>

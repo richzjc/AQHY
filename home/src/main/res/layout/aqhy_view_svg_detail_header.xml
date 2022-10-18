@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_dp45"
+>
+    <com.micker.core.widget.IconView
+            android:id="@+id/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="@dimen/margin_dp10"
+            android:paddingRight="@dimen/margin_dp10"
+            android:background="?android:selectableItemBackground"
+            android:text="@string/icon_back_with_circle"
+            android:textColor="@color/day_mode_text_color"
+            android:textSize="18sp"/>
+
+    <LinearLayout
+            android:id="@+id/center_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+        <com.micker.core.widget.IconView
+                android:id="@+id/backward"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_dp15"
+                android:paddingRight="@dimen/margin_dp15"
+                android:text="@string/icon_backward"
+                android:enabled="false"
+                android:textColor="@color/back_for_ward_color"
+                android:background="?android:selectableItemBackground"
+                android:textSize="@dimen/text_size_25"/>
+
+        <com.micker.core.widget.IconView
+                android:id="@+id/recover"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_dp15"
+                android:paddingRight="@dimen/margin_dp15"
+                android:text="@string/icon_svg_circle"
+                android:textColor="@color/color_aaaaaa"
+                android:textSize="18sp"/>
+
+        <com.micker.core.widget.IconView
+                android:id="@+id/forward"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_dp15"
+                android:enabled="false"
+                android:paddingRight="@dimen/margin_dp15"
+                android:background="?android:selectableItemBackground"
+                android:text="@string/icon_forward"
+                android:textColor="@color/back_for_ward_color"
+                android:textSize="@dimen/text_size_25"/>
+    </LinearLayout>
+
+    <FrameLayout android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+    >
+        <com.micker.core.widget.IconView
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingRight="@dimen/margin_dp10"
+                android:paddingLeft="@dimen/margin_dp10"
+                android:text="保存"
+                android:background="?android:selectableItemBackground"
+                android:textColor="@color/day_mode_text_color"
+                android:textSize="18sp"/>
+
+        <com.micker.core.widget.IOSLoadingView
+                android:id="@+id/loading"
+                android:layout_width="@dimen/margin_dp20"
+                android:layout_height="@dimen/margin_dp20"
+                android:layout_gravity="center"
+                android:visibility="gone"
+        />
+    </FrameLayout>
+</RelativeLayout>

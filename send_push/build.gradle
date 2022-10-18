@@ -1,0 +1,110 @@
+apply plugin: 'com.android.application'
+apply from: '../basic.gradle'
+apply plugin: 'kotlin-noarg'
+apply plugin: 'kotlin-allopen'
+
+noArg {
+    annotation("com.micker.data.Poko")
+}
+
+allOpen {
+    annotation("com.micker.data.Poko")
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.richzjc.send_push"
+        minSdkVersion ANDROID_MIN_VERSION
+        targetSdkVersion ANDROID_TARGET_VERSION
+        multiDexEnabled true
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
+        manifestPlaceholders = [
+                UMENG_APP_KEY: "5e943dfa895ccae948000182",
+                UMENG_MESSAGE_SCRET: "d0407f53581bfbf77d304b17b399e676",
+                QQ_APP_ID: ""
+        ]
+
+
+        ndk {
+            abiFilters 'armeabi-v7a','x86'
+        }
+
+        packagingOptions {
+            exclude "lib/arm64-v8a/libimagepipeline.so"
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+        disable 'MissingTranslation'
+    }
+    dexOptions {
+        javaMaxHeapSize "5g"
+    }
+    signingConfigs {
+        debug {
+            storeFile file("../aqhy.jks")
+            storePassword ANDROID_KEYSTORE_PASS
+            keyAlias ANDROID_ALIAS_NAME
+            keyPassword ANDROID_ALIAS_PASS
+            v2SigningEnabled true
+        }
+
+        release {
+            storeFile file("../aqhy.jks")
+            storePassword ANDROID_KEYSTORE_PASS
+            keyAlias ANDROID_ALIAS_NAME
+            keyPassword ANDROID_ALIAS_PASS
+            v2SigningEnabled true
+        }
+    }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            signingConfig signingConfigs.release
+            //是否混淆
+            minifyEnabled true
+            //disZipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard-rules.pro'
+        }
+
+        debug {
+            jniDebuggable false
+//          applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            signingConfig signingConfigs.debug
+            //是否混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), './proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    api rootProject.ext.facebook.stetho
+    api rootProject.ext.facebook.stethoOkhttp3
+    kapt rootProject.ext.router.routerCompiler
+    implementation rootProject.ext.support.startUp
+    implementation rootProject.ext.thirdlib.packerNg
+    api project(path: ':global')
+    api project(path: ':user')
+    api project(path: ':home')
+    api project(path: ':push')
+}

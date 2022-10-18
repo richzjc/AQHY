@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="guide_images">
+        <item>guide_01</item>
+        <item>guide_02</item>
+        <item>guide_03</item>
+        <item>guide_04</item>
+    </string-array>
+
+</resources>

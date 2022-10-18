@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_user_privacy_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_dp25"
+        android:paddingTop="@dimen/margin_dp25"
+        android:paddingRight="@dimen/margin_dp25"
+        android:paddingBottom="@dimen/margin_dp5">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_dp20"
+            android:gravity="center"
+            android:text="@string/alien_user_privacy_title"
+            android:textColor="@color/day_mode_text_color"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold" />
+
+    <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="@dimen/margin_dp3"
+            android:textColor="#666666"
+            android:textSize="@dimen/text_size_13" />
+
+    <TextView
+            android:id="@+id/user_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_dp20"
+            android:background="@drawable/shape_user_privacy_agree_bg"
+            android:gravity="center"
+            android:paddingTop="@dimen/margin_dp10"
+            android:paddingBottom="@dimen/margin_dp10"
+            android:text="@string/alien_user_privacy_agree"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15" />
+
+    <TextView
+            android:id="@+id/not_agree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/margin_dp10"
+            android:paddingBottom="@dimen/margin_dp10"
+            android:text="@string/alien_user_privacy_not_agree"
+            android:textColor="#666666"
+            android:textSize="@dimen/text_size_15" />
+</LinearLayout>

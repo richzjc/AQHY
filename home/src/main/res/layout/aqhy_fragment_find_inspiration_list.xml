@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color_f8f8f8"
+              android:orientation="vertical"
+>
+
+    <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+    >
+        <com.micker.core.widget.IconView
+                android:id="@+id/icon_back"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_dp45"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_dp10"
+                android:paddingRight="@dimen/margin_dp10"
+                android:background="?android:selectableItemBackground"
+                android:text="@string/icon_back_with_circle"
+                android:layout_gravity="center_vertical|left"
+                android:textColor="@color/day_mode_text_color"
+                android:textSize="18sp"/>
+
+        <com.micker.core.imageloader.WscnImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+        />
+
+        <com.micker.core.widget.IconView
+                android:id="@+id/paint"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_dp45"
+                android:gravity="center"
+                android:paddingRight="@dimen/margin_dp10"
+                android:paddingLeft="@dimen/margin_dp10"
+                android:text="画"
+                android:layout_gravity="center_vertical|right"
+                android:layout_alignParentRight="true"
+                android:background="?android:selectableItemBackground"
+                android:textColor="@color/day_mode_text_color"
+                android:textSize="18sp"/>
+    </FrameLayout>
+
+    <com.micker.core.widget.PullToRefreshCustomRecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_dp10"
+            android:descendantFocusability="blocksDescendants"/>
+</LinearLayout>

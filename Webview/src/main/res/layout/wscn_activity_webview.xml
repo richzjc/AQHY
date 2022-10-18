@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/day_mode_background_color"
+              android:orientation="vertical">
+
+    <com.micker.core.widget.TitleBar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:statusBarPadding="true"
+    />
+
+    <View
+            android:id="@+id/titleBarLine"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0.5"
+            android:background="@color/color_e6e6e6"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.micker.core.widget.pulltorefresh.PullToRefreshAdapterView
+                android:id="@+id/mPullToRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <com.micker.webview.Widget.NestedWebView
+                    android:id="@+id/webView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        </com.micker.core.widget.pulltorefresh.PullToRefreshAdapterView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

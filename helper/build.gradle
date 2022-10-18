@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion ANDROID_MIN_VERSION
+        targetSdkVersion ANDROID_TARGET_VERSION
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.support.appcompat
+    api rootProject.ext.router.router
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api rootProject.ext.kotlin.kAndroid
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'com.tencent.bugly:nativecrashreport:3.6.0'
+    api 'com.tencent.bugly:crashreport_upgrade:latest.release'
+}
+
+repositories {
+    mavenCentral()
+}

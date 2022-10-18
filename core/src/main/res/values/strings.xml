@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">core</string>
+    <string name="base_loading_text">正在加载...</string>
+    <string name="base_all_load_completed">没有更多内容</string>
+    <string name="base_click_and_load_more">点击加载更多</string>
+
+
+    <string name="icon_back_with_circle">&#xe693;</string>
+    <string name="icon_arrow_right">&#xe8b2;</string>
+    
+    <string name="icon_backward">&#xe657;</string>
+    <string name="icon_forward">&#xe655;</string>
+    <string name="icon_svg_circle">&#xe72f;</string>
+    <string name="icon_color_history">&#xe736;</string>
+    <string name="icon_color_category">&#xe711;</string>
+    <string name="icon_delete">&#xe6f3;</string>
+    <string name="icon_more">&#xe716;</string>
+    <string name="icon_right_tick">&#xe721;</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/margin_dp110"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:background="@drawable/svg_more_popuwindow_bg"
+>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/menu_item1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_dp40"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="分享"
+            android:background="?android:selectableItemBackground"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/menu_item2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_dp40"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="分享"
+            android:background="?android:selectableItemBackground"/>
+           
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/menu_item3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_dp40"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="分享"
+            android:background="?android:selectableItemBackground"/>
+       
+</LinearLayout>

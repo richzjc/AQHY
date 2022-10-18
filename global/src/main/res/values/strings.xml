@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">global</string>
+    <string name="feedback_key" translatable="false">27668185</string>
+    <string name="feedback_secret" translatable="false">503a4ebc6c93550625dd7875dc91102f</string>
+    <string name="global_save_local">保存到本地</string>
+    <string name="premium_more">更多</string>
+    <string name="premium_generate_pic_exception">生成图片异常</string>
+</resources>

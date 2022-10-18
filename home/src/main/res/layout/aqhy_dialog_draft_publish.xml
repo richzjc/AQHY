@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/achieve_parent_bg"
+>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="是否编辑完成"
+            android:padding="@dimen/margin_dp20"
+            android:textSize="@dimen/text_size_17"
+            android:textColor="@color/day_mode_text_color"
+    />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0.5"
+            android:layout_below="@id/tv_content"
+            android:background="@color/color_e6e6e6"
+    />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_content"
+            android:layout_marginTop="@dimen/space_0.5"
+            android:orientation="horizontal"
+    >
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/draft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:selectableItemBackground"
+                android:gravity="center"
+                android:padding="@dimen/margin_dp10"
+                android:text="草稿"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_size_17"/>
+
+        <View
+                android:layout_width="@dimen/space_0.5"
+                android:layout_height="match_parent"
+                android:background="@color/color_e6e6e6"
+        />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/publish"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:selectableItemBackground"
+                android:gravity="center"
+                android:padding="@dimen/margin_dp10"
+                android:text="发布"
+                android:textColor="@color/color_1482f0"
+                android:textSize="@dimen/text_size_17"/>
+    </LinearLayout>
+</RelativeLayout>

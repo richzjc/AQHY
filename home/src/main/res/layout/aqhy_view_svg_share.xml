@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+    <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+
+        <com.micker.core.imageloader.WscnImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:actualImageResource="@drawable/bg_news_flash_share"
+                app:actualImageScaleType="fitXY"
+                app:viewAspectRatio="2.34" />
+
+        <com.micker.core.imageloader.WscnImageView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:translationY="@dimen/margin_dp10"
+                app:actualImageResource="@drawable/logo_news_flash_share"
+                app:actualImageScaleType="fitXY"
+                app:viewAspectRatio="3.52" />
+
+    </RelativeLayout>
+
+    <com.micker.core.imageloader.WscnImageView
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    <RelativeLayout
+            android:id="@+id/bottom_parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_dp95"
+            android:background="@drawable/bg_news_flash_share"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/margin_dp15"
+            android:paddingRight="@dimen/margin_dp15"
+            android:visibility="gone">
+
+        <ImageView
+                android:id="@+id/zxing"
+                android:layout_width="@dimen/margin_dp75"
+                android:layout_height="@dimen/margin_dp75"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/app_download" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_dp75"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_dp15"
+                android:layout_toLeftOf="@id/zxing"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/long_press"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="top"
+                    android:maxLines="1"
+                    android:text="带你认识不一样的色彩空间"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="益智.休闲.创作.灵感"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14" />
+
+            <View
+                    android:id="@+id/line"
+                    android:layout_width="170dp"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/margin_dp4"
+                    android:background="#e4e4e4"
+                    android:ellipsize="end" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="bottom"
+                    android:maxLines="1"
+                    android:text="长按识别二维码"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_size_14" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

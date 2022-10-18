@@ -1,0 +1,11 @@
+include ':send_push'
+include ':aqhy',
+        ':core',
+        ':data',
+        ':global',
+        ':helper',
+        ':home',
+        ':push',
+        ':rpc',
+        ':user',
+        ':webview'

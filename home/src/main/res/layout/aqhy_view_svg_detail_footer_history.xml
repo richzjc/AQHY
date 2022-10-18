@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.micker.core.widget.CustomRecycleView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+    />
+
+    <com.micker.core.widget.IconView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/margin_dp15"
+            android:paddingRight="@dimen/margin_dp15"
+            android:paddingTop="@dimen/margin_dp10"
+            android:paddingBottom="@dimen/margin_dp10"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/icon_delete"
+            android:textSize="@dimen/text_size_25"
+            android:textColor="@color/color_ff0000"
+    />
+</merge>

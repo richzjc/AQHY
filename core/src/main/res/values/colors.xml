@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="retry_color">#f8f8f8</color>
+    <color name="day_mode_text_color">#333333</color>
+    <color name="transparent">#00000000</color>
+    <color name="day_mode_toolbar_color">@color/white</color>
+    <color name="day_mode_text_dark_light_color">#282828</color>
+    <color name="day_mode_background_color">#FFFFFF</color>
+    <color name="color_f8f8f8">#f8f8f8</color>
+    <color name="color_e6e6e6">#e6e6e6</color>
+    <color name="color_1482f0">#EA3952</color>
+    <color name="color_201482f0">#11F04857</color>
+    <color name="color_eef7ff">#eef7ff</color>
+    <color name="color_5e5e5e">#5e5e5e</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_ff0000">#ff0000</color>
+    <color name="color_aaaaaa">#aaaaaa</color>
+    <color name="color_808080">#808080</color>
+    <color name="day_mode_text_dark_color">#454545</color>
+    <color name="color_e7e4e4">#e7e4e4</color>
+    <color name="color_f8f2dd">#f8f2dd</color>
+
+    <color name="orange">#FF9600</color>
+    <color name="aqua">#02D1AC</color>
+    <color name="yellow">#FFD200</color>
+    <color name="blue">#00C6FF</color>
+    <color name="green">#00E099</color>
+    <color name="pink">#FF3892</color>
+
+    <array name="splash_circle_colors">
+        <item>@color/blue</item>
+        <item>@color/green</item>
+        <item>@color/pink</item>
+        <item>@color/orange</item>
+        <item>@color/aqua</item>
+        <item>@color/yellow</item>
+    </array>
+
+
+    <color name="day_mode_color_e6e6e6">#e6e6e6</color>
+
+</resources>

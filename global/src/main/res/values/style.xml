@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="anim_menu_bottombar">
+        <item name="android:windowEnterAnimation">@anim/menu_bottombar_in</item>
+        <item name="android:windowExitAnimation">@anim/menu_bottombar_out</item>
+    </style>
+
+    <style name="DefaultDialog" parent="WscnBaseDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:clipToPadding">true</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/day_mode_text_color</item>
+        <item name="android:textColorHint">@color/color_aaaaaa</item>
+        <item name="android:textColorHighlight">@color/color_aaaaaa</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:textCursorDrawable">@drawable/search_cursor_color</item>
+        <item name="met_primaryColor">@color/color_aaaaaa</item>
+        <item name="met_textColor">@color/day_mode_text_color</item>
+        <item name="met_textColorHint">@color/color_aaaaaa</item>
+    </style>
+
+    <style name="WscnBaseDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="TextInputLayout" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/day_mode_text_color</item>
+        <item name="android:textColorHint">@color/color_aaaaaa</item>
+    </style>
+
+    <style name="Base.Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+    </style>
+
+    <style name="bind_parent_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingTop">@dimen/margin_dp15</item>
+        <item name="android:paddingBottom">@dimen/margin_dp15</item>
+        <item name="android:paddingLeft">@dimen/margin_dp15</item>
+        <item name="android:paddingRight">@dimen/margin_dp15</item>
+    </style>
+
+    <style name="bind_tv_left_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/day_mode_text_dark_light_color</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="bind_cb_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:checked">false</item>
+        <item name="android:button">@drawable/global_checkbox_switch</item>
+    </style>
+
+    <style name="wxpay_transparent" parent="AppTheme">
+        <!--将Activity的Theme设置成透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
+
+    <style name="anim_menu_zoom">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+    </style>
+</resources>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="title_bar_right_btn_style">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <declare-styleable name="SetItem">
+        <attr name="type">
+            <enum name="none" value="0" />
+            <enum name="normal" value="1" />
+            <enum name="checkbox" value="2" />
+            <enum name="checked" value="3" />
+        </attr>
+        <attr name="leftImageDrawable" format="boolean" />
+        <attr name="leftText" format="string" />
+        <attr name="rightText" format="string" />
+        <attr name="isChecked" format="boolean" />
+        <attr name="arrowResId" format="reference|color" />
+        <attr name="checkboxId" format="integer" />
+        <attr name="leftTextSize" format="dimension" />
+        <attr name="rightTextSize" format="dimension" />
+        <attr name="tvLeftMargin" format="dimension" />
+        <attr name="tvRightMargin" format="dimension" />
+        <attr name="leftTextColor" format="color" />
+        <attr name="rightTextColor" format="color" />
+    </declare-styleable>
+
+
+    <!-- SettingItemView 左边textView-->
+    <style name="set_item_leftTextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:layout_marginLeft">@dimen/margin_dp15</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- SettingItemView 左边textView旁边小红点-->
+    <style name="set_item_redDot">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/margin_dp5</item>
+        <item name="android:layout_marginTop">@dimen/margin_dp13</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:src">@drawable/badge_more</item>
+    </style>
+
+
+    <!-- SettingItemView normal模式下 右边的 > -->
+    <style name="set_item_arrow">
+        <item name="android:layout_height">@dimen/margin_dp15</item>
+        <item name="android:layout_width">@dimen/margin_dp10</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/user_center_arrow</item>
+        <item name="android:layout_marginRight">@dimen/margin_dp20</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+
+    <!-- SettingItemView checkbox模式下 右边的checkbox-->
+    <style name="set_item_checkbox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:button">@drawable/global_checkbox_switch</item>
+        <item name="android:layout_marginRight">@dimen/margin_dp12</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- SettingItemView checked模式下 右边的 对号 -->
+    <style name="set_item_checked">
+        <item name="android:layout_height">@dimen/margin_dp15</item>
+        <item name="android:layout_width">@dimen/margin_dp15</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/global_drawable_confirm</item>
+        <item name="android:layout_marginRight">@dimen/margin_dp10</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!--  SettingItemView 右边的TextView -->
+    <style name="set_item_rightTextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginRight">@dimen/margin_dp10</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="dialog_loading" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <declare-styleable name="OverlayImageView">
+        <attr name="overlayAlpha" format="integer" />
+        <attr name="overlayColor" format="color|reference" />
+    </declare-styleable>
+</resources>

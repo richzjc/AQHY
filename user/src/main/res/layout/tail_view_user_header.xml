@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/parent_view"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+>
+    <com.micker.core.imageloader.OverlayImageView
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+    />
+
+    <com.micker.core.imageloader.WscnImageView
+            android:id="@+id/avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:actualImageResource="@drawable/default_img"
+            app:roundAsCircle="true"
+            android:layout_marginTop="30dp"
+            app:roundingBorderColor="@color/color_e6e6e6"
+            app:roundingBorderPadding="@dimen/margin_dp2"
+            app:roundingBorderWidth="@dimen/margin_dp2"
+            android:layout_centerHorizontal="true"
+    />
+
+    <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_dp20"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="点击登录"
+            android:layout_below="@id/avatar"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+    />
+
+    <TextView
+            android:id="@+id/mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_dp20"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            android:layout_marginBottom="@dimen/margin_dp20"
+            android:layout_below="@id/user_name"
+            android:layout_centerHorizontal="true"
+    />
+</RelativeLayout>

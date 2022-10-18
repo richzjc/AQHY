@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <LinearLayout
+        android:id="@+id/umeng_update_frame"
+        android:layout_width="280dp"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:background="@drawable/medusa_drawable_update_bg"
+        android:orientation="vertical"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_dp10"
+            android:tag="beta_title"
+            android:text="@string/update_newversion"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/color_1482f0" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/color_1482f0" />
+        <!-- Content -->
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/update_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_dp10"
+            android:tag="beta_upgrade_feature"
+            android:textColor="@color/day_mode_text_color" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/margin_dp5"
+            android:paddingRight="@dimen/margin_dp5">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/update_now"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/achieve_btn_bg"
+                android:focusable="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:tag="beta_confirm_button"
+                android:textColor="#FFFFFF" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/update_later"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/cancel_bg"
+                android:focusable="true"
+                android:gravity="center"
+                android:tag="beta_cancel_button"
+                android:textColor="@color/day_mode_text_color" />
+    </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

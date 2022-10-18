@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+>
+    <LinearLayout
+            android:id="@+id/tb_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+    >
+        <com.micker.core.widget.IconView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/margin_dp15"
+                android:paddingRight="@dimen/margin_dp15"
+                android:paddingTop="@dimen/margin_dp10"
+                android:paddingBottom="@dimen/margin_dp10"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/icon_color_category"
+                android:textSize="@dimen/text_size_25"
+                android:textColor="@color/color_999999"
+        />
+
+        <com.richzjc.library.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp"
+                app:tabMinWidth="0dp"
+                app:tabPaddingStart="@dimen/margin_dp10"
+                app:tabPaddingEnd="@dimen/margin_dp10"
+                app:tabMode="scrollable"
+                app:tabTextAppearance="@style/search_tablayout_style"
+                app:tabSelectedTextColor="@color/day_mode_text_color"
+                app:tabTextColor="@color/color_999999"/>
+
+        <com.micker.core.widget.IconView
+                android:id="@+id/history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/margin_dp15"
+                android:paddingRight="@dimen/margin_dp15"
+                android:paddingTop="@dimen/margin_dp10"
+                android:paddingBottom="@dimen/margin_dp10"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/icon_color_history"
+                android:textSize="@dimen/text_size_25"
+                android:textColor="@color/color_999999"
+        />
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_below="@id/tb_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    />
+
+    <include
+            android:id="@+id/leftView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            layout="@layout/aqhy_view_footer_bottom_left_right"/>
+    <include
+            android:id="@+id/rightView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            layout="@layout/aqhy_view_footer_bottom_left_right"/>
+</RelativeLayout>

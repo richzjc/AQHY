@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">安琪花园</string>
+    <string name="buglyAppId">be615b22fb</string>
+    <string name="update_newversion" translatable="false">发现新版本</string>
+    <string name="tail_exit_app_text">再按一次退出程序</string>
+
+    <string name="alien_user_privacy_title">用户协议与隐私政策概要</string>
+    <string name="alien_user_privacy_content">本隐私政策与您使用安琪花园服务关系密切，我们建议您仔细阅读并理解本隐私政策全部内容，做出您认为适当的选择。我们努力用通俗易懂、简明扼要的文字表达阐明本隐私政策。</string>
+    <string name="alien_user_privacy_hint">您可以点击下方链接阅读完整的</string>
+    <string name="alien_user_privacy_agree">我同意</string>
+    <string name="alien_user_privacy_not_agree">暂不使用</string>
+    <string name="alien_user_privacy_not_agree_hint">需要您同意后才可继续使用安琪花园提供的服务</string>
+    <string name="alien_user_privacy_text">用户协议</string>
+    <string name="alien_private_protocol">隐私政策</string>
+
+</resources>

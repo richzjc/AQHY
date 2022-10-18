@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <com.micker.core.imageloader.WscnImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:background="@drawable/aqhy_drawable_home_category_list_bottom"
+    >
+        <com.micker.core.widget.IconView
+                android:id="@+id/paint"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/margin_dp35"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_12"
+                android:background="?android:selectableItemBackground"
+                android:text="我来画"
+        />
+        <View android:id="@+id/find_inspiration_line"
+              android:layout_width="@dimen/space_0.5"
+              android:layout_height="match_parent"
+              android:background="@color/color_e6e6e6"
+        />
+        <com.micker.core.widget.IconView
+                android:id="@+id/find_inspiration"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/margin_dp35"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_12"
+                android:background="?android:selectableItemBackground"
+                android:text="找灵感"
+        />
+
+        <View
+                android:id="@+id/delete_line"
+                android:layout_width="@dimen/space_0.5"
+                android:layout_height="match_parent"
+                android:background="@color/color_e6e6e6"
+        />
+        <com.micker.core.widget.IconView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_dp35"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_dp10"
+                android:paddingRight="@dimen/margin_dp10"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_12"
+                android:background="?android:selectableItemBackground"
+        />
+    </LinearLayout>
+</LinearLayout>

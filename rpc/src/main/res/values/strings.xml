@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">rpc</string>
+    <string name="rpc_url_is_empty">url为空</string>
+    <string name="rpc_network_request_timeout">网络请求超时</string>
+</resources>

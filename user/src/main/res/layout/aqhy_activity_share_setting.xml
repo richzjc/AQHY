@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f8f8f8"
+        android:orientation="vertical">
+
+    <com.micker.core.widget.TitleBar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:statusBarPadding="true"
+            app:titleText="分享设置" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0.5"
+            android:background="@color/color_e6e6e6" />
+
+    <include
+            android:id="@+id/both"
+            layout="@layout/aqhy_recycler_item_user" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0.5"
+            android:background="@color/color_e7e4e4" />
+
+    <include
+            android:id="@+id/top"
+            layout="@layout/aqhy_recycler_item_user" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0.5"
+            android:background="@color/color_e7e4e4" />
+
+    <include
+            android:id="@+id/bottom"
+            layout="@layout/aqhy_recycler_item_user" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0.5"
+            android:background="@color/color_e7e4e4" />
+
+    <include
+            android:id="@+id/none"
+            layout="@layout/aqhy_recycler_item_user" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0.5"
+            android:background="@color/color_e7e4e4" />
+
+</LinearLayout>
