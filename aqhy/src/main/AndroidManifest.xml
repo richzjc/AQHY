@@ -20,9 +20,14 @@
             android:theme="@style/AppTheme">
 
         <activity android:name=".activity.MainActivity"
-                  android:launchMode="singleTask"
                   android:screenOrientation="portrait"
         />
+
+        <activity android:name=".activity.MainActivityNew"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait"
+                />
+
 
         <activity android:name=".activity.SplashActivity"
                   android:screenOrientation="portrait">

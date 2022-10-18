@@ -32,18 +32,10 @@ class MainActivity : BaseActivity<Any, BasePresenter<Any>>() {
     override fun doGetContentViewId() = R.layout.tail_activity_main
     override fun isNeedSwipeBack() = false
     override fun doInitSubViews(view: View) {
-        isShowPrivacy()
         initFragments()
         initViewPager()
         initNavigation()
         navigationView?.itemIconSize = ScreenUtils.dip2px(20f)
-    }
-
-    private fun isShowPrivacy(){
-        if(SharedPrefsUtil.getBoolean("userPrivacy", true)){
-            val dialog = UserPrivacyDialog()
-            dialog.show(supportFragmentManager, "userPrivacy")
-        }
     }
 
     private fun initNavigation() {
@@ -117,17 +109,4 @@ class MainActivity : BaseActivity<Any, BasePresenter<Any>>() {
         mFragments.add(UserFragment())
     }
 
-    override fun onBackPressed() {
-        when {
-            !DoubleClickHelper.checkExitDoubleClick() -> {
-                super.onBackPressed()
-            }
-            else -> MToastHelper.showToast(ResourceUtils.getResStringFromId(R.string.tail_exit_app_text))
-        }
-    }
-
-    override fun onDestroy() {
-        FileUtil.deleteDirectory(getShareImageCache(this))
-        super.onDestroy()
-    }
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import com.micker.aqhy.R;
-import com.micker.aqhy.activity.MainActivity;
+import com.micker.aqhy.activity.MainActivityNew;
 import com.micker.helper.ResourceUtils;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -25,7 +25,7 @@ public class BuglyInit {
         Beta.canShowApkInfo = false;
         Beta.tipsDialogLayoutId = R.layout.tail_dialog_update;
         Beta.upgradeDialogLayoutId = R.layout.tail_dialog_update;
-        Beta.canShowUpgradeActs.add(MainActivity.class);
+        Beta.canShowUpgradeActs.add(MainActivityNew.class);
         Beta.upgradeDialogLifecycleListener = new UILifecycleListener<UpgradeInfo>() {
             @Override
             public void onCreate(Context context, View view, UpgradeInfo upgradeInfo) {

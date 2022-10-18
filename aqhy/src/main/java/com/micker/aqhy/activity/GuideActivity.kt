@@ -81,7 +81,7 @@ class GuideActivity : BaseActivity<Any, BasePresenter<Any>>(), ViewPager.OnPageC
     }
 
     private fun toMain() {
-        ActivityHelper.startActivity(this, MainActivity::class.java)
+        ActivityHelper.startActivity(this, MainActivityNew::class.java)
         finish()
     }
 

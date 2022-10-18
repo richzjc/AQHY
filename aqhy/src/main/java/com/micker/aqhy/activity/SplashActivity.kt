@@ -34,7 +34,7 @@ class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCa
             startActivity(intent)
             finish()
         }else{
-            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            val intent = Intent(this@SplashActivity, MainActivityNew::class.java)
             startActivity(intent)
             finish()
         }

@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="aqhy/src/main/res/layout/tail_activity_main_new.xml" value="0.22552083333333334" />
         <entry key="aqhy/src/main/res/layout/tail_activity_splash.xml" value="0.21979166666666666" />
+        <entry key="aqhy/src/main/res/menu/bottom.xml" value="0.22552083333333334" />
       </map>
     </option>
   </component>
