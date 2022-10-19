@@ -124,6 +124,7 @@ class FirstStageView @JvmOverloads constructor(
         val shareTextView = ShareTextView(context)
         shareTextView.gravity = Gravity.CENTER
         shareTextView.setTextColor(Color.parseColor("#333333"))
+        shareTextView.setBackgroundResource(R.drawable.layer_drawable_first_stage_item)
         return shareTextView
     }
 
