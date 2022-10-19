@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
->
+        android:orientation="vertical">
 
     <com.micker.core.imageloader.WscnImageView
             android:id="@+id/bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:actualImageScaleType="fitXY"
-        />
+            app:actualImageScaleType="fitXY" />
 
     <com.micker.core.widget.PullToRefreshCustomRecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-        />
+            android:visibility="gone" />
+
+    <com.micker.first.widget.FirstStageView
+            android:id="@+id/stage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin_dp15"
+            android:layout_marginRight="@dimen/margin_dp15" />
 
 </RelativeLayout>

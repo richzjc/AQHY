@@ -15,6 +15,7 @@ import com.micker.helper.file.FileUtil
 import com.micker.helper.file.QDUtil.getShareImageCache
 import com.micker.helper.router.DoubleClickHelper
 import com.micker.helper.snack.MToastHelper
+import kotlinx.android.synthetic.main.tail_activity_main_new.*
 import kotlinx.android.synthetic.main.tail_activity_main_new.view.*
 import kotlin.random.Random
 
@@ -25,6 +26,8 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
         isShowPrivacy()
         initBg(view)
         initRv(view)
+
+        stage?.bindData(5, "人", "入")
     }
 
     private fun initRv(view: View){
