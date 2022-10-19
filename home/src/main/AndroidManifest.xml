@@ -19,5 +19,10 @@
         <activity android:name=".activity.UserWorksActivity"
                   android:screenOrientation="portrait"
         />
+
+        <activity android:name="com.micker.first.FirstStageActivity"
+                android:screenOrientation="portrait"
+                />
+
     </application>
 </manifest>
