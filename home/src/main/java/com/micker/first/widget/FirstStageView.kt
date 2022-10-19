@@ -27,7 +27,7 @@ class FirstStageView @JvmOverloads constructor(
         setBackgroundResource(R.drawable.shape_first_stage_bg)
     }
 
-    var jieShu: Int = 0
+    var jieShu: Int = 3
     var findWord: String = ""
     var proguardWord: String = ""
     var lineWidth = ScreenUtils.dip2px(1f)
@@ -135,35 +135,39 @@ class FirstStageView @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        var widthSize = MeasureSpec.getSize(widthMeasureSpec)
-        val heightSize = MeasureSpec.getSize(heightMeasureSpec)
-        var realHeightSize = widthSize
+        if(jieShu > 0) {
+            var widthSize = MeasureSpec.getSize(widthMeasureSpec)
+            val heightSize = MeasureSpec.getSize(heightMeasureSpec)
+            var realHeightSize = widthSize
 
-        val itemViewWidth = (widthSize - (jieShu - 1) * lineWidth) / jieShu
-        val itemViewHeight = (realHeightSize - (jieShu - 1) * lineWidth) / jieShu
-        val withspec = MeasureSpec.makeMeasureSpec(itemViewWidth, MeasureSpec.EXACTLY)
-        val heightspec = MeasureSpec.makeMeasureSpec(itemViewHeight, MeasureSpec.EXACTLY)
-        wordViewList?.forEach {
-            it.measure(withspec, heightspec)
-            it.setTextSize(
-                TypedValue.COMPLEX_UNIT_PX,
-                min(itemViewHeight, itemViewWidth) * 2.0f / 3.0f
-            )
+            val itemViewWidth = (widthSize - (jieShu - 1) * lineWidth) / jieShu
+            val itemViewHeight = (realHeightSize - (jieShu - 1) * lineWidth) / jieShu
+            val withspec = MeasureSpec.makeMeasureSpec(itemViewWidth, MeasureSpec.EXACTLY)
+            val heightspec = MeasureSpec.makeMeasureSpec(itemViewHeight, MeasureSpec.EXACTLY)
+            wordViewList?.forEach {
+                it.measure(withspec, heightspec)
+                it.setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    min(itemViewHeight, itemViewWidth) * 2.0f / 3.0f
+                )
+            }
+
+            val horwidthspec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY)
+            val horHeightspec = MeasureSpec.makeMeasureSpec(lineWidth, MeasureSpec.EXACTLY)
+            horlineViewList?.forEach {
+                it.measure(horwidthspec, horHeightspec)
+            }
+
+            val verwidthspec = MeasureSpec.makeMeasureSpec(lineWidth, MeasureSpec.EXACTLY)
+            val verHeightspec = MeasureSpec.makeMeasureSpec(realHeightSize, MeasureSpec.EXACTLY)
+            verlineViewList?.forEach {
+                it.measure(verwidthspec, verHeightspec)
+            }
+
+            setMeasuredDimension(widthSize, realHeightSize)
+        }else{
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         }
-
-        val horwidthspec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY)
-        val horHeightspec = MeasureSpec.makeMeasureSpec(lineWidth, MeasureSpec.EXACTLY)
-        horlineViewList?.forEach {
-            it.measure(horwidthspec, horHeightspec)
-        }
-
-        val verwidthspec = MeasureSpec.makeMeasureSpec(lineWidth, MeasureSpec.EXACTLY)
-        val verHeightspec = MeasureSpec.makeMeasureSpec(realHeightSize, MeasureSpec.EXACTLY)
-        verlineViewList?.forEach {
-            it.measure(verwidthspec, verHeightspec)
-        }
-
-        setMeasuredDimension(widthSize, realHeightSize)
     }
 
 
