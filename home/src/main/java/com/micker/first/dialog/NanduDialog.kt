@@ -1,5 +1,6 @@
 package com.micker.first.dialog
 
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.WindowManager
 import com.micker.core.base.BaseDialogFragment
@@ -45,7 +46,11 @@ class NanduDialog : BaseDialogFragment() {
 
     private fun setListener(){
         confirm?.setOnClickListener {
-
+            val findWord = find_et?.text?.toString()?.trim()
+            if(!TextUtils.isEmpty(findWord)){
+                nanduCallback?.nanduCallback(findWord?.toInt() ?: 5)
+                dismiss()
+            }
         }
     }
 }
