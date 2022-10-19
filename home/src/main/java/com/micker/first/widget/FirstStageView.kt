@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
+import com.micker.aqhy.util.playErrorSuccAlarm
 import com.micker.core.widget.ShareTextView
 import com.micker.helper.ResourceUtils
 import com.micker.helper.TLog
@@ -41,9 +42,9 @@ class FirstStageView @JvmOverloads constructor(
             if (it is ShareTextView) {
                 val tvValue = it.text?.toString()?.trim()
                 if (TextUtils.equals(tvValue, findWord)) {
-                    MToastHelper.showToast("答对了")
+                    playErrorSuccAlarm(getContext(), true)
                 } else {
-                    MToastHelper.showToast("答错了")
+                    playErrorSuccAlarm(getContext(), false)
                 }
             }
         }
