@@ -15,14 +15,7 @@
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone" />
+             />
 
-    <com.micker.first.widget.FirstStageView
-            android:id="@+id/stage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/margin_dp15"
-            android:layout_marginRight="@dimen/margin_dp15" />
 
 </RelativeLayout>

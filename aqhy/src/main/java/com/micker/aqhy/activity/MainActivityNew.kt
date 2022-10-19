@@ -1,16 +1,22 @@
 package com.micker.aqhy.activity
 
+import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.fastjson.JSON
 import com.micker.aqhy.R
+import com.micker.aqhy.adapter.MainGridAdapter
 import com.micker.aqhy.dialog.UserPrivacyDialog
+import com.micker.aqhy.model.MainGridModel
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
 import com.micker.core.imageloader.ImageLoadManager
 import com.micker.global.const.imagesArry
 import com.micker.helper.ResourceUtils
 import com.micker.helper.SharedPrefsUtil
+import com.micker.helper.file.CacheUtils
 import com.micker.helper.file.FileUtil
 import com.micker.helper.file.QDUtil.getShareImageCache
 import com.micker.helper.router.DoubleClickHelper
@@ -27,14 +33,18 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
         initBg(view)
         initRv(view)
 
-        stage?.bindData(11, "人", "入")
     }
 
     private fun initRv(view: View){
         view.recycleView?.setCanRefresh(false)
         view.recycleView?.isEnableLoadMore = false
         view.recycleView?.customRecycleView?.setLayoutManager(GridLayoutManager(this, 3))
-
+//        view.recycleView?.customRecycleView?.addItemDecoration(GridItemDecoration(3))
+        val adapter = MainGridAdapter()
+        val json = CacheUtils.InputStreamToString(CacheUtils.getFileFromAssets("func.json"))
+        val list = JSON.parseArray(json, MainGridModel::class.java)
+        adapter.setData(list)
+        view.recycleView?.customRecycleView?.adapter = adapter
     }
 
     private fun initBg(view: View){
@@ -62,5 +72,17 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
     override fun onDestroy() {
         FileUtil.deleteDirectory(getShareImageCache(this))
         super.onDestroy()
+    }
+
+    private class GridItemDecoration(val spanCount : Int) : RecyclerView.ItemDecoration(){
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            super.getItemOffsets(outRect, view, parent, state)
+
+        }
     }
 }

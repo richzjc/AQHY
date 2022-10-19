@@ -7,10 +7,8 @@ import com.micker.core.adapter.BaseRecycleAdapter
 
 class MainGridAdapter : BaseRecycleAdapter<MainGridModel, MainGridHolder>(){
     override fun binderItemHolder(holder: MainGridHolder?, position: Int) {
-        TODO("Not yet implemented")
+        holder?.doBindData(get(position))
     }
 
-    override fun createListItemView(parent: ViewGroup?, viewType: Int): MainGridHolder {
-        TODO("Not yet implemented")
-    }
+    override fun createListItemView(parent: ViewGroup?, viewType: Int) = MainGridHolder(parent?.context)
 }
