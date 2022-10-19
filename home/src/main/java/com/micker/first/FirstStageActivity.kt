@@ -21,6 +21,13 @@ import kotlin.random.Random
 @BindRouter(urls = [FIRST_STAGE_ROUTER])
 class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
+    private var guanKa : Int = 0
+
+    private val list by lazy {
+        val json = CacheUtils.InputStreamToString(CacheUtils.getFileFromAssets("first_stage.json"))
+        val list = JSON.parseArray(json, FirstStageModel::class.java)
+        list
+    }
 
     private val drawable by lazy {
         val color = ResourceUtils.getColor(R.color.color_1482f0)
@@ -47,16 +54,55 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
     override fun doInitData() {
         super.doInitData()
-        val json = CacheUtils.InputStreamToString(CacheUtils.getFileFromAssets("first_stage.json"))
-        val list = JSON.parseArray(json, FirstStageModel::class.java)
+        setListener()
         var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
         if(jieshu < 3)
             jieshu = 3
         else if(jieshu > 11)
             jieshu = 11
 
+        guanKa = SharedPrefsUtil.getInt("first_stage_guanka", 0)
+
         if(list != null && list.size > 0){
-            stage.bindData(jieshu, list.get(0).findWord, list.get(0).proguardWord)
+            stage.bindData(jieshu, list.get(guanKa).findWord, list.get(guanKa).proguardWord)
+        }
+    }
+
+    private fun setListener(){
+        last.setOnClickListener {
+            if(list != null && list.size > 0) {
+                guanKa -= 1
+                if (guanKa < 0)
+                    guanKa = list.size - 1
+
+                val entity = list.get(guanKa)
+                SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
+                var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
+                if(jieshu < 3)
+                    jieshu = 3
+                else if(jieshu > 11)
+                    jieshu = 11
+
+                stage.bindData(jieshu, entity.findWord, entity.proguardWord)
+            }
+        }
+
+        next.setOnClickListener {
+            if(list != null && list.size > 0) {
+                guanKa += 1
+                if (guanKa >= list.size)
+                    guanKa = 0
+
+                val entity = list.get(guanKa)
+                SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
+                var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
+                if(jieshu < 3)
+                    jieshu = 3
+                else if(jieshu > 11)
+                    jieshu = 11
+
+                stage.bindData(jieshu, entity.findWord, entity.proguardWord)
+            }
         }
     }
 }
