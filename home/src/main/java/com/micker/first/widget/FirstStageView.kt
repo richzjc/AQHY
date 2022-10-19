@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -12,6 +13,7 @@ import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.micker.core.widget.ShareTextView
 import com.micker.helper.ResourceUtils
+import com.micker.helper.TLog
 import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
 import kotlin.math.min
@@ -45,7 +47,6 @@ class FirstStageView @JvmOverloads constructor(
             }
         }
     }
-
 
 
     fun bindData(jieShu1: Int, findWord: String, proguardWord: String) {
@@ -84,7 +85,7 @@ class FirstStageView @JvmOverloads constructor(
             wordViewList[nextInt].text = findWord
 
 
-            val lineTotal = (jieShu - 1) * (jieShu - 1)
+            val lineTotal = (jieShu - 1)
             (0 until lineTotal)?.forEach {
                 if (horlineViewList.size < lineTotal) {
                     val lineView = createLineView()
@@ -135,7 +136,7 @@ class FirstStageView @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         var widthSize = MeasureSpec.getSize(widthMeasureSpec)
         val heightSize = MeasureSpec.getSize(heightMeasureSpec)
-        var realHeightSize = min(heightSize, widthSize)
+        var realHeightSize = widthSize
 
         val itemViewWidth = (widthSize - (jieShu - 1) * lineWidth) / jieShu
         val itemViewHeight = (realHeightSize - (jieShu - 1) * lineWidth) / jieShu
@@ -149,14 +150,14 @@ class FirstStageView @JvmOverloads constructor(
             )
         }
 
-        val horwidthspec = MeasureSpec.makeMeasureSpec(itemViewWidth, MeasureSpec.EXACTLY)
+        val horwidthspec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY)
         val horHeightspec = MeasureSpec.makeMeasureSpec(lineWidth, MeasureSpec.EXACTLY)
         horlineViewList?.forEach {
             it.measure(horwidthspec, horHeightspec)
         }
 
         val verwidthspec = MeasureSpec.makeMeasureSpec(lineWidth, MeasureSpec.EXACTLY)
-        val verHeightspec = MeasureSpec.makeMeasureSpec(itemViewHeight, MeasureSpec.EXACTLY)
+        val verHeightspec = MeasureSpec.makeMeasureSpec(realHeightSize, MeasureSpec.EXACTLY)
         verlineViewList?.forEach {
             it.measure(verwidthspec, verHeightspec)
         }
@@ -166,19 +167,40 @@ class FirstStageView @JvmOverloads constructor(
 
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        wordViewList?.forEachIndexed { index, shareTextView ->
-            val startX = (index % jieShu) * shareTextView.measuredWidth
-            val startY = Math.floor(index * 1.0 / jieShu) * shareTextView.measuredHeight
-            shareTextView.layout(
-                startX,
-                startY.toInt(),
-                startX + shareTextView.measuredWidth,
-                (startY + shareTextView.measuredHeight).toInt()
-            )
+        if (wordViewList.size > 0) {
+
+            wordViewList?.forEachIndexed { index, shareTextView ->
+                val startX = (index % jieShu) * (shareTextView.measuredWidth + lineWidth)
+                val startY = Math.floor(index * 1.0 / jieShu) * (shareTextView.measuredHeight + lineWidth)
+                shareTextView.layout(
+                    startX,
+                    startY.toInt(),
+                    startX + shareTextView.measuredWidth,
+                    (startY + shareTextView.measuredHeight).toInt()
+                )
+            }
 
 
+            if(jieShu > 0){
+                val wordWidth = wordViewList[0].measuredWidth
+                val wordHeight = wordViewList[0].measuredHeight
+                (0 until (jieShu - 1))?.forEach {
+                    val lineStartX = 0
+                    val lineStartY = (it + 1) * wordHeight  + (it * lineWidth)
+                    val lineView = horlineViewList[it]
+                    lineView.layout(lineStartX, lineStartY, lineStartX + measuredWidth,
+                        (lineStartY + lineWidth)
+                    )
 
 
+                    var startY = 0
+                    var startx = (it + 1) * wordWidth + (it * lineWidth)
+                    val verlineView = verlineViewList[it]
+                    verlineView.layout(startx, startY, startx + lineWidth,
+                        (startY + measuredHeight)
+                    )
+                }
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
         initBg(view)
         initRv(view)
 
-        stage?.bindData(5, "人", "入")
+        stage?.bindData(11, "人", "入")
     }
 
     private fun initRv(view: View){
