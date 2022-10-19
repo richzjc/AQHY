@@ -77,8 +77,7 @@ class FirstStageView @JvmOverloads constructor(
 
             if (wordViewList.size > total) {
                 val subList = wordViewList.subList(0, total)
-                wordViewList.clear()
-                wordViewList.addAll(subList)
+                wordViewList = ArrayList(subList)
             }
 
             wordViewList.forEach {
@@ -106,14 +105,12 @@ class FirstStageView @JvmOverloads constructor(
 
             if (horlineViewList.size > lineTotal) {
                 val subList = horlineViewList.subList(0, lineTotal)
-                horlineViewList.clear()
-                horlineViewList.addAll(subList)
+                horlineViewList = ArrayList(subList)
             }
 
             if (verlineViewList.size > lineTotal) {
                 val subList = verlineViewList.subList(0, lineTotal)
-                verlineViewList.clear()
-                verlineViewList.addAll(subList)
+                verlineViewList = ArrayList(subList)
             }
 
             horlineViewList?.forEach {
@@ -143,7 +140,6 @@ class FirstStageView @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         if(jieShu > 0) {
             var widthSize = MeasureSpec.getSize(widthMeasureSpec)
-            val heightSize = MeasureSpec.getSize(heightMeasureSpec)
             var realHeightSize = widthSize
 
             val itemViewWidth = (widthSize - (jieShu - 1) * lineWidth) / jieShu

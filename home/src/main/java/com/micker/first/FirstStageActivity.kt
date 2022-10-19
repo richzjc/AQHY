@@ -36,15 +36,13 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
             override fun nanduCallback(realjieshu: Int) {
                 var jieshu = realjieshu
                 SharedPrefsUtil.saveInt("first_stage_jieshu", jieshu)
-                val entity = list.get(guanKa)
-                SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
                 if (jieshu < 3)
                     jieshu = 3
                 else if (jieshu > 11)
                     jieshu = 11
 
-                stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
-                updateTvHint(entity.findWord)
+                stage.bindData(jieshu, stage.findWord, stage.proguardWord, succCallback)
+                updateTvHint(stage.findWord)
             }
         }
     }
