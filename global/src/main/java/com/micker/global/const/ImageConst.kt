@@ -1,4 +1,9 @@
 package com.micker.global.const
 
-val imagesArry = arrayOf("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.win4000.com%2Fmobile%2F2020-05-09%2F5eb64304961b7.jpg&refer=http%3A%2F%2Fpic1.win4000.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668674854&t=ebeaed87c4ee713d8484172a09a4d9f5",
-    "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg13.51tietu.net%2Fpic%2F20200117%2Fz3tgmy21ppdz3tgmy21ppd.jpg&refer=http%3A%2F%2Fimg13.51tietu.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668674854&t=65d8987e8aa00611a2899bc7c53e25f1")
+val imagesArry = arrayOf(
+    "https://img-qn-2.51miz.com/preview/photo/00/01/52/28/P-1522868-7279CE76O.jpg!/quality/90/unsharp/true/compress/true/format/webp/fh/320",
+    "https://img-qn-1.51miz.com/preview/photo/00/01/51/55/P-1515505-7F960702O.jpg!/quality/90/unsharp/true/compress/true/format/webp/fh/320",
+    "https://img-qn-5.51miz.com/preview/element/00/01/26/60/E-1266022-5E6BA5CB.jpg!/quality/90/unsharp/true/compress/true/format/jpg/fh/320",
+    "https://img-qn-5.51miz.com/preview/photo/00/01/51/07/P-1510723-C0D552C1O.jpg!/quality/90/unsharp/true/compress/true/format/webp/fh/320"
+
+)
