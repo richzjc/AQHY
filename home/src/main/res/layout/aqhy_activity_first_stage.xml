@@ -22,31 +22,89 @@
             android:layout_marginRight="@dimen/margin_dp20"
             app:viewAspectRatio="5.92" />
 
+    <LinearLayout
+            android:id="@+id/func_parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_dp50"
+            android:gravity="center"
+            android:layout_below="@id/iv_hint"
+            android:layout_marginTop="@dimen/margin_dp30"
+            android:orientation="horizontal">
+
+        <com.micker.core.widget.ShareTextView
+                android:id="@+id/nandu"
+                android:layout_width="@dimen/margin_dp150"
+                android:layout_height="@dimen/margin_dp50"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:text="难度系数"
+            />
+        <com.micker.core.widget.ShareTextView
+                android:id="@+id/diy"
+                android:layout_width="@dimen/margin_dp150"
+                android:layout_height="@dimen/margin_dp50"
+                android:layout_marginLeft="@dimen/margin_dp20"
+                android:gravity="center"
+                android:text="自定义"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                />
+    </LinearLayout>
+
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_below="@id/func_parent"
             android:orientation="vertical">
 
         <TextView
                 android:id="@+id/tv_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_20"
-                android:textStyle="bold"
                 android:layout_marginLeft="@dimen/margin_dp15"
                 android:layout_marginRight="@dimen/margin_dp15"
-            />
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold" />
 
         <com.micker.first.widget.FirstStageView
                 android:id="@+id/stage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/margin_dp25"
                 android:layout_marginLeft="@dimen/margin_dp15"
+                android:layout_marginTop="@dimen/margin_dp25"
                 android:layout_marginRight="@dimen/margin_dp15" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_dp50"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_dp20"
+                android:orientation="horizontal">
+
+            <com.micker.core.widget.ShareTextView
+                    android:id="@+id/last"
+                    android:layout_width="@dimen/margin_dp150"
+                    android:layout_height="@dimen/margin_dp50"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:text="上一关"
+                    />
+            <com.micker.core.widget.ShareTextView
+                    android:id="@+id/next"
+                    android:layout_width="@dimen/margin_dp150"
+                    android:layout_height="@dimen/margin_dp50"
+                    android:layout_marginLeft="@dimen/margin_dp20"
+                    android:gravity="center"
+                    android:text="下一关"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    />
+        </LinearLayout>
     </LinearLayout>
+
 
 
 </RelativeLayout>

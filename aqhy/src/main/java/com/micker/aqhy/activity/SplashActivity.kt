@@ -144,7 +144,7 @@ class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCa
 
     private fun sendMsg() {
         if (!isSend) {
-            handler.sendEmptyMessageDelayed(1, 2000)
+            handler.sendEmptyMessageDelayed(1, 1000)
         }
         isSend = true
     }
