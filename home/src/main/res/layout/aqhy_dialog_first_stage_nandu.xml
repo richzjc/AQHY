@@ -8,7 +8,7 @@
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_dp50"
+            android:layout_height="@dimen/margin_dp45"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -25,10 +25,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/margin_dp10"
                 android:background="@drawable/shape_first_stage_dialog_et_bg"
-                android:hint="输入3~11的数字,数字越大越难"
+                android:hint="输入3~11的数字,越大越难"
                 android:inputType="number"
                 android:paddingLeft="@dimen/margin_dp10"
                 android:paddingRight="@dimen/margin_dp10"
+                android:textSize="@dimen/text_size_14"
                 android:textColorHint="@color/color_999999" />
     </LinearLayout>
 
