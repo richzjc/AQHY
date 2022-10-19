@@ -11,11 +11,38 @@
             android:layout_height="match_parent"
             app:actualImageScaleType="fitXY" />
 
-    <com.micker.core.widget.PullToRefreshCustomRecyclerView
-            android:id="@+id/recycleView"
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-             />
+            android:layout_marginTop="@dimen/margin_dp50"
+            android:scrollbars="none">
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_dp15"
+                    android:layout_marginRight="@dimen/margin_dp15"
+                    android:orientation="horizontal">
+
+                <FrameLayout
+                        android:layout_width="@dimen/margin_dp80"
+                        android:layout_height="@dimen/margin_dp80"
+                        android:background="@drawable/drawable_main_grid_item_bg">
+
+                    <ImageView
+                            android:id="@+id/first_stage"
+                            android:layout_width="@dimen/margin_dp80"
+                            android:layout_height="@dimen/margin_dp80"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/fist_stage_logo" />
+                </FrameLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
