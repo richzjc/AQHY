@@ -6,7 +6,11 @@ import com.kronos.router.BindRouter
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
 import com.micker.core.imageloader.ImageLoadManager
+import com.micker.first.callback.DiyCallback
+import com.micker.first.callback.NanduCallback
 import com.micker.first.callback.SuccCallback
+import com.micker.first.dialog.DiyDialog
+import com.micker.first.dialog.NanduDialog
 import com.micker.first.model.FirstStageModel
 import com.micker.global.FIRST_STAGE_ROUTER
 import com.micker.global.const.imagesArry
@@ -22,27 +26,61 @@ import kotlin.random.Random
 @BindRouter(urls = [FIRST_STAGE_ROUTER])
 class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
-    private var guanKa : Int = 0
+    private var guanKa: Int = 0
 
-    private val succCallback by lazy { object : SuccCallback{
-        override fun succCallback() {
-            if(list != null && list.size > 0) {
-                guanKa += 1
-                if (guanKa >= list.size)
-                    guanKa = 0
-
+    private val nanDuCallback by lazy {
+        object : NanduCallback {
+            override fun nanduCallback(realjieshu: Int) {
+                var jieshu = realjieshu
+                SharedPrefsUtil.saveInt("first_stage_jieshu", jieshu)
                 val entity = list.get(guanKa)
                 SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
-                var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
-                if(jieshu < 3)
+                if (jieshu < 3)
                     jieshu = 3
-                else if(jieshu > 11)
+                else if (jieshu > 11)
                     jieshu = 11
 
-                stage.bindData(jieshu, entity.findWord, entity.proguardWord, this)
+                stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
             }
         }
-    } }
+    }
+
+    private val diyCallback by lazy {
+        object : DiyCallback {
+            override fun diyCallback(findWord: String, proguardWord: String) {
+
+                var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
+                if (jieshu < 3)
+                    jieshu = 3
+                else if (jieshu > 11)
+                    jieshu = 11
+
+                stage.bindData(jieshu, findWord, proguardWord, succCallback)
+            }
+        }
+    }
+
+    private val succCallback by lazy {
+        object : SuccCallback {
+            override fun succCallback() {
+                if (list != null && list.size > 0) {
+                    guanKa += 1
+                    if (guanKa >= list.size)
+                        guanKa = 0
+
+                    val entity = list.get(guanKa)
+                    SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
+                    var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
+                    if (jieshu < 3)
+                        jieshu = 3
+                    else if (jieshu > 11)
+                        jieshu = 11
+
+                    stage.bindData(jieshu, entity.findWord, entity.proguardWord, this)
+                }
+            }
+        }
+    }
 
     private val list by lazy {
         val json = CacheUtils.InputStreamToString(CacheUtils.getFileFromAssets("first_stage.json"))
@@ -52,7 +90,8 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
     private val drawable by lazy {
         val color = ResourceUtils.getColor(R.color.color_1482f0)
-        ShapeDrawable.getDrawable(0, ScreenUtils.dip2px(5f), color, color) }
+        ShapeDrawable.getDrawable(0, ScreenUtils.dip2px(5f), color, color)
+    }
 
     override fun doGetContentViewId() = R.layout.aqhy_activity_first_stage
 
@@ -66,7 +105,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         next.background = drawable
     }
 
-    private fun initBg(){
+    private fun initBg() {
         val size = imagesArry.size
         val index = Random.nextInt(size)
         ImageLoadManager.loadImage(imagesArry[index], bg, 0, false)
@@ -77,21 +116,26 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         super.doInitData()
         setListener()
         var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
-        if(jieshu < 3)
+        if (jieshu < 3)
             jieshu = 3
-        else if(jieshu > 11)
+        else if (jieshu > 11)
             jieshu = 11
 
         guanKa = SharedPrefsUtil.getInt("first_stage_guanka", 0)
 
-        if(list != null && list.size > 0){
-            stage.bindData(jieshu, list.get(guanKa).findWord, list.get(guanKa).proguardWord, succCallback)
+        if (list != null && list.size > 0) {
+            stage.bindData(
+                jieshu,
+                list.get(guanKa).findWord,
+                list.get(guanKa).proguardWord,
+                succCallback
+            )
         }
     }
 
-    private fun setListener(){
+    private fun setListener() {
         last.setOnClickListener {
-            if(list != null && list.size > 0) {
+            if (list != null && list.size > 0) {
                 guanKa -= 1
                 if (guanKa < 0)
                     guanKa = list.size - 1
@@ -99,9 +143,9 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                 val entity = list.get(guanKa)
                 SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
                 var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
-                if(jieshu < 3)
+                if (jieshu < 3)
                     jieshu = 3
-                else if(jieshu > 11)
+                else if (jieshu > 11)
                     jieshu = 11
 
                 stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
@@ -109,7 +153,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         }
 
         next.setOnClickListener {
-            if(list != null && list.size > 0) {
+            if (list != null && list.size > 0) {
                 guanKa += 1
                 if (guanKa >= list.size)
                     guanKa = 0
@@ -117,9 +161,9 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                 val entity = list.get(guanKa)
                 SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
                 var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
-                if(jieshu < 3)
+                if (jieshu < 3)
                     jieshu = 3
-                else if(jieshu > 11)
+                else if (jieshu > 11)
                     jieshu = 11
 
                 stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
@@ -127,11 +171,15 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         }
 
         nandu.setOnClickListener {
-
+            val dialog = NanduDialog()
+            dialog?.nanduCallback = nanDuCallback
+            dialog.show(supportFragmentManager, "nandu")
         }
 
         diy.setOnClickListener {
-
+            val diyDialog = DiyDialog()
+            diyDialog?.diyCallback = diyCallback
+            diyDialog.show(supportFragmentManager, "diy")
         }
     }
 }
