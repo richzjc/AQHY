@@ -1,0 +1,14 @@
+[
+  {
+    "findWord": "中",
+    "proguardWord": "口"
+  },
+  {
+    "findWord": "日",
+    "proguardWord": "月"
+  },
+  {
+    "findWord": "左",
+    "proguardWord": "右"
+  }
+]
