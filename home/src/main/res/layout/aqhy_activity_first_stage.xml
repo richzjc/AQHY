@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <com.micker.core.imageloader.WscnImageView
             android:id="@+id/bg"
@@ -12,13 +12,41 @@
             app:actualImageScaleType="fitXY" />
 
 
-    <com.micker.first.widget.FirstStageView
-            android:id="@+id/stage"
+    <com.micker.core.imageloader.WscnImageView
+            android:id="@+id/iv_hint"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/margin_dp50"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_dp20"
+            android:layout_marginTop="@dimen/margin_dp60"
+            android:layout_marginRight="@dimen/margin_dp20"
+            app:viewAspectRatio="5.92" />
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/margin_dp15"
-            android:layout_marginRight="@dimen/margin_dp15" />
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/tv_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/margin_dp15"
+                android:layout_marginRight="@dimen/margin_dp15"
+            />
+
+        <com.micker.first.widget.FirstStageView
+                android:id="@+id/stage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_dp25"
+                android:layout_marginLeft="@dimen/margin_dp15"
+                android:layout_marginRight="@dimen/margin_dp15" />
+    </LinearLayout>
 
 
-</FrameLayout>
+</RelativeLayout>

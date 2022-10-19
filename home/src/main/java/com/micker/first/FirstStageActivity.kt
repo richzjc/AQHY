@@ -19,6 +19,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
     override fun doInitSubViews(view: View) {
         super.doInitSubViews(view)
         initBg()
+        ImageLoadManager.loadImage(R.drawable.drawable_first_stage_hint, iv_hint, 0)
     }
 
     private fun initBg(){

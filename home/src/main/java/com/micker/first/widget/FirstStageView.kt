@@ -14,6 +14,7 @@ import android.widget.RelativeLayout
 import com.micker.core.widget.ShareTextView
 import com.micker.helper.ResourceUtils
 import com.micker.helper.TLog
+import com.micker.helper.snack.MToastHelper
 import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
 import kotlin.math.min
@@ -40,9 +41,9 @@ class FirstStageView @JvmOverloads constructor(
             if (it is ShareTextView) {
                 val tvValue = it.text?.toString()?.trim()
                 if (TextUtils.equals(tvValue, findWord)) {
-                    //TODO 答对了
+                    MToastHelper.showToast("答对了")
                 } else {
-                    //TODO 答错了
+                    MToastHelper.showToast("答错了")
                 }
             }
         }
