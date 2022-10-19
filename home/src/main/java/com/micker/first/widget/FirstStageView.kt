@@ -13,6 +13,7 @@ import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.micker.aqhy.util.playErrorSuccAlarm
 import com.micker.core.widget.ShareTextView
+import com.micker.first.callback.SuccCallback
 import com.micker.helper.ResourceUtils
 import com.micker.helper.TLog
 import com.micker.helper.snack.MToastHelper
@@ -36,6 +37,7 @@ class FirstStageView @JvmOverloads constructor(
     var horlineViewList = ArrayList<View>()
     var verlineViewList = ArrayList<View>()
     var wordViewList = ArrayList<ShareTextView>()
+    var succCallback : SuccCallback? = null
 
     private val onClickListener by lazy {
         OnClickListener {
@@ -43,6 +45,7 @@ class FirstStageView @JvmOverloads constructor(
                 val tvValue = it.text?.toString()?.trim()
                 if (TextUtils.equals(tvValue, findWord)) {
                     playErrorSuccAlarm(getContext(), true)
+                    succCallback?.succCallback()
                 } else {
                     playErrorSuccAlarm(getContext(), false)
                 }
@@ -51,10 +54,11 @@ class FirstStageView @JvmOverloads constructor(
     }
 
 
-    fun bindData(jieShu1: Int, findWord: String, proguardWord: String) {
+    fun bindData(jieShu1: Int, findWord: String, proguardWord: String, succCallback: SuccCallback) {
         this.jieShu = jieShu1
         this.findWord = findWord
         this.proguardWord = proguardWord
+        this.succCallback = succCallback
         removeAllViews()
         if (jieShu < 3)
             jieShu = 3

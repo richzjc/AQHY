@@ -6,6 +6,7 @@ import com.kronos.router.BindRouter
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
 import com.micker.core.imageloader.ImageLoadManager
+import com.micker.first.callback.SuccCallback
 import com.micker.first.model.FirstStageModel
 import com.micker.global.FIRST_STAGE_ROUTER
 import com.micker.global.const.imagesArry
@@ -22,6 +23,26 @@ import kotlin.random.Random
 class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
     private var guanKa : Int = 0
+
+    private val succCallback by lazy { object : SuccCallback{
+        override fun succCallback() {
+            if(list != null && list.size > 0) {
+                guanKa += 1
+                if (guanKa >= list.size)
+                    guanKa = 0
+
+                val entity = list.get(guanKa)
+                SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
+                var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
+                if(jieshu < 3)
+                    jieshu = 3
+                else if(jieshu > 11)
+                    jieshu = 11
+
+                stage.bindData(jieshu, entity.findWord, entity.proguardWord, this)
+            }
+        }
+    } }
 
     private val list by lazy {
         val json = CacheUtils.InputStreamToString(CacheUtils.getFileFromAssets("first_stage.json"))
@@ -64,7 +85,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         guanKa = SharedPrefsUtil.getInt("first_stage_guanka", 0)
 
         if(list != null && list.size > 0){
-            stage.bindData(jieshu, list.get(guanKa).findWord, list.get(guanKa).proguardWord)
+            stage.bindData(jieshu, list.get(guanKa).findWord, list.get(guanKa).proguardWord, succCallback)
         }
     }
 
@@ -83,7 +104,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                 else if(jieshu > 11)
                     jieshu = 11
 
-                stage.bindData(jieshu, entity.findWord, entity.proguardWord)
+                stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
             }
         }
 
@@ -101,8 +122,16 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                 else if(jieshu > 11)
                     jieshu = 11
 
-                stage.bindData(jieshu, entity.findWord, entity.proguardWord)
+                stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
             }
+        }
+
+        nandu.setOnClickListener {
+
+        }
+
+        diy.setOnClickListener {
+
         }
     }
 }
