@@ -1,5 +1,8 @@
 package com.micker.first
 
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.AbsoluteSizeSpan
 import android.view.View
 import com.alibaba.fastjson.JSON
 import com.kronos.router.BindRouter
@@ -41,6 +44,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                     jieshu = 11
 
                 stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
+                updateTvHint(entity.findWord)
             }
         }
     }
@@ -56,6 +60,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                     jieshu = 11
 
                 stage.bindData(jieshu, findWord, proguardWord, succCallback)
+                updateTvHint(findWord)
             }
         }
     }
@@ -77,6 +82,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                         jieshu = 11
 
                     stage.bindData(jieshu, entity.findWord, entity.proguardWord, this)
+                    updateTvHint(entity.findWord)
                 }
             }
         }
@@ -130,7 +136,18 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                 list.get(guanKa).proguardWord,
                 succCallback
             )
+            updateTvHint(list.get(guanKa).findWord)
         }
+    }
+
+    private fun updateTvHint(findWord : String){
+        val build = SpannableStringBuilder()
+        build.append("找出：")
+        val startIndex = build.length
+        build.append(findWord)
+        val endIndex = build.length
+        build.setSpan(AbsoluteSizeSpan(24, true), startIndex, endIndex, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
+        tv_hint?.text = build
     }
 
     private fun setListener() {
@@ -149,6 +166,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                     jieshu = 11
 
                 stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
+                updateTvHint(entity.findWord)
             }
         }
 
@@ -167,6 +185,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                     jieshu = 11
 
                 stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
+                updateTvHint(entity.findWord)
             }
         }
 
