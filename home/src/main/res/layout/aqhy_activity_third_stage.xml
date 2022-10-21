@@ -66,29 +66,41 @@
                 android:id="@+id/tv_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/margin_dp15"
                 android:layout_marginRight="@dimen/margin_dp15"
-                android:layout_gravity="center_vertical"
                 android:text="结果："
                 android:textSize="30dp"
                 android:textStyle="bold" />
 
-        <com.micker.third.widget.ThirdStageView
-                android:id="@+id/not_edit_stage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center" />
+        <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="@dimen/margin_dp5">
+
+            <com.micker.third.widget.ThirdStageView
+                    android:id="@+id/not_edit_stage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
     </FrameLayout>
 
 
-    <com.micker.third.widget.ThirdStageView
-            android:id="@+id/edit_stage"
+    <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_height="wrap_content"
             android:layout_below="@id/sub_parent"
             android:layout_marginLeft="@dimen/margin_dp15"
+            android:layout_marginTop="@dimen/margin_dp20"
             android:layout_marginRight="@dimen/margin_dp15"
-            android:layout_marginTop="@dimen/margin_dp20" />
+            app:cardCornerRadius="@dimen/margin_dp10">
+
+        <com.micker.third.widget.ThirdStageView
+                android:id="@+id/edit_stage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

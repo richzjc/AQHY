@@ -3,6 +3,7 @@ package com.micker.third.widget
 import android.content.Context
 import android.graphics.Color
 import android.text.SpannableStringBuilder
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -11,6 +12,8 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.micker.aqhy.util.playClickAlarm
+import com.micker.aqhy.util.playErrorSuccAlarm
 import com.micker.core.widget.ShareTextView
 import com.micker.first.callback.SuccCallback
 import com.micker.helper.system.ScreenUtils
@@ -38,10 +41,52 @@ class ThirdStageView @JvmOverloads constructor(
 
     private val onClickListener by lazy {
         OnClickListener {
-            if (it is ShareTextView && isEditMode && it != emptShareTv) {
+            if (it is ShareTextView && isEditMode && emptShareTv != null && it != emptShareTv) {
+                val emptyTag = emptShareTv?.tag?.toString()
+                val list = emptyTag?.split(",")
+                if (list != null && list.size == 2) {
+                    var emptyRow = list[0].toInt()
+                    var emptyRank = list[1].toInt()
 
+                    val clickTag = it?.tag?.toString()
+                    val clickList = clickTag?.split(",")
+                    if (clickList != null && clickList.size == 2) {
+                        var clickRow = clickList[0].toInt()
+                        var clickRank = clickList[1].toInt()
+
+                        var rowFlag = (clickRow >= emptyRow - 1) && (clickRow <= emptyRow + 1)
+                        var rankFlag = (clickRank >= emptyRank - 1) && (clickRank <= emptyRank + 1)
+                        if (rowFlag && rankFlag) {
+                            emptShareTv?.text = it.text
+                            it.text = ""
+                            emptShareTv = it
+                            if (emptShareTv == lastShareTv) {
+                                if(TextUtils.equals(checkResult(), resultStr)){
+                                    playErrorSuccAlarm(getContext(), true)
+                                    postDelayed({
+                                        succCallback?.succCallback()
+                                    }, 1500)
+                                }else{
+                                    playClickAlarm(getContext())
+                                }
+                            } else {
+                                playClickAlarm(getContext())
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
+
+    private fun checkResult(): String {
+        val builder = SpannableStringBuilder()
+        wordViewList?.forEach {
+            it.forEach {
+                builder.append(it.text)
+            }
+        }
+        return builder.toString()
     }
 
 
@@ -102,8 +147,8 @@ class ThirdStageView @JvmOverloads constructor(
             resultStr = spanBuilder.toString()?.trim()
 
             if (isEditMode) {
-                wordViewList?.forEach {
-                    it.forEach {
+                wordViewList?.forEachIndexed { outerIndex, it ->
+                    it.forEachIndexed { inndexIndex, it ->
                         if (it != emptShareTv) {
                             val numberListSize = numberList.size
                             val realIndex = Random.nextInt(numberListSize)
@@ -112,6 +157,7 @@ class ThirdStageView @JvmOverloads constructor(
                             if (isEditMode) {
                                 it.setOnClickListener(onClickListener)
                             }
+                            it.tag = "${outerIndex},${inndexIndex}"
                             addView(it)
                         }
                     }
@@ -120,7 +166,7 @@ class ThirdStageView @JvmOverloads constructor(
                 var startIndex = 1
                 wordViewList?.forEach {
                     it.forEach {
-                        if (it != emptShareTv) {
+                        if (it != emptShareTv && it != null) {
                             it.text = "${startIndex}"
                             startIndex += 1
                             it.setOnClickListener(onClickListener)
