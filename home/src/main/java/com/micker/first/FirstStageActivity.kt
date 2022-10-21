@@ -1,10 +1,11 @@
 package com.micker.first
 
+import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.TextUtils
 import android.text.style.AbsoluteSizeSpan
 import android.view.View
-import com.alibaba.fastjson.JSON
 import com.kronos.router.BindRouter
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
@@ -14,7 +15,6 @@ import com.micker.first.callback.NanduCallback
 import com.micker.first.callback.SuccCallback
 import com.micker.first.dialog.DiyDialog
 import com.micker.first.dialog.NanduDialog
-import com.micker.first.model.FirstStageModel
 import com.micker.global.FIRST_STAGE_ROUTER
 import com.micker.global.const.imagesArry
 import com.micker.global.util.ShapeDrawable
@@ -29,20 +29,30 @@ import kotlin.random.Random
 @BindRouter(urls = [FIRST_STAGE_ROUTER])
 class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
-    private var guanKa: Int = 0
 
     private val nanDuCallback by lazy {
         object : NanduCallback {
-            override fun nanduCallback(realjieshu: Int) {
-                var jieshu = realjieshu
-                SharedPrefsUtil.saveInt("first_stage_jieshu", jieshu)
-                if (jieshu < 3)
-                    jieshu = 3
-                else if (jieshu > 11)
-                    jieshu = 11
+            override fun nanduCallback(realjieshu: Int, isBiHua: Boolean) {
+                if (!isBiHua) {
+                    var jieshu = realjieshu
+                    if (jieshu < 3)
+                        jieshu = 3
+                    else if (jieshu > 11)
+                        jieshu = 11
+                    SharedPrefsUtil.saveInt("first_stage_jieshu", jieshu)
+                    stage.bindData(jieshu, stage.findWord, stage.proguardWord, succCallback)
+                    updateTvHint(stage.findWord)
+                } else {
+                    var jieshu = realjieshu
 
-                stage.bindData(jieshu, stage.findWord, stage.proguardWord, succCallback)
-                updateTvHint(stage.findWord)
+                    if (jieshu < 1)
+                        jieshu = 1
+                    else if (jieshu > 17)
+                        jieshu = 11
+
+                    SharedPrefsUtil.saveInt("first_stage_bihua", jieshu)
+                    setData(jieshu, succCallback)
+                }
             }
         }
     }
@@ -66,36 +76,74 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
     private val succCallback by lazy {
         object : SuccCallback {
             override fun succCallback() {
-                if (list != null && list.size > 0) {
-                    guanKa += 1
-                    if (guanKa >= list.size)
-                        guanKa = 0
-
-                    val entity = list.get(guanKa)
-                    SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
-                    var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
-                    if (jieshu < 3)
-                        jieshu = 3
-                    else if (jieshu > 11)
-                        jieshu = 11
-
-                    stage.bindData(jieshu, entity.findWord, entity.proguardWord, this)
-                    updateTvHint(entity.findWord)
-                }
+                setData(-1, this)
             }
         }
     }
 
-    private val list by lazy {
-        val json = CacheUtils.InputStreamToString(CacheUtils.getFileFromAssets("first_stage.json"))
-        val list = JSON.parseArray(json, FirstStageModel::class.java)
-        list
+    private fun setData(bihua: Int, succCallback: SuccCallback) {
+        var realBiBua = bihua
+        if (realBiBua < 1 || realBiBua > 17) {
+            realBiBua = SharedPrefsUtil.getInt("first_stage_bihua", 0)
+        }
+        var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
+        if (jieshu < 3)
+            jieshu = 3
+        else if (jieshu > 11)
+            jieshu = 11
+
+        if (realBiBua < 1 || realBiBua > 17) {
+            val radomFind = Random.nextInt(17)
+            val findStr = list.optString("${radomFind + 1}", "").replace("\n", "")
+            val findSize = findStr.length
+            val findIndex = Random.nextInt(findSize)
+            val findString = findStr.toCharArray().get(findIndex).toString()
+
+            val radomFind1 = Random.nextInt(17)
+            val findStr1 = list.optString("${radomFind1 + 1}", "").replace("\n", "")
+            val findSize1 = findStr1.length
+            val findIndex1 = Random.nextInt(findSize1)
+            var findString1 = findStr1.toCharArray().get(findIndex1).toString()
+
+            if (TextUtils.equals(findString, findString1)) {
+                if (findIndex1 < findSize1 - 1) {
+                    findString1 = findStr1.toCharArray().get(findIndex1 + 1).toString()
+                } else {
+                    findString1 = findStr1.toCharArray().get(0).toString()
+                }
+            }
+
+            stage?.bindData(jieshu, findString, findString1, succCallback)
+            updateTvHint(findString)
+        } else {
+            val findStr = list.optString("${realBiBua}", "").replace("\n", "")
+            val findSize = findStr.length
+            val findIndex = Random.nextInt(findSize)
+            val findString = findStr.toCharArray().get(findIndex).toString()
+
+            val findIndex1 = Random.nextInt(findSize)
+            var findString1 = findStr.toCharArray().get(findIndex1).toString()
+
+            if (TextUtils.equals(findString, findString1)) {
+                if (findIndex1 < findSize - 1) {
+                    findString1 = findStr.toCharArray().get(findIndex1 + 1).toString()
+                } else {
+                    findString1 = findStr.toCharArray().get(0).toString()
+                }
+            }
+
+            stage?.bindData(jieshu, findString, findString1, succCallback)
+            updateTvHint(findString)
+        }
     }
 
-    private val drawable by lazy {
-        val color = ResourceUtils.getColor(R.color.color_1482f0)
-        ShapeDrawable.getDrawable(0, ScreenUtils.dip2px(5f), color, color)
+
+    private val list by lazy {
+        val json = CacheUtils.InputStreamToString(CacheUtils.getFileFromAssets("first_stage.json"))
+        val jobj = org.json.JSONObject(json)
+        jobj
     }
+
 
     override fun doGetContentViewId() = R.layout.aqhy_activity_first_stage
 
@@ -103,10 +151,6 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         super.doInitSubViews(view)
         initBg()
         ImageLoadManager.loadImage(R.drawable.drawable_first_stage_hint, iv_hint, 0)
-        nandu.background = drawable
-        diy.background = drawable
-        last.background = drawable
-        next.background = drawable
     }
 
     private fun initBg() {
@@ -119,78 +163,43 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
     override fun doInitData() {
         super.doInitData()
         setListener()
-        var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
-        if (jieshu < 3)
-            jieshu = 3
-        else if (jieshu > 11)
-            jieshu = 11
-
-        guanKa = SharedPrefsUtil.getInt("first_stage_guanka", 0)
-
-        if (list != null && list.size > 0) {
-            stage.bindData(
-                jieshu,
-                list.get(guanKa).findWord,
-                list.get(guanKa).proguardWord,
-                succCallback
-            )
-            updateTvHint(list.get(guanKa).findWord)
-        }
+        setData(-1, succCallback)
     }
 
-    private fun updateTvHint(findWord : String){
+    private fun updateTvHint(findWord: String) {
         val build = SpannableStringBuilder()
         build.append("找出：")
         val startIndex = build.length
         build.append(findWord)
         val endIndex = build.length
-        build.setSpan(AbsoluteSizeSpan(24, true), startIndex, endIndex, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
+        build.setSpan(
+            AbsoluteSizeSpan(24, true),
+            startIndex,
+            endIndex,
+            Spanned.SPAN_INCLUSIVE_INCLUSIVE
+        )
         tv_hint?.text = build
     }
 
     private fun setListener() {
-        last.setOnClickListener {
-            if (list != null && list.size > 0) {
-                guanKa -= 1
-                if (guanKa < 0)
-                    guanKa = list.size - 1
-
-                val entity = list.get(guanKa)
-                SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
-                var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
-                if (jieshu < 3)
-                    jieshu = 3
-                else if (jieshu > 11)
-                    jieshu = 11
-
-                stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
-                updateTvHint(entity.findWord)
-            }
-        }
-
-        next.setOnClickListener {
-            if (list != null && list.size > 0) {
-                guanKa += 1
-                if (guanKa >= list.size)
-                    guanKa = 0
-
-                val entity = list.get(guanKa)
-                SharedPrefsUtil.saveInt("first_stage_guanka", guanKa)
-                var jieshu = SharedPrefsUtil.getInt("first_stage_jieshu", 6)
-                if (jieshu < 3)
-                    jieshu = 3
-                else if (jieshu > 11)
-                    jieshu = 11
-
-                stage.bindData(jieshu, entity.findWord, entity.proguardWord, succCallback)
-                updateTvHint(entity.findWord)
-            }
-        }
-
         nandu.setOnClickListener {
             val dialog = NanduDialog()
+            val bundle = Bundle()
+            bundle.putBoolean("isBiHua", false)
+            bundle.putString("hint", "输入3~11的数字,越大越难")
+            dialog.arguments = bundle
             dialog?.nanduCallback = nanDuCallback
             dialog.show(supportFragmentManager, "nandu")
+        }
+
+        bihua.setOnClickListener {
+            val dialog = NanduDialog()
+            val bundle = Bundle()
+            bundle.putBoolean("isBiHua", true)
+            bundle.putString("hint", "请输入笔画数")
+            dialog.arguments = bundle
+            dialog?.nanduCallback = nanDuCallback
+            dialog.show(supportFragmentManager, "笔画")
         }
 
         diy.setOnClickListener {

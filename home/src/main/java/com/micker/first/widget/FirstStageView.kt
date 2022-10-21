@@ -17,6 +17,7 @@ import com.micker.first.callback.SuccCallback
 import com.micker.helper.ResourceUtils
 import com.micker.helper.TLog
 import com.micker.helper.snack.MToastHelper
+import com.micker.helper.speak.TextToSpeechUtils.textSpeak
 import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
 import kotlin.math.min
@@ -37,7 +38,7 @@ class FirstStageView @JvmOverloads constructor(
     var horlineViewList = ArrayList<View>()
     var verlineViewList = ArrayList<View>()
     var wordViewList = ArrayList<ShareTextView>()
-    var succCallback : SuccCallback? = null
+    var succCallback: SuccCallback? = null
 
     private val onClickListener by lazy {
         OnClickListener {
@@ -45,7 +46,10 @@ class FirstStageView @JvmOverloads constructor(
                 val tvValue = it.text?.toString()?.trim()
                 if (TextUtils.equals(tvValue, findWord)) {
                     playErrorSuccAlarm(getContext(), true)
-                    succCallback?.succCallback()
+                    postDelayed({
+                        succCallback?.succCallback()
+                    }, 1500)
+
                 } else {
                     playErrorSuccAlarm(getContext(), false)
                 }
@@ -55,6 +59,7 @@ class FirstStageView @JvmOverloads constructor(
 
 
     fun bindData(jieShu1: Int, findWord: String, proguardWord: String, succCallback: SuccCallback) {
+        textSpeak("找出${findWord}")
         this.jieShu = jieShu1
         this.findWord = findWord
         this.proguardWord = proguardWord
@@ -138,7 +143,7 @@ class FirstStageView @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        if(jieShu > 0) {
+        if (jieShu > 0) {
             var widthSize = MeasureSpec.getSize(widthMeasureSpec)
             var realHeightSize = widthSize
 
@@ -167,7 +172,7 @@ class FirstStageView @JvmOverloads constructor(
             }
 
             setMeasuredDimension(widthSize, realHeightSize)
-        }else{
+        } else {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         }
     }
@@ -178,7 +183,8 @@ class FirstStageView @JvmOverloads constructor(
 
             wordViewList?.forEachIndexed { index, shareTextView ->
                 val startX = (index % jieShu) * (shareTextView.measuredWidth + lineWidth)
-                val startY = Math.floor(index * 1.0 / jieShu) * (shareTextView.measuredHeight + lineWidth)
+                val startY =
+                    Math.floor(index * 1.0 / jieShu) * (shareTextView.measuredHeight + lineWidth)
                 shareTextView.layout(
                     startX,
                     startY.toInt(),
@@ -188,14 +194,15 @@ class FirstStageView @JvmOverloads constructor(
             }
 
 
-            if(jieShu > 0){
+            if (jieShu > 0) {
                 val wordWidth = wordViewList[0].measuredWidth
                 val wordHeight = wordViewList[0].measuredHeight
                 (0 until (jieShu - 1))?.forEach {
                     val lineStartX = 0
-                    val lineStartY = (it + 1) * wordHeight  + (it * lineWidth)
+                    val lineStartY = (it + 1) * wordHeight + (it * lineWidth)
                     val lineView = horlineViewList[it]
-                    lineView.layout(lineStartX, lineStartY, lineStartX + measuredWidth,
+                    lineView.layout(
+                        lineStartX, lineStartY, lineStartX + measuredWidth,
                         (lineStartY + lineWidth)
                     )
 
@@ -203,7 +210,8 @@ class FirstStageView @JvmOverloads constructor(
                     var startY = 0
                     var startx = (it + 1) * wordWidth + (it * lineWidth)
                     val verlineView = verlineViewList[it]
-                    verlineView.layout(startx, startY, startx + lineWidth,
+                    verlineView.layout(
+                        startx, startY, startx + lineWidth,
                         (startY + measuredHeight)
                     )
                 }

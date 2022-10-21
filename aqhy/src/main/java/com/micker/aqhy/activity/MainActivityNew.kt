@@ -17,6 +17,8 @@ import com.micker.helper.file.QDUtil.getShareImageCache
 import com.micker.helper.router.DoubleClickHelper
 import com.micker.helper.router.RouterHelper
 import com.micker.helper.snack.MToastHelper
+import com.micker.helper.speak.TextToSpeechUtils.initTextToSpeech
+import com.micker.helper.speak.TextToSpeechUtils.textSpeechclose
 import kotlinx.android.synthetic.main.tail_activity_main_new.*
 import kotlinx.android.synthetic.main.tail_activity_main_new.view.*
 import kotlin.random.Random
@@ -34,6 +36,7 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
     override fun doGetContentViewId() = R.layout.tail_activity_main_new
     override fun isNeedSwipeBack() = false
     override fun doInitSubViews(view: View) {
+        initTextToSpeech(application)
         isShowPrivacy()
         initBg(view)
         initListener()
@@ -63,6 +66,7 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
 
     override fun onDestroy() {
         FileUtil.deleteDirectory(getShareImageCache(this))
+        textSpeechclose()
         super.onDestroy()
     }
 

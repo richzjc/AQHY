@@ -29,7 +29,9 @@
                 android:inputType="number"
                 android:paddingLeft="@dimen/margin_dp10"
                 android:paddingRight="@dimen/margin_dp10"
+                android:cursorVisible="true"
                 android:textSize="@dimen/text_size_14"
+                android:textCursorDrawable="@color/color_1482f0"
                 android:textColorHint="@color/color_999999" />
     </LinearLayout>
 

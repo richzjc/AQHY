@@ -42,13 +42,16 @@ class NanduDialog : BaseDialogFragment() {
         super.doInitData()
         confirm?.background = drawable
         setListener()
+        val hint = arguments?.getString("hint", "")
+        find_et?.hint = hint
     }
 
-    private fun setListener(){
+    private fun setListener() {
         confirm?.setOnClickListener {
             val findWord = find_et?.text?.toString()?.trim()
-            if(!TextUtils.isEmpty(findWord)){
-                nanduCallback?.nanduCallback(findWord?.toInt() ?: 5)
+            if (!TextUtils.isEmpty(findWord)) {
+                val isBiHua = arguments?.getBoolean("isBiHua", false) ?: false
+                nanduCallback?.nanduCallback(findWord?.toInt() ?: 5, isBiHua)
                 dismiss()
             }
         }
