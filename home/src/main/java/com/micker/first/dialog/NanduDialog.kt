@@ -10,6 +10,9 @@ import com.micker.helper.ResourceUtils
 import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
 import kotlinx.android.synthetic.main.aqhy_dialog_first_stage_diy.*
+import kotlinx.android.synthetic.main.aqhy_dialog_first_stage_diy.confirm
+import kotlinx.android.synthetic.main.aqhy_dialog_first_stage_diy.find_et
+import kotlinx.android.synthetic.main.aqhy_dialog_first_stage_nandu.*
 
 class NanduDialog : BaseDialogFragment() {
 
@@ -44,6 +47,7 @@ class NanduDialog : BaseDialogFragment() {
         setListener()
         val hint = arguments?.getString("hint", "")
         find_et?.hint = hint
+        title?.text = arguments?.getString("title", "")
     }
 
     private fun setListener() {

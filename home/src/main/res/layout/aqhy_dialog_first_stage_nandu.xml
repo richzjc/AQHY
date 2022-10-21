@@ -13,6 +13,7 @@
             android:orientation="horizontal">
 
         <com.micker.core.widget.ShareTextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="难度系数:"

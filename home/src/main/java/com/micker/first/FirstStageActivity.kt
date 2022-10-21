@@ -187,6 +187,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
             val bundle = Bundle()
             bundle.putBoolean("isBiHua", false)
             bundle.putString("hint", "输入3~11的数字,越大越难")
+            bundle.putString("title", "难度系数")
             dialog.arguments = bundle
             dialog?.nanduCallback = nanDuCallback
             dialog.show(supportFragmentManager, "nandu")
@@ -196,7 +197,8 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
             val dialog = NanduDialog()
             val bundle = Bundle()
             bundle.putBoolean("isBiHua", true)
-            bundle.putString("hint", "请输入笔画数")
+            bundle.putString("hint", "请输入笔画数（1~17）画的汉字")
+            bundle.putString("title", "笔画数")
             dialog.arguments = bundle
             dialog?.nanduCallback = nanDuCallback
             dialog.show(supportFragmentManager, "笔画")
