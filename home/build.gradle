@@ -31,4 +31,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     kapt rootProject.ext.router.routerCompiler
     implementation project(path: ':global')
+    api project(path: ':user')
 }

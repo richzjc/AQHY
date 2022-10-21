@@ -1,4 +1,4 @@
-package com.micker.aqhy.activity
+package com.micker.home.activity
 
 import android.animation.Animator
 import android.animation.AnimatorSet
@@ -6,25 +6,20 @@ import android.animation.ValueAnimator
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import com.micker.aqhy.R
-import com.micker.aqhy.dialog.UserPrivacyDialog
-import com.micker.aqhy.util.setMsgToWX
-import com.micker.aqhy.widget.ViewPagerScroller
+import com.kronos.router.BindRouter
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
-import com.micker.helper.ResourceUtils
-import com.micker.helper.SharedPrefsUtil
-import com.micker.helper.file.FileUtil
-import com.micker.helper.file.QDUtil.getShareImageCache
-import com.micker.helper.router.DoubleClickHelper
-import com.micker.helper.snack.MToastHelper
+import com.micker.global.SECOND_STAGE_ROUTER
 import com.micker.helper.system.ScreenUtils
+import com.micker.home.R
 import com.micker.home.fragment.HomeFragment
 import com.micker.home.fragment.InspirationFragment
+import com.micker.home.widget.ViewPagerScroller
 import com.micker.user.fragment.UserFragment
 import kotlinx.android.synthetic.main.tail_activity_main.*
 import java.util.*
 
+@BindRouter(urls = [SECOND_STAGE_ROUTER])
 class MainActivity : BaseActivity<Any, BasePresenter<Any>>() {
     private val titles by lazy { arrayOf("首页", "灵感", "个人") }
     private val duration: Int = 800

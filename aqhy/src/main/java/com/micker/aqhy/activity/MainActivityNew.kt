@@ -8,6 +8,7 @@ import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
 import com.micker.core.imageloader.ImageLoadManager
 import com.micker.global.FIRST_STAGE_ROUTER
+import com.micker.global.SECOND_STAGE_ROUTER
 import com.micker.global.const.imagesArry
 import com.micker.helper.ResourceUtils
 import com.micker.helper.SharedPrefsUtil
@@ -72,5 +73,6 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
 
     private fun initListener(){
         first_stage?.setOnClickListener { RouterHelper.open(FIRST_STAGE_ROUTER, this) }
+        second_stage?.setOnClickListener { RouterHelper.open(SECOND_STAGE_ROUTER, this) }
     }
 }

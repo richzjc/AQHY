@@ -1,4 +1,4 @@
-package com.micker.aqhy.widget;
+package com.micker.home.widget;
 
 import android.content.Context;
 import android.view.animation.Interpolator;

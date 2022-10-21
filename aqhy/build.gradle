@@ -105,7 +105,6 @@ dependencies {
     implementation rootProject.ext.support.startUp
     implementation rootProject.ext.thirdlib.packerNg
     api project(path: ':global')
-    api project(path: ':user')
     api project(path: ':home')
     api project(path: ':push')
 }
