@@ -76,20 +76,5 @@ class DiyDialog : BaseDialogFragment() {
                 }
             }
         })
-
-        proguard_et?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                val text = s?.toString()
-                if(!TextUtils.isEmpty(text) && text!!.length > 1){
-                    proguard_et?.text = SpannableStringBuilder(text!!.substring(0, 1))
-                }
-            }
-        })
     }
 }

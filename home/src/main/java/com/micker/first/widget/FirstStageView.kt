@@ -70,6 +70,7 @@ class FirstStageView @JvmOverloads constructor(
         else if (jieShu > 11)
             jieShu = 11
 
+        var proguardLength = proguardWord.length
 
         if (jieShu > 0) {
             val total = jieShu * jieShu
@@ -86,7 +87,8 @@ class FirstStageView @JvmOverloads constructor(
             }
 
             wordViewList.forEach {
-                it.text = proguardWord
+                val randInt = Random.nextInt(proguardLength)
+                it.text = proguardWord.toCharArray()[randInt].toString()
                 addView(it)
                 it.setOnClickListener(onClickListener)
             }

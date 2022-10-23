@@ -55,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/margin_dp10"
                 android:background="@drawable/shape_first_stage_dialog_et_bg"
-                android:hint="输入一个汉字"
+                android:hint="输入多个汉字"
                 android:inputType="text"
                 android:paddingLeft="@dimen/margin_dp10"
                 android:cursorVisible="true"

@@ -42,50 +42,53 @@ class ThirdStageView @JvmOverloads constructor(
     var emptShareTv : ShareTextView? = null
 
     private val onClickListener by lazy {
-        OnClickListener {
-            if (it is ShareTextView && isEditMode && emptShareTv != null && it != emptShareTv) {
-                val emptyTag = queryTag(emptShareTv)
-                if (emptyTag != null) {
-                    var emptyRow = emptyTag[0]
-                    var emptyRank = emptyTag[1]
+        object : OnClickListener{
+            @Synchronized
+            override fun onClick(it: View?) {
+                if (it is ShareTextView && isEditMode && emptShareTv != null && it != emptShareTv) {
+                    val emptyTag = queryTag(emptShareTv)
+                    if (emptyTag != null) {
+                        var emptyRow = emptyTag[0]
+                        var emptyRank = emptyTag[1]
 
-                    val lastShareTv = wordViewList[jieShu - 1][jieShu - 1]
-                    val clickTag = queryTag(it)
-                    if (clickTag != null) {
-                        var clickRow = clickTag[0]
-                        var clickRank = clickTag[1]
+                        val lastShareTv = wordViewList[jieShu - 1][jieShu - 1]
+                        val clickTag = queryTag(it)
+                        if (clickTag != null) {
+                            var clickRow = clickTag[0]
+                            var clickRank = clickTag[1]
 
-                        var rowFlag = (clickRow >= emptyRow - 1) && (clickRow <= emptyRow + 1)
-                        var rankFlag = (clickRank >= emptyRank - 1) && (clickRank <= emptyRank + 1)
-                        var totalFlag = true
-                        if(clickRow != emptyRow)
-                            totalFlag = (clickRank == emptyRank)
-                        if (rowFlag && rankFlag && totalFlag) {
-                            try {
-                                val replaceStr = it?.text
-                                emptShareTv?.setText(replaceStr)
-                                it?.text = ""
-                                emptShareTv = it
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
+                            var rowFlag = (clickRow >= emptyRow - 1) && (clickRow <= emptyRow + 1)
+                            var rankFlag = (clickRank >= emptyRank - 1) && (clickRank <= emptyRank + 1)
+                            var totalFlag = true
+                            if(clickRow != emptyRow)
+                                totalFlag = (clickRank == emptyRank)
+                            if (rowFlag && rankFlag && totalFlag) {
+                                try {
+                                    val replaceStr = it?.text
+                                    emptShareTv?.setText(replaceStr)
+                                    it?.text = ""
+                                    emptShareTv = it
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
 
-                            if (emptShareTv == lastShareTv) {
-                                if (TextUtils.equals(checkResult(), resultStr)) {
-                                    playErrorSuccAlarm(getContext(), true)
-                                    postDelayed({
-                                        succCallback?.succCallback()
-                                    }, 1500)
+                                if (emptShareTv == lastShareTv) {
+                                    if (TextUtils.equals(checkResult(), resultStr)) {
+                                        playErrorSuccAlarm(getContext(), true)
+                                        postDelayed({
+                                            succCallback?.succCallback()
+                                        }, 1500)
+                                    } else {
+                                        playClickAlarm(getContext())
+                                    }
                                 } else {
                                     playClickAlarm(getContext())
                                 }
-                            } else {
+
+
+                            }else{
                                 playClickAlarm(getContext())
                             }
-
-
-                        }else{
-                            playClickAlarm(getContext())
                         }
                     }
                 }

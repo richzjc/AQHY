@@ -105,14 +105,6 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
             val findIndex1 = Random.nextInt(findSize1)
             var findString1 = findStr1.toCharArray().get(findIndex1).toString()
 
-            if (TextUtils.equals(findString, findString1)) {
-                if (findIndex1 < findSize1 - 1) {
-                    findString1 = findStr1.toCharArray().get(findIndex1 + 1).toString()
-                } else {
-                    findString1 = findStr1.toCharArray().get(0).toString()
-                }
-            }
-
             stage?.bindData(jieshu, findString, findString1, succCallback)
             updateTvHint(findString)
         } else {
@@ -123,14 +115,6 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
             val findIndex1 = Random.nextInt(findSize)
             var findString1 = findStr.toCharArray().get(findIndex1).toString()
-
-            if (TextUtils.equals(findString, findString1)) {
-                if (findIndex1 < findSize - 1) {
-                    findString1 = findStr.toCharArray().get(findIndex1 + 1).toString()
-                } else {
-                    findString1 = findStr.toCharArray().get(0).toString()
-                }
-            }
 
             stage?.bindData(jieshu, findString, findString1, succCallback)
             updateTvHint(findString)
