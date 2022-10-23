@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -16,6 +17,7 @@ import com.micker.aqhy.util.playClickAlarm
 import com.micker.aqhy.util.playErrorSuccAlarm
 import com.micker.core.widget.ShareTextView
 import com.micker.first.callback.SuccCallback
+import com.micker.helper.TLog
 import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
 import kotlin.math.min
@@ -35,49 +37,76 @@ class ThirdStageView @JvmOverloads constructor(
     var wordViewList = ArrayList<ArrayList<ShareTextView>>()
 
     var resultStr = ""
-    var emptShareTv: ShareTextView? = null
-    var lastShareTv: ShareTextView? = null
     var succCallback: SuccCallback? = null
+
+    var emptShareTv : ShareTextView? = null
 
     private val onClickListener by lazy {
         OnClickListener {
             if (it is ShareTextView && isEditMode && emptShareTv != null && it != emptShareTv) {
-                val emptyTag = emptShareTv?.tag?.toString()
-                val list = emptyTag?.split(",")
-                if (list != null && list.size == 2) {
-                    var emptyRow = list[0].toInt()
-                    var emptyRank = list[1].toInt()
+                val emptyTag = queryTag(emptShareTv)
+                if (emptyTag != null) {
+                    var emptyRow = emptyTag[0]
+                    var emptyRank = emptyTag[1]
 
-                    val clickTag = it?.tag?.toString()
-                    val clickList = clickTag?.split(",")
-                    if (clickList != null && clickList.size == 2) {
-                        var clickRow = clickList[0].toInt()
-                        var clickRank = clickList[1].toInt()
+                    val lastShareTv = wordViewList[jieShu - 1][jieShu - 1]
+                    val clickTag = queryTag(it)
+                    if (clickTag != null) {
+                        var clickRow = clickTag[0]
+                        var clickRank = clickTag[1]
 
                         var rowFlag = (clickRow >= emptyRow - 1) && (clickRow <= emptyRow + 1)
                         var rankFlag = (clickRank >= emptyRank - 1) && (clickRank <= emptyRank + 1)
-                        if (rowFlag && rankFlag) {
-                            emptShareTv?.text = it.text
-                            it.text = ""
-                            emptShareTv = it
+                        var totalFlag = true
+                        if(clickRow != emptyRow)
+                            totalFlag = (clickRank == emptyRank)
+                        if (rowFlag && rankFlag && totalFlag) {
+                            try {
+                                val replaceStr = it?.text
+                                emptShareTv?.setText(replaceStr)
+                                it?.text = ""
+                                emptShareTv = it
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+
                             if (emptShareTv == lastShareTv) {
-                                if(TextUtils.equals(checkResult(), resultStr)){
+                                if (TextUtils.equals(checkResult(), resultStr)) {
                                     playErrorSuccAlarm(getContext(), true)
                                     postDelayed({
                                         succCallback?.succCallback()
                                     }, 1500)
-                                }else{
+                                } else {
                                     playClickAlarm(getContext())
                                 }
                             } else {
                                 playClickAlarm(getContext())
                             }
+
+
+                        }else{
+                            playClickAlarm(getContext())
                         }
                     }
                 }
             }
         }
     }
+
+    private fun queryTag(view: ShareTextView?): IntArray? {
+        var intArr : IntArray? = null
+        wordViewList?.forEachIndexed { outer, arrayList ->
+            arrayList.forEachIndexed { index, shareTextView ->
+                if (shareTextView == view) {
+                    intArr = IntArray(2)
+                    intArr!![0] = outer
+                    intArr!![1] = index
+                }
+            }
+        }
+        return intArr
+    }
+
 
     private fun checkResult(): String {
         val builder = SpannableStringBuilder()
@@ -95,6 +124,10 @@ class ThirdStageView @JvmOverloads constructor(
         this.jieShu = jieShu1
         this.isEditMode = isEditMode
         removeAllViews()
+        horlineViewList?.clear()
+        verlineViewList?.clear()
+        wordViewList?.clear()
+        resultStr = ""
 
         imageView = ImageView(getContext())
         val params = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -110,32 +143,15 @@ class ThirdStageView @JvmOverloads constructor(
         if (jieShu > 0) {
             val total = jieShu
             (0 until total)?.forEach { outer ->
-                if (outer >= wordViewList.size)
-                    wordViewList.add(ArrayList())
+                wordViewList.add(ArrayList())
                 var outerList = wordViewList.get(outer)
                 (0 until total)?.forEach { inner ->
-                    if (outerList.size < total) {
-                        val createView = createShareTextView()
-                        outerList.add(createView)
-                    }
-                }
-
-                if (outerList.size > total) {
-                    val subList = outerList.subList(0, total)
-                    outerList = ArrayList(subList)
-                    wordViewList.set(outer, outerList)
+                    val createView = createShareTextView()
+                    outerList.add(createView)
                 }
             }
 
-
-            if (wordViewList.size > total) {
-                val subList = wordViewList.subList(0, total)
-                val outerList = ArrayList(subList)
-                wordViewList = outerList
-            }
-
-            emptShareTv = wordViewList.get(jieShu - 1).get(jieShu - 1)
-            lastShareTv = wordViewList.get(jieShu - 1).get(jieShu - 1)
+            emptShareTv = wordViewList[jieShu - 1][jieShu - 1]
 
             val realTotal = jieShu * jieShu
             val spanBuilder = SpannableStringBuilder()
@@ -145,6 +161,7 @@ class ThirdStageView @JvmOverloads constructor(
                 numberList.add(it)
             }
             resultStr = spanBuilder.toString()?.trim()
+            val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 
             if (isEditMode) {
                 wordViewList?.forEachIndexed { outerIndex, it ->
@@ -152,13 +169,14 @@ class ThirdStageView @JvmOverloads constructor(
                         if (it != emptShareTv) {
                             val numberListSize = numberList.size
                             val realIndex = Random.nextInt(numberListSize)
-                            it.text = "${numberList.get(realIndex)}"
+                            it?.text = "${numberList.get(realIndex)}"
                             numberList.removeAt(realIndex)
                             if (isEditMode) {
                                 it.setOnClickListener(onClickListener)
                             }
-                            it.tag = "${outerIndex},${inndexIndex}"
-                            addView(it)
+                            it?.also {
+                                addView(it, params)
+                            }
                         }
                     }
                 }
@@ -166,45 +184,34 @@ class ThirdStageView @JvmOverloads constructor(
                 var startIndex = 1
                 wordViewList?.forEach {
                     it.forEach {
-                        if (it != emptShareTv && it != null) {
-                            it.text = "${startIndex}"
+                        if (it != emptShareTv) {
+                            it?.text = "${startIndex}"
                             startIndex += 1
-                            it.setOnClickListener(onClickListener)
-                            addView(it)
+                            it?.also {
+                                addView(it)
+                            }
                         }
+
+                        it?.setOnClickListener(onClickListener)
                     }
                 }
             }
 
             val lineTotal = (jieShu - 1)
             (0 until lineTotal)?.forEach {
-                if (horlineViewList.size < lineTotal) {
-                    val lineView = createLineView()
-                    horlineViewList.add(lineView)
-                }
+                val lineView = createLineView()
+                horlineViewList.add(lineView)
 
-                if (verlineViewList.size < lineTotal) {
-                    val lineView = createLineView()
-                    verlineViewList.add(lineView)
-                }
+                val verlineView = createLineView()
+                verlineViewList.add(verlineView)
+
+                addView(lineView)
+                addView(verlineView)
             }
 
-            if (horlineViewList.size > lineTotal) {
-                val subList = horlineViewList.subList(0, lineTotal)
-                horlineViewList = ArrayList(subList)
-            }
-
-            if (verlineViewList.size > lineTotal) {
-                val subList = verlineViewList.subList(0, lineTotal)
-                verlineViewList = ArrayList(subList)
-            }
-
-            horlineViewList?.forEach {
-                addView(it)
-            }
-
-            verlineViewList?.forEach {
-                addView(it)
+            if(emptShareTv != null && emptShareTv?.parent == null){
+                addView(emptShareTv)
+                emptShareTv?.setOnClickListener(onClickListener)
             }
         }
     }

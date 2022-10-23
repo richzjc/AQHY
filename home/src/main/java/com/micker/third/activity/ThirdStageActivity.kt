@@ -1,6 +1,8 @@
 package com.micker.third.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import com.kronos.router.BindRouter
 import com.micker.core.base.BaseActivity
@@ -14,6 +16,7 @@ import com.micker.global.const.imagesArry
 import com.micker.helper.SharedPrefsUtil
 import com.micker.home.R
 import kotlinx.android.synthetic.main.aqhy_activity_third_stage.*
+import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 @BindRouter(urls = [THIRD_STAGE_ROUTER])
@@ -29,9 +32,8 @@ class ThirdStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                         jieshu = 3
                     else if (jieshu > 6)
                         jieshu = 6
-                    SharedPrefsUtil.saveInt("third_stage_jieshu", jieshu)
-                    not_edit_stage.bindData(jieshu, false, succCallback)
-                    edit_stage.bindData(jieshu, true, succCallback)
+                    SharedPrefsUtil.saveIntForInstance("third_stage_jieshu", jieshu)
+                    reset?.performClick()
                 }
             }
         }
@@ -82,7 +84,7 @@ class ThirdStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
             bundle.putString("title", "难度系数")
             dialog.arguments = bundle
             dialog?.nanduCallback = nanDuCallback
-            dialog.show(supportFragmentManager, "nandu")
+            dialog.show(supportFragmentManager, "thirdNanDu")
         }
 
         reset?.setOnClickListener {

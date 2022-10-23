@@ -95,6 +95,11 @@ public class SharedPrefsUtil {
         getPrefs().edit().putInt(key, value).apply();
     }
 
+    public static void saveIntForInstance(String key, int value) {
+        getPrefs().edit().putInt(key, value).commit();
+    }
+
+
     public static int getInt(String key) {
         return getPrefs().getInt(key, 0);
     }
