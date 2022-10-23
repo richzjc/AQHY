@@ -99,13 +99,7 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
             val findIndex = Random.nextInt(findSize)
             val findString = findStr.toCharArray().get(findIndex).toString()
 
-            val radomFind1 = Random.nextInt(17)
-            val findStr1 = list.optString("${radomFind1 + 1}", "").replace("\n", "")
-            val findSize1 = findStr1.length
-            val findIndex1 = Random.nextInt(findSize1)
-            var findString1 = findStr1.toCharArray().get(findIndex1).toString()
-
-            stage?.bindData(jieshu, findString, findString1, succCallback)
+            stage?.bindData(jieshu, findString, findStr, succCallback)
             updateTvHint(findString)
         } else {
             val findStr = list.optString("${realBiBua}", "").replace("\n", "")
@@ -113,10 +107,8 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
             val findIndex = Random.nextInt(findSize)
             val findString = findStr.toCharArray().get(findIndex).toString()
 
-            val findIndex1 = Random.nextInt(findSize)
-            var findString1 = findStr.toCharArray().get(findIndex1).toString()
 
-            stage?.bindData(jieshu, findString, findString1, succCallback)
+            stage?.bindData(jieshu, findString, findStr, succCallback)
             updateTvHint(findString)
         }
     }

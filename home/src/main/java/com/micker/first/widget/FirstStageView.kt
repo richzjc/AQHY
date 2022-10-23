@@ -88,7 +88,13 @@ class FirstStageView @JvmOverloads constructor(
 
             wordViewList.forEach {
                 val randInt = Random.nextInt(proguardLength)
-                it.text = proguardWord.toCharArray()[randInt].toString()
+                val text = proguardWord.toCharArray()[randInt].toString()
+                var realText = text
+                while (TextUtils.equals(realText, findWord) && proguardLength > 1) {
+                    val randInt = Random.nextInt(proguardLength)
+                    realText = proguardWord.toCharArray()[randInt].toString()
+                }
+                it.text = realText
                 addView(it)
                 it.setOnClickListener(onClickListener)
             }
