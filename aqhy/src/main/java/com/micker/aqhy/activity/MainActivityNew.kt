@@ -42,6 +42,7 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
         isShowPrivacy()
         initBg(view)
         initListener()
+        sl?.bindText(0, 0, "测试", "快讯")
     }
 
     private fun initBg(view: View){
