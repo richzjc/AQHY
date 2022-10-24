@@ -112,24 +112,37 @@ class FourStageView @JvmOverloads constructor(
 
 
     private fun checkResult(): Boolean {
-//        val builder = SpannableStringBuilder()
-//        wordViewList?.forEach {
-//            it.forEach {
-//                builder.append(it.text)
-//            }
-//        }
-//        return builder.toString()
+        var flag = true
+        var startIndex = 0
+        wordViewList?.forEachIndexed { outer, arrayList ->
+            arrayList.forEachIndexed { inner, wscnImageView ->
+                if(outer != jieShu - 1 && inner != jieShu - 1){
+                    val curBitmap = cutMap[wscnImageView]
+                    if(!flag || startIndex >= orderBitmapList.size || curBitmap != orderBitmapList.get(startIndex))
+                        flag = false
+
+                    startIndex += 1
+                }
+            }
+
+        }
         return true
     }
 
     private fun cutBitmap(bitmap: Bitmap) {
         val width = bitmap.width
         val height = bitmap.height
-        val itemBitmapWdith = width/jieShu
-        val itemBitmapHeight = height/jieShu
+        val itemBitmapWdith = width / jieShu
+        val itemBitmapHeight = height / jieShu
         val total = (jieShu * jieShu)
         (0 until total)?.forEach {
-//            Bitmap.createbitma
+            var row = it / jieShu
+            var rank = it % jieShu
+            var startX = rank * itemBitmapWdith
+            var startY = row * itemBitmapHeight
+            val cutBitmap =
+                Bitmap.createBitmap(bitmap, startX, startY, itemBitmapWdith, itemBitmapHeight)
+            orderBitmapList.add(cutBitmap)
         }
     }
 
