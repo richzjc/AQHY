@@ -75,9 +75,7 @@ class ThirdStageView @JvmOverloads constructor(
                                 if (emptShareTv == lastShareTv) {
                                     if (TextUtils.equals(checkResult(), resultStr)) {
                                         playErrorSuccAlarm(getContext(), true)
-                                        postDelayed({
-                                            succCallback?.succCallback()
-                                        }, 1500)
+//                                      //TODO 添加烟花效果
                                     } else {
                                         playClickAlarm(getContext())
                                     }

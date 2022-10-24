@@ -1,43 +1,48 @@
 package com.micker.four.widget
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.text.SpannableStringBuilder
-import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.micker.aqhy.util.playClickAlarm
 import com.micker.aqhy.util.playErrorSuccAlarm
-import com.micker.core.widget.ShareTextView
+import com.micker.core.imageloader.WscnImageView
 import com.micker.first.callback.SuccCallback
 import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
 import kotlin.math.min
+import kotlin.random.Random
 
 class FourStageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs) {
 
+    var imageView: ImageView? = null
 
     var jieShu: Int = 3
     var lineWidth = ScreenUtils.dip2px(1f)
     var horlineViewList = ArrayList<View>()
     var verlineViewList = ArrayList<View>()
-    var wordViewList = ArrayList<ArrayList<ShareTextView>>()
+    var wordViewList = ArrayList<ArrayList<WscnImageView>>()
+    var originBitmap: Bitmap? = null
 
-    var resultStr = ""
+    val cutMap = HashMap<WscnImageView?, Bitmap?>()
+    val orderBitmapList = ArrayList<Bitmap>()
     var succCallback: SuccCallback? = null
 
-    var emptShareTv: ShareTextView? = null
+    var emptShareTv: WscnImageView? = null
 
     private val onClickListener by lazy {
         object : OnClickListener {
             @Synchronized
             override fun onClick(it: View?) {
-                if (it is ShareTextView && emptShareTv != null && it != emptShareTv) {
+                if (it is WscnImageView && emptShareTv != null && it != emptShareTv) {
                     val emptyTag = queryTag(emptShareTv)
                     if (emptyTag != null) {
                         var emptyRow = emptyTag[0]
@@ -57,20 +62,22 @@ class FourStageView @JvmOverloads constructor(
                                 totalFlag = (clickRank == emptyRank)
                             if (rowFlag && rankFlag && totalFlag) {
                                 try {
-                                    val replaceStr = it?.text
-                                    emptShareTv?.setText(replaceStr)
-                                    it?.text = ""
+                                    val bitmap = cutMap[it]
+                                    if (bitmap != null && !bitmap.isRecycled) {
+                                        emptShareTv?.setImageBitmap(bitmap)
+                                        it?.setImageBitmap(null)
+                                        cutMap[emptShareTv] = bitmap
+                                        cutMap[it] = null
+                                    }
                                     emptShareTv = it
                                 } catch (e: Exception) {
                                     e.printStackTrace()
                                 }
 
                                 if (emptShareTv == lastShareTv) {
-                                    if (TextUtils.equals(checkResult(), resultStr)) {
+                                    if (checkResult()) {
                                         playErrorSuccAlarm(getContext(), true)
-                                        postDelayed({
-                                            succCallback?.succCallback()
-                                        }, 1500)
+                                        //TODO 添加烟花效果
                                     } else {
                                         playClickAlarm(getContext())
                                     }
@@ -89,7 +96,7 @@ class FourStageView @JvmOverloads constructor(
         }
     }
 
-    private fun queryTag(view: ShareTextView?): IntArray? {
+    private fun queryTag(view: WscnImageView?): IntArray? {
         var intArr: IntArray? = null
         wordViewList?.forEachIndexed { outer, arrayList ->
             arrayList.forEachIndexed { index, shareTextView ->
@@ -104,25 +111,47 @@ class FourStageView @JvmOverloads constructor(
     }
 
 
-    private fun checkResult(): String {
-        val builder = SpannableStringBuilder()
-        wordViewList?.forEach {
-            it.forEach {
-                builder.append(it.text)
-            }
-        }
-        return builder.toString()
+    private fun checkResult(): Boolean {
+//        val builder = SpannableStringBuilder()
+//        wordViewList?.forEach {
+//            it.forEach {
+//                builder.append(it.text)
+//            }
+//        }
+//        return builder.toString()
+        return true
     }
 
+    private fun cutBitmap(bitmap: Bitmap) {
+        val width = bitmap.width
+        val height = bitmap.height
+        val itemBitmapWdith = width/jieShu
+        val itemBitmapHeight = height/jieShu
+        val total = (jieShu * jieShu)
+        (0 until total)?.forEach {
+//            Bitmap.createbitma
+        }
+    }
 
-    fun bindData(jieShu1: Int, succCallback: SuccCallback) {
+    fun bindData(jieShu1: Int, bitmap: Bitmap?, succCallback: SuccCallback) {
+        bitmap ?: return
+        originBitmap = bitmap
         this.succCallback = succCallback
         this.jieShu = jieShu1
         removeAllViews()
         horlineViewList?.clear()
         verlineViewList?.clear()
         wordViewList?.clear()
-        resultStr = ""
+        cutMap.clear()
+        orderBitmapList.clear()
+
+        cutBitmap(bitmap!!)
+
+        imageView = ImageView(getContext())
+        val params = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        imageView?.scaleType = ImageView.ScaleType.FIT_XY
+        imageView?.setImageResource(R.drawable.third_stage_bg)
+        addView(imageView, params)
 
         if (jieShu < 3)
             jieShu = 3
@@ -142,23 +171,22 @@ class FourStageView @JvmOverloads constructor(
 
             emptShareTv = wordViewList[jieShu - 1][jieShu - 1]
 
-            val realTotal = jieShu * jieShu
-            val spanBuilder = SpannableStringBuilder()
-            val numberList = ArrayList<Int>()
-            (1 until realTotal)?.forEach {
-                spanBuilder.append("${it}")
-                numberList.add(it)
-            }
-            resultStr = spanBuilder.toString()?.trim()
-            var startIndex = 1
+
+            var realBmpList = ArrayList(orderBitmapList)
             wordViewList?.forEach {
                 it.forEach {
                     if (it != emptShareTv) {
-                        it?.text = "${startIndex}"
-                        startIndex += 1
+                        val numberListSize = realBmpList.size
+                        val realIndex = Random.nextInt(numberListSize)
+                        val bitmap = realBmpList.get(realIndex)
+                        it.setImageBitmap(bitmap)
+                        realBmpList.removeAt(realIndex)
+                        it.setOnClickListener(onClickListener)
                         it?.also {
-                            addView(it)
+                            addView(it, params)
                         }
+
+                        cutMap.put(it, bitmap)
                     }
 
                     it?.setOnClickListener(onClickListener)
@@ -184,11 +212,9 @@ class FourStageView @JvmOverloads constructor(
         }
     }
 
-    private fun createShareTextView(): ShareTextView {
-        val shareTextView = ShareTextView(context)
-        shareTextView.gravity = Gravity.CENTER
-        shareTextView.setTextColor(Color.WHITE)
-        shareTextView.setBackgroundResource(R.drawable.layer_drawable_first_stage_item)
+    private fun createShareTextView(): WscnImageView {
+        val shareTextView = WscnImageView(context)
+        shareTextView.scaleType = ImageView.ScaleType.FIT_XY
         return shareTextView
     }
 
@@ -200,7 +226,7 @@ class FourStageView @JvmOverloads constructor(
 
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        if (jieShu > 0) {
+        if (jieShu > 0 && originBitmap != null) {
             var widthSize = MeasureSpec.getSize(widthMeasureSpec)
             var realHeightSize = widthSize
 
@@ -211,10 +237,6 @@ class FourStageView @JvmOverloads constructor(
             wordViewList?.forEach {
                 it.forEach {
                     it.measure(withspec, heightspec)
-                    it.setTextSize(
-                        TypedValue.COMPLEX_UNIT_PX,
-                        min(itemViewHeight, itemViewWidth) * 2.0f / 3.0f
-                    )
                 }
             }
 
@@ -230,6 +252,11 @@ class FourStageView @JvmOverloads constructor(
                 it.measure(verwidthspec, verHeightspec)
             }
 
+
+            val ivwidthspec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY)
+            val ivHeightspec = MeasureSpec.makeMeasureSpec(realHeightSize, MeasureSpec.EXACTLY)
+            imageView?.measure(ivwidthspec, ivHeightspec)
+
             setMeasuredDimension(widthSize, realHeightSize)
         } else {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -239,6 +266,8 @@ class FourStageView @JvmOverloads constructor(
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         if (wordViewList.size > 0 && wordViewList.get(0).size > 0) {
+
+            imageView?.layout(0, 0, measuredWidth, measuredHeight)
 
             wordViewList?.forEachIndexed { outerIndex, shareTextView ->
                 shareTextView?.forEachIndexed { index, it ->
