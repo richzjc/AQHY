@@ -76,13 +76,13 @@ class FourStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         val index = Random.nextInt(size)
         ImageLoadManager.loadBitmap(pingTuArr[index]) {
             if (it != null) {
-                edit_stage.bindData(jieshu, it, succCallback)
+                edit_stage.bindData(card_view, jieshu, it, succCallback)
                 setNotEditBitmap(it)
             } else {
                 val drawable = ResourceUtils.getResDrawableFromID(R.drawable.defalut_pingtu_img)
                 val bitmapDrawable = drawable as BitmapDrawable
                 val bitmap = bitmapDrawable.bitmap
-                edit_stage?.bindData(jieshu, bitmap, succCallback)
+                edit_stage?.bindData(card_view, jieshu, bitmap, succCallback)
                 setNotEditBitmap(bitmap)
             }
         }
@@ -149,7 +149,7 @@ class FourStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
         reset?.setOnClickListener {
             val jieshu = SharedPrefsUtil.getInt("four_stage_jieshu", 3)
-            edit_stage?.bindData(jieshu, edit_stage.originBitmap, succCallback)
+            edit_stage?.bindData(card_view, jieshu, edit_stage.originBitmap, succCallback)
         }
 
         select?.setOnClickListener {
@@ -165,7 +165,7 @@ class FourStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                             val photo = resultPhotos[0]
                             val bitmap = BitmapFactory.decodeFile(photo.path)
                             val jieshu = SharedPrefsUtil.getInt("four_stage_jieshu", 3)
-                            edit_stage?.bindData(jieshu, bitmap, succCallback)
+                            edit_stage?.bindData(card_view, jieshu, bitmap, succCallback)
                             setNotEditBitmap(bitmap)
                         }
                     }

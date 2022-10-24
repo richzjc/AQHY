@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.cardview.widget.CardView
 import com.micker.aqhy.util.playClickAlarm
 import com.micker.aqhy.util.playErrorSuccAlarm
 import com.micker.core.imageloader.WscnImageView
@@ -39,6 +40,7 @@ class FourStageView @JvmOverloads constructor(
 
     var emptShareTv: WscnImageView? = null
     var lastBitmap: Bitmap? = null
+    var cardView : CardView? = null
 
     private val onClickListener by lazy {
         object : OnClickListener {
@@ -155,10 +157,12 @@ class FourStageView @JvmOverloads constructor(
         }
     }
 
-    fun bindData(jieShu1: Int, bitmap: Bitmap?, succCallback: SuccCallback) {
+    fun bindData(cardView : FourCardView, jieShu1: Int, bitmap: Bitmap?, succCallback: SuccCallback) {
         bitmap ?: return
+        cardView.bindBitmap(bitmap)
         originBitmap = bitmap
         this.succCallback = succCallback
+        this.cardView = cardView
         this.jieShu = jieShu1
         removeAllViews()
         horlineViewList?.clear()
@@ -166,6 +170,7 @@ class FourStageView @JvmOverloads constructor(
         wordViewList?.clear()
         cutMap.clear()
         orderBitmapList.clear()
+
         cutBitmap(bitmap!!)
 
         imageView = ImageView(getContext())
