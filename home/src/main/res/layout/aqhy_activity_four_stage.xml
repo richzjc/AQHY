@@ -11,114 +11,119 @@
             android:layout_height="match_parent"
             app:actualImageScaleType="centerCrop" />
 
-    <LinearLayout
-            android:id="@+id/func_parent"
+    <RelativeLayout
+            android:id="@+id/top_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_dp15"
-            android:layout_marginTop="@dimen/margin_dp60"
-            android:layout_marginRight="@dimen/margin_dp15"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/margin_dp50"
+            android:layout_marginRight="@dimen/margin_dp15">
 
-
-        <com.micker.core.widget.ShareTextView
-                android:id="@+id/nandu"
+        <LinearLayout
+                android:id="@+id/func_parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/first_stage_btn_bg"
-                android:gravity="center"
-                android:paddingLeft="@dimen/margin_dp15"
-                android:paddingTop="@dimen/margin_dp5"
-                android:paddingRight="@dimen/margin_dp15"
-                android:paddingBottom="@dimen/margin_dp5"
-                android:text="难度系数"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:orientation="vertical">
 
-        <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:visibility="invisible" />
 
-        <com.micker.core.widget.ShareTextView
-                android:id="@+id/select"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/first_stage_btn_bg"
-                android:gravity="center"
-                android:paddingLeft="@dimen/margin_dp15"
-                android:paddingTop="@dimen/margin_dp5"
-                android:paddingRight="@dimen/margin_dp15"
-                android:paddingBottom="@dimen/margin_dp5"
-                android:text="选择"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+            <com.micker.core.widget.ShareTextView
+                    android:id="@+id/nandu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/first_stage_btn_bg"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin_dp15"
+                    android:paddingTop="@dimen/margin_dp5"
+                    android:paddingRight="@dimen/margin_dp15"
+                    android:paddingBottom="@dimen/margin_dp5"
+                    android:text="难度系数"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
 
-        <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:visibility="invisible" />
 
-        <com.micker.core.widget.ShareTextView
-                android:id="@+id/reset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/first_stage_btn_bg"
-                android:gravity="center"
-                android:paddingLeft="@dimen/margin_dp15"
-                android:paddingTop="@dimen/margin_dp5"
-                android:paddingRight="@dimen/margin_dp15"
-                android:paddingBottom="@dimen/margin_dp5"
-                android:text="重置"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
+            <com.micker.core.widget.ShareTextView
+                    android:id="@+id/select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_dp15"
+                    android:background="@drawable/first_stage_btn_bg"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin_dp15"
+                    android:paddingTop="@dimen/margin_dp5"
+                    android:paddingRight="@dimen/margin_dp15"
+                    android:paddingBottom="@dimen/margin_dp5"
+                    android:text="选择"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
 
-    </LinearLayout>
+
+            <com.micker.core.widget.ShareTextView
+                    android:id="@+id/reset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_dp15"
+                    android:background="@drawable/first_stage_btn_bg"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin_dp15"
+                    android:paddingTop="@dimen/margin_dp5"
+                    android:paddingRight="@dimen/margin_dp15"
+                    android:paddingBottom="@dimen/margin_dp5"
+                    android:text="重置"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+                android:id="@+id/sub_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@id/func_parent"
+                android:layout_alignBottom="@id/func_parent"
+                android:layout_marginLeft="@dimen/margin_dp10"
+                android:layout_toRightOf="@id/func_parent">
+
+            <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="@dimen/margin_dp5">
+
+                <com.micker.core.imageloader.WscnImageView
+                        android:id="@+id/not_edit_stage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+
+    </RelativeLayout>
 
 
     <FrameLayout
-            android:id="@+id/sub_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/func_parent"
-            android:layout_marginTop="@dimen/margin_dp15"
-            android:gravity="center_vertical">
-
+            android:layout_height="match_parent"
+            android:layout_below="@id/top_parent"
+            android:layout_marginLeft="@dimen/margin_dp15"
+            android:layout_marginTop="@dimen/margin_dp10"
+            android:layout_marginRight="@dimen/margin_dp15"
+            android:layout_marginBottom="@dimen/margin_dp20">
 
         <androidx.cardview.widget.CardView
+                android:id="@+id/card_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:cardCornerRadius="@dimen/margin_dp5">
+                app:cardCornerRadius="@dimen/margin_dp10">
 
-            <com.micker.core.imageloader.WscnImageView
-                    android:id="@+id/not_edit_stage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+            <com.micker.four.widget.FourStageView
+                    android:id="@+id/edit_stage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
         </androidx.cardview.widget.CardView>
+
     </FrameLayout>
 
-
-    <com.micker.four.widget.FourCardView
-            android:id="@+id/card_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sub_parent"
-            app:cardBackgroundColor="@color/transparent"
-            android:layout_marginBottom="@dimen/margin_dp20"
-            android:layout_marginLeft="@dimen/margin_dp15"
-            android:layout_marginRight="@dimen/margin_dp15"
-            android:layout_marginTop="@dimen/margin_dp30"
-            app:cardCornerRadius="@dimen/margin_dp10">
-
-        <com.micker.four.widget.FourStageView
-                android:id="@+id/edit_stage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-    </com.micker.four.widget.FourCardView>
 
 </RelativeLayout>

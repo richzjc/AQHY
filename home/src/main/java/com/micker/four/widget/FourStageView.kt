@@ -40,7 +40,6 @@ class FourStageView @JvmOverloads constructor(
 
     var emptShareTv: WscnImageView? = null
     var lastBitmap: Bitmap? = null
-    var cardView : CardView? = null
 
     private val onClickListener by lazy {
         object : OnClickListener {
@@ -157,12 +156,10 @@ class FourStageView @JvmOverloads constructor(
         }
     }
 
-    fun bindData(cardView : FourCardView, jieShu1: Int, bitmap: Bitmap?, succCallback: SuccCallback) {
+    fun bindData(jieShu1: Int, bitmap: Bitmap?, succCallback: SuccCallback) {
         bitmap ?: return
-        cardView.bindBitmap(bitmap)
         originBitmap = bitmap
         this.succCallback = succCallback
-        this.cardView = cardView
         this.jieShu = jieShu1
         removeAllViews()
         horlineViewList?.clear()
@@ -271,6 +268,13 @@ class FourStageView @JvmOverloads constructor(
                     ((originBitmap!!.height * 1f / originBitmap!!.width) * widthSize1).toInt()
             }
 
+            if(widthSize < widthSize1 - ScreenUtils.dip2px(30f)) {
+                widthSize = widthSize1 - ScreenUtils.dip2px(30f)
+
+                realHeightSize = ((originBitmap!!.height * 1f / originBitmap!!.width) * widthSize).toInt()
+                if(realHeightSize > heightSize)
+                    realHeightSize = heightSize
+            }
 
             val itemViewWidth = (widthSize - (jieShu - 1) * lineWidth) / jieShu
             val itemViewHeight = (realHeightSize - (jieShu - 1) * lineWidth) / jieShu
