@@ -28,7 +28,7 @@ class LiveShareIconView @JvmOverloads constructor(
 //        initTypeFace(value)
 //    }
 
-    var rectColor: Int = Color.BLACK
+
 
     init {
         val gap = Math.tan(Math.PI * 6.0 / 180) * setHeight
@@ -42,12 +42,7 @@ class LiveShareIconView @JvmOverloads constructor(
         setText("测试")
     }
 
-    private val paint by lazy {
-        val paint = Paint()
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.FILL
-        paint
-    }
+
 
 //    fun initTypeFace(value : Int) {
 //        val gettypeFace = ResourcesCompat.getFont(context, value)
@@ -68,7 +63,7 @@ class LiveShareIconView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         canvas?.save()
         canvas?.skew(-Math.tan(Math.PI * 6.0 / 180).toFloat(), 0f)
-        paint.color = rectColor
+
         val gap = Math.tan(Math.PI * 6.0 / 180) * measuredHeight
 
 //        canvas?.drawRect(
@@ -79,27 +74,7 @@ class LiveShareIconView @JvmOverloads constructor(
 //            paint
 //        )
 
-        val path = Path()
-        var startX = gap.toFloat() * 2
-        var startY = 0f
-        path.moveTo(startX, startY)
 
-        startX = measuredWidth.toFloat()
-        startY = 0f
-
-        path.lineTo(startX, startY)
-
-        startX = measuredWidth.toFloat()
-        startY = measuredHeight.toFloat()
-
-        path.lineTo(startX, startY)
-
-        startX = 0f
-        startY = measuredHeight.toFloat()
-
-        path.lineTo(startX, startY)
-
-        canvas?.drawPath(path, paint)
         super.onDraw(canvas)
         canvas?.restore()
     }

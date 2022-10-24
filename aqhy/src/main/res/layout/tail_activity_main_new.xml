@@ -13,12 +13,12 @@
             app:actualImageScaleType="centerCrop" />
 
 
-    <com.wallstreetcn.baseui.widget.LiveShareLayout
+    <com.wallstreetcn.baseui.widget.LiveShareTotalLayout
             android:id="@+id/sl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_dp100"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginLeft="@dimen/margin_dp15"
         />
 
@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_dp50"
+            android:visibility="invisible"
             android:scrollbars="none">
 
         <LinearLayout
