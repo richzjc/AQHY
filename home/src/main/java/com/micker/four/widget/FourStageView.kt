@@ -3,6 +3,7 @@ package com.micker.four.widget
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.text.SpannableStringBuilder
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -228,6 +229,7 @@ class FourStageView @JvmOverloads constructor(
     private fun createShareTextView(): WscnImageView {
         val shareTextView = WscnImageView(context)
         shareTextView.scaleType = ImageView.ScaleType.FIT_XY
+        shareTextView.hierarchy?.setPlaceholderImage(ColorDrawable(Color.TRANSPARENT))
         return shareTextView
     }
 

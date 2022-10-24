@@ -36,5 +36,8 @@
                 android:name="com.micker.third.activity.ThirdStageActivity"
                 android:screenOrientation="portrait" />
 
+        <activity
+                android:name="com.micker.four.activity.FourStageActivity"
+                android:screenOrientation="portrait" />
     </application>
 </manifest>
