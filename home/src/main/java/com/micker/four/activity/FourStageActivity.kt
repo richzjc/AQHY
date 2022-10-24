@@ -1,11 +1,19 @@
 package com.micker.four.activity
 
+import android.Manifest
+import android.app.Activity
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.fragment.app.FragmentActivity
+import com.huantansheng.easyphotos.EasyPhotos
+import com.huantansheng.easyphotos.listener.FinishSelectListener
+import com.huantansheng.easyphotos.models.album.entity.Photo
 import com.kronos.router.BindRouter
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
@@ -17,15 +25,20 @@ import com.micker.global.FOUR_STAGE_ROUTER
 import com.micker.global.THIRD_STAGE_ROUTER
 import com.micker.global.const.imagesArry
 import com.micker.global.const.pingTuArr
+import com.micker.global.dialog.selectPicFromCamera
+import com.micker.global.dialog.selectPicFromCameraOrPic
 import com.micker.helper.ResourceUtils
 import com.micker.helper.SharedPrefsUtil
 import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
+import com.tbruyelle.rxpermissions3.RxPermissionsNew
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.aqhy_activity_four_stage.*
 import kotlinx.android.synthetic.main.aqhy_activity_four_stage.bg
 import kotlinx.android.synthetic.main.aqhy_activity_four_stage.edit_stage
 import kotlinx.android.synthetic.main.aqhy_activity_four_stage.nandu
 import kotlinx.android.synthetic.main.aqhy_activity_four_stage.reset
+import java.util.ArrayList
 import kotlin.random.Random
 
 @BindRouter(urls = [FOUR_STAGE_ROUTER])
@@ -77,11 +90,24 @@ class FourStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
     private fun setNotEditBitmap(bitmap: Bitmap) {
         not_edit_stage?.also {
-            val height = ScreenUtils.getScreenHeight() / 3 - ScreenUtils.dip2px(50f)
-            var width = (bitmap.width / bitmap.height) * height
-            if (width > ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(30f))
-                width = ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(30f)
-            val params = FrameLayout.LayoutParams(width, height)
+
+            var widthSize1 = ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(30f)
+            val heightSize = ScreenUtils.getScreenHeight() / 3 - ScreenUtils.dip2px(50f)
+            val tempHeight = (bitmap!!.height * 1f / bitmap!!.width) * widthSize1
+
+            var realHeightSize: Int
+            var widthSize: Int
+
+
+            if (tempHeight > heightSize) {
+                realHeightSize = heightSize
+                widthSize = ((bitmap!!.width * 1f / bitmap!!.height) * realHeightSize).toInt()
+            }else{
+                widthSize = widthSize1
+                realHeightSize = ((bitmap!!.height * 1f / bitmap!!.width) * widthSize1).toInt()
+            }
+
+            val params = FrameLayout.LayoutParams(widthSize, realHeightSize)
             it.layoutParams = params
             it.scaleType = ImageView.ScaleType.FIT_XY
             it.setImageBitmap(bitmap)
@@ -124,6 +150,26 @@ class FourStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         reset?.setOnClickListener {
             val jieshu = SharedPrefsUtil.getInt("four_stage_jieshu", 3)
             edit_stage?.bindData(jieshu, edit_stage.originBitmap, succCallback)
+        }
+
+        select?.setOnClickListener {
+
+            selectPicFromCameraOrPic(this,
+                1,
+                null,
+                FinishSelectListener { resultCode, data ->
+                    if (resultCode == RESULT_OK) {
+                        val resultPhotos: ArrayList<Photo>? =
+                            data.getParcelableArrayListExtra(EasyPhotos.RESULT_PHOTOS)
+                        if (resultPhotos != null && resultPhotos.size > 0) {
+                            val photo = resultPhotos[0]
+                            val bitmap = BitmapFactory.decodeFile(photo.path)
+                            val jieshu = SharedPrefsUtil.getInt("four_stage_jieshu", 3)
+                            edit_stage?.bindData(jieshu, bitmap, succCallback)
+                            setNotEditBitmap(bitmap)
+                        }
+                    }
+                })
         }
     }
 }

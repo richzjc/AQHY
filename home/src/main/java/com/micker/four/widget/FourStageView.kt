@@ -38,6 +38,7 @@ class FourStageView @JvmOverloads constructor(
     var succCallback: SuccCallback? = null
 
     var emptShareTv: WscnImageView? = null
+    var lastBitmap: Bitmap? = null
 
     private val onClickListener by lazy {
         object : OnClickListener {
@@ -77,6 +78,8 @@ class FourStageView @JvmOverloads constructor(
 
                                 if (emptShareTv == lastShareTv) {
                                     if (checkResult()) {
+                                        if (lastBitmap != null && !lastBitmap!!.isRecycled)
+                                            emptShareTv?.setImageBitmap(lastBitmap)
                                         playErrorSuccAlarm(getContext(), true)
                                         //TODO 添加烟花效果
                                     } else {
@@ -117,9 +120,12 @@ class FourStageView @JvmOverloads constructor(
         var startIndex = 0
         wordViewList?.forEachIndexed { outer, arrayList ->
             arrayList.forEachIndexed { inner, wscnImageView ->
-                if(outer != jieShu - 1 && inner != jieShu - 1){
+                if (outer != jieShu - 1 && inner != jieShu - 1) {
                     val curBitmap = cutMap[wscnImageView]
-                    if(!flag || startIndex >= orderBitmapList.size || curBitmap != orderBitmapList.get(startIndex))
+                    if (!flag || startIndex >= orderBitmapList.size || curBitmap != orderBitmapList.get(
+                            startIndex
+                        )
+                    )
                         flag = false
 
                     startIndex += 1
@@ -143,7 +149,11 @@ class FourStageView @JvmOverloads constructor(
             var startY = row * itemBitmapHeight
             val cutBitmap =
                 Bitmap.createBitmap(bitmap, startX, startY, itemBitmapWdith, itemBitmapHeight)
-            orderBitmapList.add(cutBitmap)
+            if (it == total - 1) {
+                lastBitmap = cutBitmap
+            } else {
+                orderBitmapList.add(cutBitmap)
+            }
         }
     }
 
@@ -242,8 +252,22 @@ class FourStageView @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         if (jieShu > 0 && originBitmap != null) {
-            var widthSize = MeasureSpec.getSize(widthMeasureSpec)
-            var realHeightSize = widthSize
+            var widthSize1 = MeasureSpec.getSize(widthMeasureSpec)
+            val heightSize = MeasureSpec.getSize(heightMeasureSpec)
+            val tempHeight = (originBitmap!!.height * 1f / originBitmap!!.width) * widthSize1
+
+            var realHeightSize: Int
+            var widthSize: Int
+
+
+            if (tempHeight > heightSize) {
+                realHeightSize = heightSize
+                widthSize = ((originBitmap!!.width * 1f / originBitmap!!.height) * realHeightSize).toInt()
+            }else{
+                widthSize = widthSize1
+                realHeightSize = ((originBitmap!!.height * 1f / originBitmap!!.width) * widthSize1).toInt()
+            }
+
 
             val itemViewWidth = (widthSize - (jieShu - 1) * lineWidth) / jieShu
             val itemViewHeight = (realHeightSize - (jieShu - 1) * lineWidth) / jieShu

@@ -37,4 +37,6 @@ dependencies {
     api project(path: ':webview')
 
     api rootProject.ext.thirdlib.newGuide
+    api "com.github.richzjc:easyPhotos:1.0.4"
+    api "com.github.richzjc:rxPermissionNew:1.0.4"
 }

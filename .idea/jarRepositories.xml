@@ -51,5 +51,10 @@
       <option name="name" value="maven5" />
       <option name="url" value="https://maven.wallstcn.com/repository/mobile-public/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://maven-wscn.awtmt.com/repository/mobile-public/" />
+    </remote-repository>
   </component>
 </project>

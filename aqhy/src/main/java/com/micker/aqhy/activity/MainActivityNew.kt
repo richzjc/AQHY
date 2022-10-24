@@ -1,7 +1,6 @@
 package com.micker.aqhy.activity
 
 import android.view.View
-import com.alibaba.fastjson.JSON
 import com.micker.aqhy.R
 import com.micker.aqhy.dialog.UserPrivacyDialog
 import com.micker.core.base.BaseActivity
@@ -14,7 +13,6 @@ import com.micker.global.THIRD_STAGE_ROUTER
 import com.micker.global.const.imagesArry
 import com.micker.helper.ResourceUtils
 import com.micker.helper.SharedPrefsUtil
-import com.micker.helper.file.CacheUtils
 import com.micker.helper.file.FileUtil
 import com.micker.helper.file.QDUtil.getShareImageCache
 import com.micker.helper.router.DoubleClickHelper
@@ -43,7 +41,6 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
         isShowPrivacy()
         initBg(view)
         initListener()
-        sl?.bindText( "测试", "快讯")
     }
 
     private fun initBg(view: View){

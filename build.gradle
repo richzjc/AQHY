@@ -44,7 +44,7 @@ allprojects {
                 username properties.getProperty("mavenUser")
                 password properties.getProperty("mavenPwd")
             }
-            url 'https://maven.wallstcn.com/repository/mobile-public/'
+            url 'https://maven-wscn.awtmt.com/repository/mobile-public/'
         }
 
         google()
