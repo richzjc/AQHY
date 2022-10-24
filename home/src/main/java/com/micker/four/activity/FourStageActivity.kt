@@ -1,8 +1,11 @@
 package com.micker.four.activity
 
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
 import com.kronos.router.BindRouter
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
@@ -16,6 +19,7 @@ import com.micker.global.const.imagesArry
 import com.micker.global.const.pingTuArr
 import com.micker.helper.ResourceUtils
 import com.micker.helper.SharedPrefsUtil
+import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
 import kotlinx.android.synthetic.main.aqhy_activity_four_stage.*
 import kotlinx.android.synthetic.main.aqhy_activity_four_stage.bg
@@ -57,14 +61,30 @@ class FourStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         val jieshu = SharedPrefsUtil.getInt("four_stage_jieshu", 3)
         val size = pingTuArr.size
         val index = Random.nextInt(size)
-        ImageLoadManager.loadBitmap(pingTuArr[index]){
-            if(it != null){
+        ImageLoadManager.loadBitmap(pingTuArr[index]) {
+            if (it != null) {
                 edit_stage.bindData(jieshu, it, succCallback)
-            }else{
+                setNotEditBitmap(it)
+            } else {
                 val drawable = ResourceUtils.getResDrawableFromID(R.drawable.defalut_pingtu_img)
                 val bitmapDrawable = drawable as BitmapDrawable
-                edit_stage?.bindData(jieshu, bitmapDrawable.bitmap, succCallback)
+                val bitmap = bitmapDrawable.bitmap
+                edit_stage?.bindData(jieshu, bitmap, succCallback)
+                setNotEditBitmap(bitmap)
             }
+        }
+    }
+
+    private fun setNotEditBitmap(bitmap: Bitmap) {
+        not_edit_stage?.also {
+            val height = ScreenUtils.getScreenHeight() / 3 - ScreenUtils.dip2px(50f)
+            var width = (bitmap.width / bitmap.height) * height
+            if (width > ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(30f))
+                width = ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(30f)
+            val params = FrameLayout.LayoutParams(width, height)
+            it.layoutParams = params
+            it.scaleType = ImageView.ScaleType.FIT_XY
+            it.setImageBitmap(bitmap)
         }
     }
 
@@ -102,7 +122,8 @@ class FourStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         }
 
         reset?.setOnClickListener {
-            setData(succCallback)
+            val jieshu = SharedPrefsUtil.getInt("four_stage_jieshu", 3)
+            edit_stage?.bindData(jieshu, edit_stage.originBitmap, succCallback)
         }
     }
 }
