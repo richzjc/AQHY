@@ -103,11 +103,12 @@
 
 
     <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/sub_parent"
             android:layout_marginLeft="@dimen/margin_dp15"
-            android:layout_marginTop="@dimen/margin_dp20"
+            android:layout_marginBottom="@dimen/margin_dp20"
+            android:layout_marginTop="@dimen/margin_dp30"
             android:layout_marginRight="@dimen/margin_dp15"
             app:cardCornerRadius="@dimen/margin_dp10">
 

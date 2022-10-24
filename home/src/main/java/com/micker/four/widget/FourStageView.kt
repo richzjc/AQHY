@@ -27,7 +27,7 @@ class FourStageView @JvmOverloads constructor(
     var imageView: ImageView? = null
 
     var jieShu: Int = 3
-    var lineWidth = ScreenUtils.dip2px(1f)
+    var lineWidth = ScreenUtils.dip2px(1.5f)
     var horlineViewList = ArrayList<View>()
     var verlineViewList = ArrayList<View>()
     var wordViewList = ArrayList<ArrayList<WscnImageView>>()
@@ -68,9 +68,9 @@ class FourStageView @JvmOverloads constructor(
                                     if (bitmap != null && !bitmap.isRecycled) {
                                         emptShareTv?.setImageBitmap(bitmap)
                                         it?.setImageBitmap(null)
-                                        cutMap[emptShareTv] = bitmap
-                                        cutMap[it] = null
                                     }
+                                    cutMap[emptShareTv] = bitmap
+                                    cutMap[it] = null
                                     emptShareTv = it
                                 } catch (e: Exception) {
                                     e.printStackTrace()
@@ -120,20 +120,18 @@ class FourStageView @JvmOverloads constructor(
         var startIndex = 0
         wordViewList?.forEachIndexed { outer, arrayList ->
             arrayList.forEachIndexed { inner, wscnImageView ->
-                if (outer != jieShu - 1 && inner != jieShu - 1) {
+                if (!(outer == jieShu - 1 && inner == jieShu - 1)) {
                     val curBitmap = cutMap[wscnImageView]
-                    if (!flag || startIndex >= orderBitmapList.size || curBitmap != orderBitmapList.get(
-                            startIndex
-                        )
-                    )
+                    if (!flag || startIndex >= orderBitmapList.size || curBitmap != orderBitmapList[startIndex])
                         flag = false
-
-                    startIndex += 1
                 }
+
+
+                startIndex += 1
             }
 
         }
-        return true
+        return flag
     }
 
     private fun cutBitmap(bitmap: Bitmap) {
@@ -168,7 +166,6 @@ class FourStageView @JvmOverloads constructor(
         wordViewList?.clear()
         cutMap.clear()
         orderBitmapList.clear()
-
         cutBitmap(bitmap!!)
 
         imageView = ImageView(getContext())
@@ -197,20 +194,19 @@ class FourStageView @JvmOverloads constructor(
 
 
             var realBmpList = ArrayList(orderBitmapList)
-            wordViewList?.forEach {
-                it.forEach {
-                    if (it != emptShareTv) {
+            wordViewList?.forEachIndexed { outerIndex, arrayList ->
+                arrayList.forEachIndexed { innerIndex, it ->
+                    if (!(outerIndex == jieShu - 1 && innerIndex == jieShu - 1)) {
                         val numberListSize = realBmpList.size
                         val realIndex = Random.nextInt(numberListSize)
-                        val bitmap = realBmpList.get(realIndex)
+                        val bitmap = realBmpList[realIndex]
                         it.setImageBitmap(bitmap)
                         realBmpList.removeAt(realIndex)
-                        it.setOnClickListener(onClickListener)
                         it?.also {
                             addView(it, params)
                         }
 
-                        cutMap.put(it, bitmap)
+                        cutMap[it] = bitmap
                     }
 
                     it?.setOnClickListener(onClickListener)
@@ -262,10 +258,12 @@ class FourStageView @JvmOverloads constructor(
 
             if (tempHeight > heightSize) {
                 realHeightSize = heightSize
-                widthSize = ((originBitmap!!.width * 1f / originBitmap!!.height) * realHeightSize).toInt()
-            }else{
+                widthSize =
+                    ((originBitmap!!.width * 1f / originBitmap!!.height) * realHeightSize).toInt()
+            } else {
                 widthSize = widthSize1
-                realHeightSize = ((originBitmap!!.height * 1f / originBitmap!!.width) * widthSize1).toInt()
+                realHeightSize =
+                    ((originBitmap!!.height * 1f / originBitmap!!.width) * widthSize1).toInt()
             }
 
 
