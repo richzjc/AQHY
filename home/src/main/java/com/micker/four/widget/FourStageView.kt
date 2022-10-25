@@ -82,6 +82,7 @@ class FourStageView @JvmOverloads constructor(
                                         if (lastBitmap != null && !lastBitmap!!.isRecycled)
                                             emptShareTv?.setImageBitmap(lastBitmap)
                                         playErrorSuccAlarm(getContext(), true)
+                                        emptShareTv = null
                                         //TODO 添加烟花效果
                                     } else {
                                         playClickAlarm(getContext())
