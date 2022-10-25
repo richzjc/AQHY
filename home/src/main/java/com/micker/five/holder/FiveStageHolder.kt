@@ -32,7 +32,7 @@ class FiveStageHolder(context: Context?) : BaseRecycleViewHolder<FiveStageModel>
         itemView?.setOnClickListener {
             if(super.content != null) {
                 val bundle = Bundle()
-                bundle.putString("url", super.content?.url)
+                bundle.putString("videoUrl", super.content?.url)
                 RouterHelper.open(VIDEO_FULL_SCREEN_PLAY_ACTION, mContext, bundle)
             }
         }

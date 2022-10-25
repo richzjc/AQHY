@@ -1,6 +1,5 @@
 package com.micker.five.activity
 
-import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Build
 import android.text.TextUtils
@@ -65,7 +64,7 @@ class FullScreenPlayActivity : BaseActivity<Any, BasePresenter<Any>>() {
     override fun doInitData() {
         super.doInitData()
 
-        var url = intent.getStringExtra("url")
+        var url = intent.getStringExtra("videoUrl")
         if (TextUtils.isEmpty(url)) {
             finish()
             return
