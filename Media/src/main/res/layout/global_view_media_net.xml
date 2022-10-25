@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.wallstreetcn.baseui.widget.CustomTextView
+        android:id="@+id/tipsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/live_room_mobile_tips"
+        android:textColor="@color/white"/>
+
+    <com.wallstreetcn.baseui.widget.CustomTextView
+        android:id="@+id/playBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_dp10"
+        android:background="@drawable/shape_text_white_cornor"
+        android:paddingLeft="@dimen/margin_dp10"
+        android:paddingTop="@dimen/margin_dp3"
+        android:paddingRight="@dimen/margin_dp10"
+        android:paddingBottom="@dimen/margin_dp3"
+        android:text="@string/live_room_play_text_continue"
+        android:textColor="@color/white"/>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="live_room_open_overlay_window">是否開啟懸浮窗？</string>
+    <string name="live_room_to_set_up">去設定</string>
+    <string name="live_room_cancel_text">取消</string>
+    <string name="live_room_play_text">播放</string>
+    <string name="live_room_play_text_continue">繼續</string>
+    <string name="live_room_mobile_tips">當前為運營商網絡，播放將會消耗手機流量</string>
+    <string name="play_error_and_again">播放错误，请重试</string>
+    <string name="live_room_definition_text">清晰度</string>
+    <string name="live_room_live_on_living">直播中</string>
+    <string name="live_room_join_humans">人參與</string>
+    <string name="live_room_no_internet_change_dps">當前網絡情况不佳，建議切換清晰度</string>
+    <string name="live_room_original_painting">原画</string>
+
+    <string name="wall_global_sure_text">確定</string>
+    <string name="wall_global_cancel_text">取消</string>
+
+    <string name="wall_global_network_unconnected">當前網絡不可用，請稍後再試</string>
+    <string name="wall_global_media_2g_play_tips">為保護你的流量，需要打開2G/3G/4G播放開關</string>
+</resources>

@@ -8,4 +8,5 @@ include ':aqhy',
         ':push',
         ':rpc',
         ':user',
-        ':webview'
+        ':webview',
+        'Media'

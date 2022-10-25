@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_source"
+    android:layout_width="170dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_marginRight="@dimen/margin_dp10"
+    android:layout_gravity="right"
+    android:background="@drawable/shape_drawable_chooser_bg"
+    android:visibility="gone">
+
+    <com.wallstreetcn.global.media.controller.MediaPlayChooser
+        android:id="@+id/rdg_speed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <RelativeLayout
+        android:id="@+id/viewCacheLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rdg_speed"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/viewCache"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_dp20"
+            android:layout_marginBottom="@dimen/margin_dp20"
+            android:text="查看缓存视频"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14" />
+
+        <View
+            android:id="@+id/viewCacheTip"
+            android:layout_width="@dimen/margin_dp6"
+            android:layout_height="@dimen/margin_dp6"
+            android:layout_alignTop="@+id/viewCache"
+            android:layout_margin="@dimen/margin_dp4"
+            android:layout_toRightOf="@+id/viewCache"
+            android:background="@drawable/global_dot_f0414a"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_0.5"
+            android:background="#55ffffff" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -23,6 +23,7 @@ class FiveStageActivity : BaseRecyclerViewActivity<FiveStageModel, Any, BasePres
 
     override fun doInitSubViews(view: View) {
         super.doInitSubViews(view)
+        titleBar?.title = "家庭教育"
         ptrRecyclerView?.setCanRefresh(false)
         recycleView?.setIsEndless(false)
     }

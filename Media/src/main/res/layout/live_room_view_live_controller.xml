@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <com.wallstreetcn.baseui.widget.CustomTextView
+        android:id="@+id/tv_notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/text_view_notice_bg"
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="gone"
+        tools:text="11kb/s"/>
+
+    <RelativeLayout
+        android:id="@+id/controlRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_dp45"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/media_control_bg">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0.5dp"
+            android:layout_height="12dp"
+            android:layout_centerVertical="true"
+            android:background="@color/news_night_read"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/layout_control"
+            android:layout_toRightOf="@+id/view"
+            android:orientation="horizontal">
+
+
+            <com.wallstreetcn.baseui.widget.CustomTextView
+                android:id="@+id/video_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_dp16"
+                android:layout_marginRight="@dimen/margin_dp16"
+                android:background="@drawable/text_view_living_room"
+                android:gravity="center"
+                android:padding="@dimen/margin_dp2"
+                android:text="@string/live_room_live_on_living"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+
+            <com.wallstreetcn.baseui.widget.CustomTextView
+                android:id="@+id/live_room_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_dp16"
+                android:layout_toEndOf="@+id/video_type"
+                android:layout_toRightOf="@+id/video_type"
+                android:gravity="center"
+                android:text="@string/live_room_join_humans"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_control"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <com.wallstreetcn.baseui.widget.CustomTextView
+                android:id="@+id/live_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingRight="@dimen/margin_dp16"
+                android:text="倍速"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:visibility="gone"/>
+
+
+            <com.wallstreetcn.baseui.widget.CustomTextView
+                android:id="@+id/live_room_source"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingRight="@dimen/margin_dp16"
+                android:text="@string/live_room_definition_text"
+                android:textColor="@android:color/white"
+                android:textSize="11sp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/live_fullscreen"
+                style="@android:style/MediaButton.Play"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="@dimen/margin_dp15"
+                android:src="@drawable/live_media_control_fullscreen"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone">
+
+        <com.wallstreetcn.baseui.widget.CustomTextView
+            android:id="@+id/mediacontroller_time_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.wallstreetcn.global.media.MEndTimeTextView
+            android:id="@+id/mediacontroller_time_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/mediacontroller_play_pause"
+        style="@android:style/MediaButton.Play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingTop="@dimen/margin_dp10"
+        android:paddingBottom="@dimen/margin_dp10"/>
+
+    <com.wallstreetcn.global.media.widget.PlayTitleLayout
+        android:id="@+id/playTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+    </com.wallstreetcn.global.media.widget.PlayTitleLayout>
+
+    <com.wallstreetcn.global.media.controller.PlayUrlChooserLayout
+        android:id="@+id/chooseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+
+    </com.wallstreetcn.global.media.controller.PlayUrlChooserLayout>
+</RelativeLayout>

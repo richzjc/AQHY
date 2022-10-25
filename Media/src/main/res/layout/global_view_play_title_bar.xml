@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/global_play_title_bar_bg"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <com.wallstreetcn.baseui.customView.IconView
+        android:id="@+id/videoBack"
+        android:layout_width="@dimen/margin_dp45"
+        android:layout_height="@dimen/margin_dp45"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="&#xe77b;"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20"/>
+
+    <TextView
+        android:id="@+id/videoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/margin_dp45"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:maxLines="2"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_15"
+        tools:text="女学霸开挂：入职3年工资居然比老板马明哲还高！"/>
+
+    <com.wallstreetcn.baseui.customView.IconView
+        android:id="@+id/videoFav"
+        android:layout_width="@dimen/margin_dp45"
+        android:layout_height="@dimen/margin_dp45"
+        android:layout_marginLeft="@dimen/margin_dp15"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/icon_unfav"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20"
+        android:visibility="gone"/>
+
+
+    <com.wallstreetcn.baseui.customView.IconView
+        android:id="@+id/videoShare"
+        android:layout_width="@dimen/margin_dp45"
+        android:layout_height="@dimen/margin_dp45"
+        android:layout_marginRight="@dimen/margin_dp15"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/icon_share"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_20"/>
+</LinearLayout>

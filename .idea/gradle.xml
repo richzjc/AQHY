@@ -11,6 +11,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Media" />
             <option value="$PROJECT_DIR$/Webview" />
             <option value="$PROJECT_DIR$/aqhy" />
             <option value="$PROJECT_DIR$/core" />

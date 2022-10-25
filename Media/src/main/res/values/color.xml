@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="news_night_read">#444444</color>
+    <color name="media_control_bg">#7A000000</color>
+</resources>
