@@ -9,11 +9,11 @@ object TextToSpeechUtils {
     var mTextToSpeech: TextToSpeech? = null
 
     fun initTextToSpeech(context: Context) {
-        mTextToSpeech = TextToSpeech(context, TextToSpeech.OnInitListener {
-            if(it == TextToSpeech.SUCCESS){
-                mTextToSpeech?.setLanguage(Locale.CHINA)
+        mTextToSpeech = TextToSpeech(context) {
+            if (it == TextToSpeech.SUCCESS) {
+                mTextToSpeech?.language = Locale.CHINA
             }
-        })
+        }
 
         mTextToSpeech?.setPitch(1.0f)
         mTextToSpeech?.setSpeechRate(1.0f)
