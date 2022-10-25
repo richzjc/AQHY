@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.micker.helper.system.ScreenUtils;
 import com.wallstreetcn.global.media.R;
-import com.wallstreetcn.global.media.WscnMediaEntity;
-import com.wallstreetcn.helper.utils.system.ScreenUtils;
 
 import com.wallstreetcn.global.media.model.PlayUriEntity;
 
@@ -74,7 +73,7 @@ public class PlayUrlChooser extends RadioGroup implements RadioGroup.OnCheckedCh
     private RadioButton addRadioItem(PlayUriEntity playUriEntity, int id) {
         Context context = getContext();
         RadioButton rdb = new RadioButton(context);
-        rdb.setBackgroundResource(R.color.day_mode_color_19000000);
+        rdb.setBackgroundResource(R.color.black);
         rdb.setButtonDrawable(null);
         rdb.setGravity(Gravity.CENTER);
         RadioGroup.LayoutParams lp = new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.dip2px(55));
@@ -83,7 +82,7 @@ public class PlayUrlChooser extends RadioGroup implements RadioGroup.OnCheckedCh
         rdb.setLayoutParams(lp);
 //        String text = current == playUriEntity ? "√ " + playUriEntity.getTypeString() + "  " : playUriEntity.getTypeString();
         rdb.setTextSize(14);
-        rdb.setTextColor(ContextCompat.getColor(getContext(), current == playUriEntity ? R.color.day_mode_theme_color_1478f0 : R.color.white ));
+        rdb.setTextColor(ContextCompat.getColor(getContext(), current == playUriEntity ? R.color.color_1482f0 : R.color.white ));
         rdb.setText(playUriEntity.getTypeSpannable());
         rdb.setId(id);
         addView(rdb, lp);

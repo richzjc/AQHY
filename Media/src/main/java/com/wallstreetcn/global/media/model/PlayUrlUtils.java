@@ -2,8 +2,8 @@ package com.wallstreetcn.global.media.model;
 
 import android.text.TextUtils;
 
+import com.micker.helper.Util;
 import com.wallstreetcn.global.media.utils.WscnMediaUtils;
-import com.wallstreetcn.helper.utils.Util;
 
 import java.util.Collections;
 import java.util.Comparator;

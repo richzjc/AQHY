@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.wallstreetcn.baseui.callback.IViewHolder;
+import com.micker.core.callback.IViewHolder;
 import com.wallstreetcn.global.media.R;
 
 import androidx.annotation.DrawableRes;

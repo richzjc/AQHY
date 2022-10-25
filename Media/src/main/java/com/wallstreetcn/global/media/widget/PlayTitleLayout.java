@@ -7,15 +7,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.wallstreetcn.baseui.customView.IconView;
+import com.micker.helper.system.ScreenUtils;
 
 import com.wallstreetcn.global.media.R;
 import com.wallstreetcn.global.media.controller.Config;
-import com.wallstreetcn.helper.utils.ResourceUtils;
-import com.wallstreetcn.helper.utils.Util;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 public class PlayTitleLayout extends LinearLayout implements View.OnClickListener {
 
@@ -35,7 +32,7 @@ public class PlayTitleLayout extends LinearLayout implements View.OnClickListene
     }
 
     private TextView titleTv;
-    private IconView videoFav;
+    private TextView videoFav;
     private View     videoShare;
     private View     mainView;
 
@@ -53,7 +50,7 @@ public class PlayTitleLayout extends LinearLayout implements View.OnClickListene
         videoShare.setOnClickListener(this);
         titleTv = findViewById(R.id.videoTitle);
         mainView = findViewById(R.id.mainView);
-        mainView.setPadding(0, Util.getStatusBarHeight(getContext()), 0, 0);
+        mainView.setPadding(0, ScreenUtils.dip2px(50f), 0, 0);
         super.setVisibility(GONE);
     }
 
@@ -82,8 +79,8 @@ public class PlayTitleLayout extends LinearLayout implements View.OnClickListene
     }
 
     public void setFav(boolean fav) {
-        videoFav.setText(ResourceUtils.getResStringFromId(fav ? R.string.icon_star : R.string.icon_not_star));
-        videoFav.setTextColor(ContextCompat.getColor(getContext(), fav ? R.color.day_mode_theme_color_1478f0 : R.color.white));
+//        videoFav.setText(ResourceUtils.getResStringFromId(fav ? R.string.icon_star : R.string.icon_not_star));
+//        videoFav.setTextColor(ContextCompat.getColor(getContext(), fav ? R.color.day_mode_theme_color_1478f0 : R.color.white));
     }
 
     @Override

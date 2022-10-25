@@ -7,16 +7,16 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.micker.helper.ResourceUtils;
+import com.micker.helper.Util;
+import com.micker.helper.snack.MToastHelper;
+import com.micker.helper.system.TDevice;
+import com.micker.rpc.ResponseListener;
 import com.wallstreetcn.global.media.R;
 import com.wallstreetcn.global.media.utils.SharedMediaUtils;
 import com.wallstreetcn.global.media.utils.WscnMediaUtils;
 
 import com.wallstreetcn.global.media.utils.NetFileUtils;
-import com.wallstreetcn.helper.utils.ResourceUtils;
-import com.wallstreetcn.helper.utils.Util;
-import com.wallstreetcn.helper.utils.snack.MToastHelper;
-import com.wallstreetcn.helper.utils.system.TDevice;
-import com.wallstreetcn.rpc.ResponseListener;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;

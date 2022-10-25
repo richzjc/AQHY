@@ -8,9 +8,14 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import com.micker.helper.ResourceUtils;
+import com.micker.helper.TLog;
+import com.micker.helper.data.CollectionUtil4Data;
+import com.micker.helper.rx.LazyAction;
+import com.micker.helper.rx.RxUtils;
+import com.micker.helper.snack.MToastHelper;
 import com.wallstreetcn.global.media.MEndTimeTextView;
 import com.wallstreetcn.global.media.widget.WscnMediaView;
-import com.wallstreetcn.helper.utils.TLog;
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,13 +34,6 @@ import com.wallstreetcn.global.media.model.PlayUrlUtils;
 import com.wallstreetcn.global.media.utils.PlaySpeedUtils;
 import com.wallstreetcn.global.media.utils.WscnMediaUtils;
 import com.wallstreetcn.global.media.widget.PlayTitleLayout;
-import com.wallstreetcn.helper.utils.ResourceUtils;
-import com.wallstreetcn.helper.utils.data.CollectionUtil4Data;
-import com.wallstreetcn.helper.utils.rx.LazyAction;
-import com.wallstreetcn.helper.utils.rx.RxUtils;
-import com.wallstreetcn.helper.utils.snack.MToastHelper;
-import com.wallstreetcn.helper.utils.system.ScreenUtils;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Formatter;

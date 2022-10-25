@@ -8,8 +8,9 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 
-import com.wallstreetcn.helper.utils.system.ScreenUtils;
-import com.wallstreetcn.helper.utils.text.span.RoundedBackgroundSpan;
+
+import com.micker.helper.system.ScreenUtils;
+import com.micker.helper.text.span.RoundedBackgroundSpan;
 
 import java.util.List;
 

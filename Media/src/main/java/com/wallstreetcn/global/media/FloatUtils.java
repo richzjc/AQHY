@@ -4,10 +4,11 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 
-import com.wallstreetcn.helper.utils.ResourceUtils;
-import com.wallstreetcn.helper.utils.SharedPrefsUtil;
-import com.wallstreetcn.helper.utils.SmartFloatUtil;
-import com.wallstreetcn.helper.utils.system.EquipmentUtils;
+import com.micker.helper.ResourceUtils;
+import com.micker.helper.SharedPrefsUtil;
+import com.micker.helper.SmartFloatUtil;
+import com.micker.helper.system.EquipmentUtils;
+
 
 public class FloatUtils {
 

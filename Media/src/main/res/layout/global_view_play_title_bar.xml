@@ -9,7 +9,7 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <com.wallstreetcn.baseui.customView.IconView
+    <com.micker.core.widget.IconView
         android:id="@+id/videoBack"
         android:layout_width="@dimen/margin_dp45"
         android:layout_height="@dimen/margin_dp45"
@@ -30,27 +30,27 @@
         android:textSize="@dimen/text_size_15"
         tools:text="女学霸开挂：入职3年工资居然比老板马明哲还高！"/>
 
-    <com.wallstreetcn.baseui.customView.IconView
+    <com.micker.core.widget.IconView
         android:id="@+id/videoFav"
         android:layout_width="@dimen/margin_dp45"
         android:layout_height="@dimen/margin_dp45"
         android:layout_marginLeft="@dimen/margin_dp15"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:text="@string/icon_unfav"
+        android:text="不喜欢"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_20"
         android:visibility="gone"/>
 
 
-    <com.wallstreetcn.baseui.customView.IconView
+    <com.micker.core.widget.IconView
         android:id="@+id/videoShare"
         android:layout_width="@dimen/margin_dp45"
         android:layout_height="@dimen/margin_dp45"
         android:layout_marginRight="@dimen/margin_dp15"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:text="@string/icon_share"
+        android:text="分享"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_20"/>
 </LinearLayout>

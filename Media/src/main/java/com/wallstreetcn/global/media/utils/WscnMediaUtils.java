@@ -6,19 +6,14 @@ import android.text.TextUtils;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.kronos.download.DownloadConstants;
-import com.kronos.download.DownloadManager;
-import com.kronos.download.DownloadModel;
-import com.wallstreetcn.baseui.manager.AppManager;
+import com.micker.core.manager.AppManager;
+import com.micker.helper.ResourceUtils;
+import com.micker.helper.SharedPrefsUtil;
+import com.micker.helper.Util;
+import com.micker.helper.system.TDevice;
 import com.wallstreetcn.global.media.R;
 import com.wallstreetcn.global.media.VideoCacheManager;
 import com.wallstreetcn.global.media.WscnMediaEntity;
-import com.wallstreetcn.helper.utils.ResourceUtils;
-import com.wallstreetcn.helper.utils.SharedPrefsUtil;
-import com.wallstreetcn.helper.utils.Util;
-import com.wallstreetcn.helper.utils.file.FileUtil;
-import com.wallstreetcn.helper.utils.system.TDevice;
-
 import java.io.File;
 
 public class WscnMediaUtils {
@@ -100,26 +95,26 @@ public class WscnMediaUtils {
     }
 
     public static boolean isDownload(String url) {
-        File local = new File(url);
-        if (local != null && local.exists()) {
-            return true;
-        }
-        DownloadModel downloadModel = DownloadManager.INSTANCE.getModel(url);
-        if (downloadModel != null && downloadModel.getState() == DownloadConstants.DOWNLOAD_FINISH) {
-            try {
-                String path = downloadModel.getSdCardFile();
-                File file = new File(path);
-                if (file != null && file.exists()) {
-                    if (!TextUtils.isEmpty(url) && url.endsWith(".m3u8")) {
-                        return true;
-                    } else if (downloadModel.getDownloadLength() == file.length()) {
-                        return true;
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//        File local = new File(url);
+//        if (local != null && local.exists()) {
+//            return true;
+//        }
+//        DownloadModel downloadModel = DownloadManager.INSTANCE.getModel(url);
+//        if (downloadModel != null && downloadModel.getState() == DownloadConstants.DOWNLOAD_FINISH) {
+//            try {
+//                String path = downloadModel.getSdCardFile();
+//                File file = new File(path);
+//                if (file != null && file.exists()) {
+//                    if (!TextUtils.isEmpty(url) && url.endsWith(".m3u8")) {
+//                        return true;
+//                    } else if (downloadModel.getDownloadLength() == file.length()) {
+//                        return true;
+//                    }
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
         return false;
     }
 
@@ -132,16 +127,16 @@ public class WscnMediaUtils {
     }
 
     public static void cleanCache(String url) {
-        try {
-            DownloadModel downloadModel = DownloadManager.INSTANCE.getModel(url);
-            if (downloadModel != null && downloadModel.getState() == DownloadConstants.DOWNLOAD_FINISH) {
-                String path = downloadModel.getSdCardFile();
-                if (FileUtil.isFileExist(path)) {
-                    FileUtil.deleteFile(path);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            DownloadModel downloadModel = DownloadManager.INSTANCE.getModel(url);
+//            if (downloadModel != null && downloadModel.getState() == DownloadConstants.DOWNLOAD_FINISH) {
+//                String path = downloadModel.getSdCardFile();
+//                if (FileUtil.isFileExist(path)) {
+//                    FileUtil.deleteFile(path);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

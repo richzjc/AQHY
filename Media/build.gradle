@@ -34,6 +34,7 @@ android {
 dependencies {
     api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     api project(':core')
+    api project(':helper')
     api 'com.github.bxunzhao:AndroidVideoCache:v3.0.5'
     api "com.github.bxunzhao:IjkLib:0.5.2"
     api 'org.dync.kathline:ijkplayer-exo2:0.8.8'

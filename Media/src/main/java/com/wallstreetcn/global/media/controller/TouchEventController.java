@@ -11,7 +11,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
-import com.wallstreetcn.helper.utils.TLog;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.micker.helper.TLog;
 import com.wallstreetcn.global.media.R;
 import com.wallstreetcn.global.media.widget.MediaControlProgressBar;
 
@@ -310,7 +310,7 @@ public class TouchEventController {
         }
         SpannableString sp = new SpannableString(seek + " / " + total);
         ForegroundColorSpan span = new ForegroundColorSpan(ContextCompat.getColor(view.getContext(),
-                R.color.day_mode_theme_color_1478f0));
+                R.color.color_1482f0));
         sp.setSpan(span, 0, seek.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sp;
     }

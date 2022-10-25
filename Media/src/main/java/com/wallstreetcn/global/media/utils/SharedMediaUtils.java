@@ -1,6 +1,7 @@
 package com.wallstreetcn.global.media.utils;
 
-import com.wallstreetcn.helper.utils.SharedPrefsUtil;
+
+import com.micker.helper.SharedPrefsUtil;
 
 public class SharedMediaUtils {
 

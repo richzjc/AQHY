@@ -8,11 +8,11 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 
+import com.micker.helper.SmartFloatUtil;
+import com.micker.helper.router.RouterHelper;
 import com.wallstreetcn.global.media.controller.BaseMediaController;
 import com.wallstreetcn.global.media.widget.VideoWidget;
 import com.wallstreetcn.global.media.widget.WscnMediaView;
-import com.wallstreetcn.helper.utils.SmartFloatUtil;
-import com.wallstreetcn.helper.utils.router.RouterHelper;
 
 import androidx.annotation.Nullable;
 

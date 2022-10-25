@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.micker.helper.router.RouterHelper;
+import com.micker.helper.system.ScreenUtils;
 import com.wallstreetcn.global.media.R;
 import com.wallstreetcn.global.media.model.PlayUriEntity;
-import com.wallstreetcn.helper.utils.router.RouterHelper;
-import com.wallstreetcn.helper.utils.system.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@
                 android:layout_height="match_parent"
                 android:background="#11000000">
 
-    <com.wallstreetcn.baseui.widget.CustomTextView
+    <TextView
         android:id="@+id/tv_notice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <com.wallstreetcn.baseui.widget.CustomTextView
+            <TextView
                 android:id="@+id/mediacontroller_time_current"
                 style="@style/video_controller_text"
                 android:layout_alignParentLeft="true"
@@ -72,7 +72,7 @@
             android:layout_centerVertical="true"
             android:orientation="horizontal">
 
-            <com.wallstreetcn.baseui.widget.CustomTextView
+            <TextView
                 android:id="@+id/live_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -84,7 +84,7 @@
                 android:textSize="11sp"
                 android:visibility="gone"/>
 
-            <com.wallstreetcn.baseui.widget.CustomTextView
+            <TextView
                 android:id="@+id/live_room_source"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

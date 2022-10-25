@@ -1,12 +1,9 @@
 package com.wallstreetcn.global.media
 
 import android.content.Context
-import com.wallstreetcn.helper.utils.TLog
 import android.view.WindowManager
 import com.google.android.exoplayer2.ExoPlaybackException
-import com.wallstreetcn.baseui.manager.AppManager
-import com.wallstreetcn.helper.utils.data.CrashReport
-import com.wallstreetcn.helper.utils.data.TraceUtils
+import com.micker.core.manager.AppManager
 import tv.danmaku.ijk.media.exo.IjkExoMediaPlayer
 
 class WscnIjkExoMediaPlayer(context: Context) : IjkExoMediaPlayer(context) {
@@ -122,8 +119,6 @@ class WscnIjkExoMediaPlayer(context: Context) : IjkExoMediaPlayer(context) {
     override fun onPlayerError(error: ExoPlaybackException?) {
         super.onPlayerError(error)
         error?.cause?.message
-        TraceUtils.reportError(AppManager.getAppManager().topActivity, Throwable(error))
-        CrashReport.postCatchedException(Throwable("currentActivity: ${AppManager.getAppManager().topActivity.javaClass.simpleName}, detailMsg : ${error?.message},  causeMsg : ${error?.cause?.message}"))
     }
 
 

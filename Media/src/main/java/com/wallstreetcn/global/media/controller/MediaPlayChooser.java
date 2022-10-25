@@ -9,8 +9,8 @@ import android.widget.RadioGroup;
 
 import androidx.core.content.ContextCompat;
 
+import com.micker.helper.system.ScreenUtils;
 import com.wallstreetcn.global.media.R;
-import com.wallstreetcn.helper.utils.system.ScreenUtils;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class MediaPlayChooser extends RadioGroup implements RadioGroup.OnChecked
     private RadioButton addRadioItem(CharSequence playUriEntity, int index) {
         Context context = getContext();
         RadioButton rdb = new RadioButton(context);
-        rdb.setBackgroundResource(R.color.day_mode_color_19000000);
+        rdb.setBackgroundResource(R.color.black);
         rdb.setButtonDrawable(null);
         rdb.setGravity(Gravity.CENTER);
         rdb.setPadding(0, ScreenUtils.dip2px(10), 0, ScreenUtils.dip2px(10));
@@ -60,7 +60,7 @@ public class MediaPlayChooser extends RadioGroup implements RadioGroup.OnChecked
         lp.gravity = Gravity.CENTER_HORIZONTAL;
         rdb.setLayoutParams(lp);
         rdb.setTextSize(14);
-        rdb.setTextColor(ContextCompat.getColor(getContext(), current == index ? R.color.day_mode_theme_color_1478f0 : R.color.white));
+        rdb.setTextColor(ContextCompat.getColor(getContext(), current == index ? R.color.color_1482f0 : R.color.white));
         rdb.setText(playUriEntity);
         rdb.setId(index);
         addView(rdb, lp);

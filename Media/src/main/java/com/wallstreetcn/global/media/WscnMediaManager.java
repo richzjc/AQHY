@@ -5,15 +5,11 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.kronos.download.DownloadManager;
-import com.kronos.download.DownloadModel;
+import com.micker.helper.Util;
+import com.micker.helper.UtilsContextManager;
+import com.micker.helper.system.TDevice;
 import com.wallstreetcn.global.media.utils.SharedMediaUtils;
 import com.wallstreetcn.global.media.utils.WscnMediaUtils;
-import com.wallstreetcn.helper.utils.TLog;
-import com.wallstreetcn.helper.utils.Util;
-import com.wallstreetcn.helper.utils.UtilsContextManager;
-import com.wallstreetcn.helper.utils.system.TDevice;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -177,11 +173,11 @@ public class WscnMediaManager {
             return null;
         Uri uri = Uri.parse(url);
         String path = uri.getPath();
-        if (!TextUtils.isEmpty(path) && path.endsWith(".m3u8") && WscnMediaUtils.isDownload(url)) {
-            DownloadModel model = DownloadManager.INSTANCE.getModel(url);
-            if (model != null)
-                return Uri.parse(model.getSdCardFile());
-        }
+//        if (!TextUtils.isEmpty(path) && path.endsWith(".m3u8") && WscnMediaUtils.isDownload(url)) {
+//            DownloadModel model = DownloadManager.INSTANCE.getModel(url);
+//            if (model != null)
+//                return Uri.parse(model.getSdCardFile());
+//        }
 
         if (path.contains(".flv") || path.contains(".m3u8") || entity.isNocache()) {
             if (path.contains(".m3u8") && !path.endsWith(".m3u8")) {
@@ -189,13 +185,12 @@ public class WscnMediaManager {
             }
             return uri;
         }
-        if (WscnMediaUtils.isDownload(url)) {
-            DownloadModel model = DownloadManager.INSTANCE.getModel(url);
-            if (model != null)
-                return Uri.parse(model.getSdCardFile());
-        }
+//        if (WscnMediaUtils.isDownload(url)) {
+//            DownloadModel model = DownloadManager.INSTANCE.getModel(url);
+//            if (model != null)
+//                return Uri.parse(model.getSdCardFile());
+//        }
         if (!TextUtils.isEmpty(url)) {
-            TLog.i("VideoCache", url);
             String proxy = VideoCacheManager.getProxy().getProxyUrl(url);
             return Uri.parse(proxy);
         }

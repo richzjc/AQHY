@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
-import com.wallstreetcn.helper.utils.TLog;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,12 +14,11 @@ import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.wallstreetcn.baseui.customView.IconView;
-
+import com.micker.core.widget.IconView;
+import com.micker.helper.TLog;
+import com.micker.helper.rx.RxUtils;
+import com.micker.helper.system.ScreenUtils;
 import com.wallstreetcn.global.media.R;
-import com.wallstreetcn.helper.utils.rx.RxUtils;
-import com.wallstreetcn.helper.utils.system.ScreenUtils;
-
 import java.util.concurrent.TimeUnit;
 
 
@@ -139,7 +137,7 @@ public class VideoWidget implements IFloatContainer {
     private WscnMediaView  videoView;
     private ViewGroup      fl;
     private BackgroundView backgroundView;
-    private IconView       btnClose;
+    private IconView btnClose;
 //    public static final String url = "http://baobab.wdjcdn.com/14564977406580.mp4";
 
 
@@ -162,7 +160,7 @@ public class VideoWidget implements IFloatContainer {
         lp.addRule(RelativeLayout.ALIGN_PARENT_TOP | RelativeLayout.ALIGN_PARENT_RIGHT);
         int margin = ScreenUtils.dip2px(5);
         lp.setMargins(margin, margin, margin, margin);
-        btnClose.setText(R.string.icon_main_right_cancle);
+        btnClose.setText("取消");
         btnClose.setTextSize(15);
         btnClose.setGravity(Gravity.CENTER);
         btnClose.setOnClickListener(v -> {
@@ -362,8 +360,6 @@ public class VideoWidget implements IFloatContainer {
         private void scale(float scale) {
             params.x = (int) (scale * (bigSize.x - smallSize.x) + smallSize.x);
             params.y = (int) (scale * (bigSize.y - smallSize.y) + smallSize.y);
-
-            TLog.d(VideoWidget.class.getSimpleName(), params.height + " _ " + params.width + " _ " + params.x + " _ " + params.y + " _ ");
 
             mWindowManager.updateViewLayout(backgroundView, params);
         }

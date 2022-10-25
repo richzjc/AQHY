@@ -2,8 +2,8 @@ package com.wallstreetcn.global.media.controller;
 
 import android.text.TextUtils;
 
+import com.micker.helper.data.CollectionUtil4Data;
 import com.wallstreetcn.global.media.model.PlayUriEntity;
-import com.wallstreetcn.helper.utils.data.CollectionUtil4Data;
 
 import java.util.List;
 

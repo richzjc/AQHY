@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.danikula.videocache.HttpProxyCacheServer;
-import com.wallstreetcn.helper.utils.UtilsContextManager;
+import com.micker.helper.UtilsContextManager;
 
 /**
  * Created by Leif Zhang on 2017/4/24.

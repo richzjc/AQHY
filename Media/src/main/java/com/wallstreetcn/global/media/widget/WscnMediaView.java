@@ -20,6 +20,12 @@ import android.widget.MediaController;
 
 import androidx.annotation.NonNull;
 
+import com.micker.core.imageloader.ImageLoadManager;
+import com.micker.core.imageloader.WscnImageView;
+import com.micker.helper.TLog;
+import com.micker.helper.Util;
+import com.micker.helper.image.ImageUtlFormatHelper;
+import com.micker.helper.system.ScreenUtils;
 import com.wallstreetcn.global.media.MediaFromEnum;
 import com.wallstreetcn.global.media.R;
 import com.wallstreetcn.global.media.WscnIjkExoMediaPlayer;
@@ -29,13 +35,6 @@ import com.wallstreetcn.global.media.WscnMediaViewControl;
 import com.wallstreetcn.global.media.controller.BaseMediaController;
 import com.wallstreetcn.global.media.utils.SharedMediaUtils;
 import com.wallstreetcn.global.media.utils.WscnMediaUtils;
-import com.wallstreetcn.helper.utils.TLog;
-import com.wallstreetcn.helper.utils.Util;
-import com.wallstreetcn.helper.utils.data.TraceUtils;
-import com.wallstreetcn.helper.utils.image.ImageUtlFormatHelper;
-import com.wallstreetcn.helper.utils.system.ScreenUtils;
-import com.wallstreetcn.imageloader.ImageLoadManager;
-import com.wallstreetcn.imageloader.WscnImageView;
 
 import java.util.Map;
 
@@ -763,7 +762,6 @@ public class WscnMediaView extends FrameLayout implements MediaController.MediaP
                             + ",url:" + mMediaEntity != null ? mMediaEntity.getUrl() : "null"
                             + "dataSource:" + mMediaPlayer != null ? mMediaPlayer.getDataSource() : "null";
                     TLog.e(TAG, error);
-                    TraceUtils.reportError(getContext(), new Throwable(error));
                     mCurrentState = STATE_ERROR;
                     mTargetState = STATE_ERROR;
                     if (mMediaController != null) {

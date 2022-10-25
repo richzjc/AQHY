@@ -1,12 +1,9 @@
 package com.wallstreetcn.global.media.utils;
 
-import com.kronos.download.DownloadConstants;
-import com.kronos.download.DownloadManager;
-import com.kronos.download.DownloadModel;
 import com.kronos.volley.toolbox.StringRequest;
-import com.wallstreetcn.helper.utils.rx.RxUtils;
-import com.wallstreetcn.rpc.ResponseListener;
-import com.wallstreetcn.rpc.VolleyQueue;
+import com.micker.helper.rx.RxUtils;
+import com.micker.rpc.ResponseListener;
+import com.micker.rpc.VolleyQueue;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import okhttp3.Response;
@@ -15,15 +12,7 @@ public class NetFileUtils {
 
     public static void loadFileLength(String downloadUrl, ResponseListener<Long> listener) {
 //        DecimalFormat decimalFormat = new DecimalFormat("##0.00");
-        if (WscnMediaUtils.offline(downloadUrl)) {
-            if (listener != null) {
-                DownloadModel model = DownloadManager.INSTANCE.getModel(downloadUrl);
-                if (model != null && model.getState() == DownloadConstants.DOWNLOAD_FINISH) {
-                    listener.onSuccess(model.getDownloadLength(), false);
-                    return;
-                }
-            }
-        }
+
         RxUtils.just(downloadUrl).map(s -> {
             Response response = null;
             try {

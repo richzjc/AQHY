@@ -6,13 +6,13 @@ import android.widget.MediaController;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
-import com.wallstreetcn.baseui.widget.CustomTextView;
 
 import java.util.Formatter;
 import java.util.Locale;
 
-public class MEndTimeTextView  extends CustomTextView {
+public class MEndTimeTextView  extends AppCompatTextView {
 
     private MediaController.MediaPlayerControl player;
     StringBuilder mFormatBuilder;
