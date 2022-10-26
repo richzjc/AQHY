@@ -10,6 +10,8 @@ import android.text.style.ClickableSpan
 import android.view.KeyEvent
 import android.view.View
 import com.micker.aqhy.R
+import com.micker.aqhy.application.BuglyInit
+import com.micker.aqhy.application.init.UmengInit
 import com.micker.core.base.BaseDialogFragment
 import com.micker.helper.ResourceUtils
 import com.micker.helper.SharedPrefsUtil
@@ -29,7 +31,7 @@ class UserPrivacyDialog : BaseDialogFragment() {
         return dialog
     }
 
-    override fun doGetContentViewId()  = R.layout.aqhy_dialog_user_privacy
+    override fun doGetContentViewId() = R.layout.aqhy_dialog_user_privacy
 
     override fun getDialogWidth(): Int {
         return ScreenUtils.getScreenWidth() - ScreenUtils.dip2px(70f)
@@ -60,7 +62,7 @@ class UserPrivacyDialog : BaseDialogFragment() {
         builder.append("。")
         builder.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
-                RouterHelper.open("https://314.la/terms/aqhy_protocol.html", context)
+                RouterHelper.open("http://yuanyuan0914.top/protocal/aqhy_prootocol.html", context)
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -70,7 +72,7 @@ class UserPrivacyDialog : BaseDialogFragment() {
 
         builder.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
-                RouterHelper.open("https://314.la/terms/aqhy_privacy.html", context)
+                RouterHelper.open("http://yuanyuan0914.top/protocal/aqhy_privacy.html", context)
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -83,11 +85,13 @@ class UserPrivacyDialog : BaseDialogFragment() {
     private fun setListener() {
         user_agree?.setOnClickListener {
             SharedPrefsUtil.save("userPrivacy", false)
+            BuglyInit.init(context)
+            UmengInit().init(context)
             dismiss()
         }
 
         not_agree?.setOnClickListener {
-            MToastHelper.showToast(ResourceUtils.getResStringFromId(R.string.alien_user_privacy_not_agree_hint))
+            dismiss()
         }
     }
 }

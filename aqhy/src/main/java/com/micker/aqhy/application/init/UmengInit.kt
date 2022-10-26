@@ -4,13 +4,16 @@ import android.content.Context
 import com.mcxiaoke.packer.helper.PackerNg
 import com.micker.aqhy.application.UmengConfig
 import com.micker.helper.ResourceUtils
+import com.micker.helper.SharedPrefsUtil
 import com.micker.push.UmengPushAdapter
 import com.umeng.commonsdk.UMConfigure
 
 class UmengInit {
     fun init(application: Context?) {
-        umengInit(application)
-        pushInit(application)
+        if (!SharedPrefsUtil.getBoolean("needShowGuide", true)) {
+            umengInit(application)
+            pushInit(application)
+        }
     }
 
     private fun umengInit(application: Context?) {

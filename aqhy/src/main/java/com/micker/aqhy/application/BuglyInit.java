@@ -11,7 +11,6 @@ import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.beta.UpgradeInfo;
 import com.tencent.bugly.beta.ui.UILifecycleListener;
-
 /**
  * Created by zhangyang on 2017/6/16.
  */
@@ -19,7 +18,7 @@ import com.tencent.bugly.beta.ui.UILifecycleListener;
 public class BuglyInit {
     private static String TAG = "";
 
-    public static void init(Application application) {
+    public static void init(Context application) {
         String buglyAppId = ResourceUtils.getResStringFromId(R.string.buglyAppId);
         Beta.autoCheckUpgrade = true;
         Beta.canShowApkInfo = false;

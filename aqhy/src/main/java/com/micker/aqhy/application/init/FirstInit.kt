@@ -9,15 +9,20 @@ import com.micker.aqhy.factory.ErrorCodeFactory
 import com.micker.core.imageloader.ImageLoaderInit
 import com.micker.data.constant.BASE_URL
 import com.micker.global.user.AccountManager
+import com.micker.helper.SharedPrefsUtil
 import com.micker.helper.UtilsContextManager
 import com.micker.rpc.VolleyQueue
 import com.micker.rpc.host.HostManager
 import com.micker.webview.Template.WSCNWebViewActivity
 
 class FirstInit {
-    fun init(application : Context){
-        UtilsContextManager.getInstance().init(application as Application?).webViewActivity = WSCNWebViewActivity::class.java
-        BuglyInit.init(application)
+    fun init(application: Context) {
+        UtilsContextManager.getInstance().init(application as Application?).webViewActivity =
+            WSCNWebViewActivity::class.java
+        if (!SharedPrefsUtil.getBoolean("needShowGuide", true))
+            BuglyInit.init(application)
+
+
         VolleyQueue.getInstance().factory = ErrorCodeFactory()
         ImageLoaderInit.init(application, ImageLoadOkHttpClient().okHttpClient)
         HostManager.setBaseUrl(BASE_URL)

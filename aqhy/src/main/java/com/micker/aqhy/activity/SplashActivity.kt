@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.animation.DecelerateInterpolator
 import com.micker.aqhy.R
 import com.micker.aqhy.callback.SplashCallback
+import com.micker.aqhy.dialog.UserPrivacyDialog
 import com.micker.data.model.aqhy.LaunchConfigEntity
 import com.micker.aqhy.presenter.SplashPresenter
 import com.micker.core.base.BaseActivity
@@ -26,14 +27,17 @@ import kotlin.random.Random
 class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCallback {
 
     private var isSend = false
+    private var dialog: UserPrivacyDialog? = null
+
 
     private val handler = Handler(Handler.Callback {
-        if(SharedPrefsUtil.getBoolean("needShowGuide", true)) {
+
+        if (SharedPrefsUtil.getBoolean("needShowGuide", true)) {
             SharedPrefsUtil.saveBoolean("needShowGuide", false)
             val intent = Intent(this@SplashActivity, GuideActivity::class.java)
             startActivity(intent)
             finish()
-        }else{
+        } else {
             val intent = Intent(this@SplashActivity, MainActivityNew::class.java)
             startActivity(intent)
             finish()
@@ -50,6 +54,16 @@ class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCa
         val index = Random.nextInt(size)
         ImageLoadManager.loadImage(imagesArry[index], img, 0, false)
 //        mPresenter?.requestImgs()
+
+        if (SharedPrefsUtil.getBoolean("userPrivacy", true)) {
+            dialog = UserPrivacyDialog()
+            dialog?.setOnDismissListener {
+                sendMsg()
+            }
+            dialog?.show(supportFragmentManager, "userPrivacy")
+        }
+
+
         startAnimation()
     }
 
@@ -69,7 +83,8 @@ class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCa
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                sendMsg()
+                if (!(dialog != null && dialog!!.isAdded))
+                    sendMsg()
             }
 
             override fun onAnimationCancel(animation: Animator?) {
@@ -90,7 +105,7 @@ class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCa
             Log.i("index", "$index")
             val url = it[index].image
             ImageLoadManager.loadBitmap(url) { inner ->
-                if(inner == null)
+                if (inner == null)
                     return@loadBitmap
 
                 var widthScale = 0.0f
@@ -118,11 +133,11 @@ class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCa
     }
 
 
-    private fun startImgAnim(){
+    private fun startImgAnim() {
         val animator1 = ObjectAnimator.ofFloat(
             img,
             "scaleX",
-           0.5f,
+            0.5f,
             1f
         )
 
