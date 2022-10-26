@@ -42,13 +42,13 @@ class UserPresenter : BasePresenter<UserCallback>(){
 
         var item = UserItemEntity("用户协议", USER_MAIN_SETTING_ACTIVITY, false, ScreenUtils.dip2px(5f), rightText)
         item.onClickListener = View.OnClickListener {
-            RouterHelper.open("https://314.la/terms/aqhy_protocol.html", it?.context)
+            RouterHelper.open("http://yuanyuan0914.top/protocal/aqhy_prootocol.html", it?.context)
         }
         list.add(item)
 
         item = UserItemEntity("隐私政策", USER_MAIN_SETTING_ACTIVITY, false, 0, rightText)
         item.onClickListener = View.OnClickListener {
-            RouterHelper.open("https://314.la/terms/aqhy_privacy.html", it?.context)
+            RouterHelper.open("http://yuanyuan0914.top/protocal/aqhy_privacy.html", it?.context)
         }
         list.add(item)
         list.add(UserItemEntity("关于我们", USER_MAIN_ABOUNT_ACTIVITY, false, 0, rightText))
