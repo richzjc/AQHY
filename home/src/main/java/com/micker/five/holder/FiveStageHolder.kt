@@ -23,7 +23,7 @@ class FiveStageHolder(context: Context?) : BaseRecycleViewHolder<FiveStageModel>
     init {
         itemView?.image?.layoutParams?.also {
             it.width = ScreenUtils.dip2px(100f)
-            it.height = ScreenUtils.dip2px(100f)
+            it.height = ScreenUtils.dip2px(150f)
             itemView?.image?.layoutParams = it
             val hierarchy = itemView?.image?.hierarchy
             hierarchy?.setPlaceholderImage(R.drawable.default_img)

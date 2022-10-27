@@ -103,4 +103,5 @@ dependencies {
     api project(path: ':global')
     api project(path: ':home')
     api project(path: ':push')
+    implementation 'com.alexvasilkov:gesture-views:2.5.2@aar'
 }

@@ -1,16 +1,17 @@
 package com.micker.aqhy.activity
 
 import android.view.View
+import android.view.ViewGroup
+import com.alexvasilkov.gestures.Settings
+import com.alexvasilkov.gestures.views.GestureFrameLayout
 import com.micker.aqhy.R
-import com.micker.aqhy.dialog.UserPrivacyDialog
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
 import com.micker.core.imageloader.ImageLoadManager
+import com.micker.core.imageloader.WscnImageView
 import com.micker.global.*
-import com.micker.global.FOUR_STAGE_ROUTER
 import com.micker.global.const.imagesArry
 import com.micker.helper.ResourceUtils
-import com.micker.helper.SharedPrefsUtil
 import com.micker.helper.file.FileUtil
 import com.micker.helper.file.QDUtil.getShareImageCache
 import com.micker.helper.router.DoubleClickHelper
@@ -18,6 +19,7 @@ import com.micker.helper.router.RouterHelper
 import com.micker.helper.snack.MToastHelper
 import com.micker.helper.speak.TextToSpeechUtils.initTextToSpeech
 import com.micker.helper.speak.TextToSpeechUtils.textSpeechclose
+import com.micker.helper.system.ScreenUtils
 import kotlinx.android.synthetic.main.tail_activity_main_new.*
 import kotlinx.android.synthetic.main.tail_activity_main_new.view.*
 import kotlin.random.Random
@@ -36,22 +38,39 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
     override fun isNeedSwipeBack() = false
     override fun doInitSubViews(view: View) {
         initTextToSpeech(application)
-        isShowPrivacy()
         initBg(view)
         initListener()
+
+       val gfl = findViewById(R.id.image_parent)
+        (gfl as ChartGestureFrameLayout)?.controller?.settings?.fitMethod = Settings.Fit.HORIZONTAL
+//        (gfl as GestureFrameLayout)?.controller?.settings?.maxZoom = 8.0f
+
+        (findViewById(R.id.imageView) as? WscnImageView)?.apply {
+
+            ImageLoadManager.loadImage("https://img0.baidu.com/it/u=2125852376,3859573982&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=2791", imageView, 0)
+//            ImageLoadManager.loadImage("https://img2.baidu.com/it/u=4001497767,4020188350&fm=253&fmt=auto&app=138&f=JPEG?w=213&h=200", imageView, 0)
+
+            val width = 650
+            val height = 3628
+//
+//            val width = 213
+//            val height = 200
+            val ratio = width * 1f / height
+            val params = layoutParams
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            params.width = ScreenUtils.getScreenWidth()
+
+//            gfl?.controller?.settings?.fitMethod = Settings.Fit.HORIZONTAL
+
+            layoutParams = params
+             aspectRatio = ratio
+        }
     }
 
     private fun initBg(view: View){
         val size = imagesArry.size
         val index = Random.nextInt(size)
         ImageLoadManager.loadImage(imagesArry[index], view.bg, 0, false)
-    }
-
-    private fun isShowPrivacy(){
-        if(SharedPrefsUtil.getBoolean("userPrivacy", true)){
-            val dialog = UserPrivacyDialog()
-            dialog.show(supportFragmentManager, "userPrivacy")
-        }
     }
 
     override fun onBackPressed() {
