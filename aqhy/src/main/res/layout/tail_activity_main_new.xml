@@ -11,36 +11,12 @@
             android:layout_height="match_parent"
             app:actualImageScaleType="centerCrop" />
 
-
-    <com.micker.aqhy.activity.ChartScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_1482f0"
-            android:scrollbars="none">
-
-        <com.micker.aqhy.activity.ChartGestureFrameLayout
-                android:id="@+id/image_parent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-
-            <com.micker.core.imageloader.WscnImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/black"
-                    app:actualImageScaleType="fitXY"
-                    app:backgroundImage="@color/day_mode_divide_line_color_e6e6e6" />
-        </com.micker.aqhy.activity.ChartGestureFrameLayout>
-    </com.micker.aqhy.activity.ChartScrollView>
-
-
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_dp50"
             android:scrollbars="none"
-            android:visibility="gone">
+            android:visibility="visible">
 
         <LinearLayout
                 android:layout_width="match_parent"
