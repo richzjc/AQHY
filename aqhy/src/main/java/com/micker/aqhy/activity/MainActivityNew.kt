@@ -12,6 +12,7 @@ import com.micker.aqhy.R
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
 import com.micker.helper.ResourceUtils
+import com.micker.helper.Util
 import com.micker.helper.file.FileUtil
 import com.micker.helper.file.QDUtil.getShareImageCache
 import com.micker.helper.router.DoubleClickHelper
@@ -27,11 +28,11 @@ import java.util.ArrayList
 class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
 
     lateinit var mFragments: MutableList<Fragment>
-    private val titles by lazy { arrayOf("首页", "视频", "我的") }
     private val duration: Int = 800
     override fun doGetContentViewId() = R.layout.tail_activity_main_new1
 
     override fun doInitSubViews(view: View) {
+        parent_ll?.setPadding(0, Util.getStatusBarHeight(this), 0, 0)
         initTextToSpeech(application)
         initFragments()
         initViewPager()
