@@ -25,7 +25,6 @@ class MainActivity : BaseActivity<Any, BasePresenter<Any>>() {
     private val duration: Int = 800
     lateinit var mFragments: MutableList<Fragment>
     override fun doGetContentViewId() = R.layout.tail_activity_main
-    override fun isNeedSwipeBack() = false
     override fun doInitSubViews(view: View) {
         initFragments()
         initViewPager()

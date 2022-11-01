@@ -16,4 +16,5 @@
     <string name="icon_delete">&#xe6f3;</string>
     <string name="icon_more">&#xe716;</string>
     <string name="icon_right_tick">&#xe721;</string>
+    <string name="icon_new_main_category">&#xe817;</string>
 </resources>

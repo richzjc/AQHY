@@ -111,4 +111,9 @@
         <attr name="overlayAlpha" format="integer" />
         <attr name="overlayColor" format="color|reference" />
     </declare-styleable>
+
+    <style name="CHILD_WSCNTabText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

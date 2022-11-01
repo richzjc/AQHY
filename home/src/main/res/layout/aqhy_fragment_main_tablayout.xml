@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_dp40"
+            >
+
+        <com.micker.core.widget.IconView
+                android:id="@+id/imgChannel"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/text_size_19"
+                android:textColor="@color/day_mode_text_color1_333333"
+                android:text="@string/icon_new_main_category"
+                android:gravity="center" />
+
+        <com.richzjc.library.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/imgChannel"
+                app:tabGravity="center"
+                app:tabIndicator="@drawable/order_drawable_rectangle_1482f0"
+                app:tabIndicatorColor="@color/day_mode_theme_color_1478f0"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="3dp"
+                app:tabIndicatorWidth="@dimen/margin_dp17"
+                app:tabMinWidth="@dimen/margin_dp50"
+                app:tabMode="scrollable"
+                app:tabPaddingEnd="@dimen/margin_dp10"
+                app:tabPaddingStart="@dimen/margin_dp10"
+                app:tabSelectedTextColor="@color/day_mode_text_color1_333333"
+                app:tabTextAppearance="@style/CHILD_WSCNTabText"
+                app:tabTextColor="@color/day_mode_text_color3_999999" />
+    </RelativeLayout>
+
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+</LinearLayout>
