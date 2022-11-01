@@ -41,10 +41,6 @@
                 android:screenOrientation="portrait" />
 
         <activity
-                android:name="com.micker.five.activity.FiveStageActivity"
-                android:screenOrientation="portrait" />
-
-        <activity
                 android:name="com.micker.five.activity.FullScreenPlayActivity"
                 android:screenOrientation="portrait" />
     </application>

@@ -4,14 +4,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
-import android.view.ViewGroup
 import android.widget.LinearLayout
-import com.alexvasilkov.gestures.Settings
-import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.micker.core.adapter.BaseRecycleViewHolder
-import com.micker.core.imageloader.ImageLoadManager
-import com.micker.core.imageloader.WscnImageView
-import com.micker.five.activity.ChartGestureFrameLayout
 import com.micker.five.model.FiveStageModel
 import com.micker.global.VIDEO_FULL_SCREEN_PLAY_ACTION
 import com.micker.helper.router.RouterHelper

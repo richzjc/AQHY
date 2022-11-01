@@ -11,7 +11,6 @@ import com.micker.VideoFragment
 import com.micker.aqhy.R
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
-import com.micker.global.const.imagesArry
 import com.micker.helper.ResourceUtils
 import com.micker.helper.file.FileUtil
 import com.micker.helper.file.QDUtil.getShareImageCache
