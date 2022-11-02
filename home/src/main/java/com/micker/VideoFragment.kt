@@ -1,5 +1,6 @@
 package com.micker
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.micker.core.adapter.BaseFragmentAdapter
 import com.micker.core.base.BaseFragment
@@ -34,7 +35,12 @@ class VideoFragment : BaseFragment<Any, BasePresenter<Any>>() {
 
     private fun initFragments() {
         mFragments = ArrayList()
-        mFragments.add(FiveStageFragment())
+        val fragment1 = FiveStageFragment()
+        val bundle1 = Bundle()
+        bundle1.putString("apiPath", "http://yuanyuan0914.top/config/home_education.json")
+        fragment1.arguments = bundle1
+        mFragments.add(fragment1)
+
         mFragments.add(FiveStageFragment())
         mFragments.add(FiveStageFragment())
         mFragments.add(FiveStageFragment())

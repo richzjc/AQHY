@@ -18,6 +18,7 @@
                 android:textSize="@dimen/text_size_19"
                 android:textColor="@color/day_mode_text_color1_333333"
                 android:text="@string/icon_new_main_category"
+                android:visibility="gone"
                 android:gravity="center" />
 
         <com.richzjc.library.TabLayout

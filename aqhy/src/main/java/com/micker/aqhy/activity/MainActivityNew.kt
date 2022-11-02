@@ -92,7 +92,7 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
             override fun getCount() = mFragments.size
         }
         viewPager?.currentItem = 0
-        navigationView?.selectedItemId = R.id.menu_cart
+        navigationView?.selectedItemId = R.id.menu_home
         viewPager.offscreenPageLimit = 3
         val pagerScroller = ViewPagerScroller(this)
         pagerScroller.setScrollDuration(duration)

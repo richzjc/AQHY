@@ -24,15 +24,16 @@ import java.util.Map;
 public abstract class AbstractApi<T> implements BaseApi<T> {
 
 
-    protected ResponseListener<T> responseListener;
+    public ResponseListener<T> responseListener;
     protected Bundle bundle;
     protected String realUrl;
     private final String TAG = getClass().getName();
-    protected boolean isNeedToast = true;
+    public boolean isNeedToast = true;
     protected String cacheExtra;
     protected long cacheTime = 0;
     protected boolean isNeedRefresh = false;
     protected boolean ignoreExpired = false;
+    private StringRequest request;
 
     public void setIgnoreExpired() {
         this.ignoreExpired = true;
@@ -55,6 +56,12 @@ public abstract class AbstractApi<T> implements BaseApi<T> {
         if (bundle == null)
             bundle = new Bundle();
         this.bundle = bundle;
+    }
+
+    public StringRequest getRealRequest() {
+        if (request == null)
+            request = getRequest();
+        return request;
     }
 
     public void setResponseListener(ResponseListener<T> responseListener) {

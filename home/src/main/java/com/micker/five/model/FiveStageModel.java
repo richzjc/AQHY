@@ -6,25 +6,22 @@ import android.os.Parcelable;
 import com.micker.data.IDifference;
 
 public class FiveStageModel implements Parcelable, IDifference {
-    public String id;
     public String title;
-    public String url;
+    public String videoUrl;
 
     public FiveStageModel(){
 
     }
 
     protected FiveStageModel(Parcel in) {
-        id = in.readString();
         title = in.readString();
-        url = in.readString();
+        videoUrl = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
         dest.writeString(title);
-        dest.writeString(url);
+        dest.writeString(videoUrl);
     }
 
     @Override
@@ -46,6 +43,6 @@ public class FiveStageModel implements Parcelable, IDifference {
 
     @Override
     public String getUniqueId() {
-        return id;
+        return videoUrl;
     }
 }

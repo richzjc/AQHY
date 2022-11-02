@@ -31,7 +31,7 @@ class FiveStageHolder(context: Context?) : BaseRecycleViewHolder<FiveStageModel>
         itemView?.setOnClickListener {
             if(super.content != null) {
                 val bundle = Bundle()
-                bundle.putString("videoUrl", super.content?.url)
+                bundle.putString("videoUrl", super.content?.videoUrl)
                 RouterHelper.open(VIDEO_FULL_SCREEN_PLAY_ACTION, mContext, bundle)
             }
         }
@@ -43,7 +43,7 @@ class FiveStageHolder(context: Context?) : BaseRecycleViewHolder<FiveStageModel>
     override fun doBindData(content: FiveStageModel?) {
         super.content = content
         itemView?.title?.text = content?.title
-        showFirstFrame(content?.url)
+        showFirstFrame(content?.videoUrl)
     }
 
 
