@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.micker.core.adapter.BaseFragmentAdapter
 import com.micker.core.base.BaseFragment
 import com.micker.core.base.BasePresenter
+import com.micker.helper.Util
 import com.micker.home.R
 import com.micker.home.fragment.HomeFragment
 import com.micker.home.fragment.InspirationFragment
@@ -21,6 +22,7 @@ class NewsMainFragment : BaseFragment<Any, BasePresenter<Any>>(){
 
     override fun doInitData() {
         super.doInitData()
+        parent_ll?.setPadding(0, Util.getStatusBarHeight(context), 0, 0)
         initFragments()
         initViewPager()
     }
@@ -30,13 +32,13 @@ class NewsMainFragment : BaseFragment<Any, BasePresenter<Any>>(){
         viewPager.adapter = fragmentAdapter
         tabLayout.setupWithViewPager(viewPager)
         fragmentAdapter.configData(Arrays.asList(*titles), mFragments)
-
     }
 
     private fun initFragments() {
         mFragments = ArrayList()
-        mFragments.add(HomeFragment())
-        mFragments.add(InspirationFragment())
-        mFragments.add(UserFragment())
+        mFragments.add(NewsMainChildFragment())
+        mFragments.add(NewsMainChildFragment())
+        mFragments.add(NewsMainChildFragment())
+        mFragments.add(NewsMainChildFragment())
     }
 }

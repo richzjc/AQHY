@@ -6,6 +6,7 @@ import com.micker.core.adapter.BaseFragmentAdapter
 import com.micker.core.base.BaseFragment
 import com.micker.core.base.BasePresenter
 import com.micker.five.activity.FiveStageFragment
+import com.micker.helper.Util
 import com.micker.home.R
 import kotlinx.android.synthetic.main.aqhy_fragment_main_tablayout.*
 import java.util.*
@@ -21,6 +22,7 @@ class VideoFragment : BaseFragment<Any, BasePresenter<Any>>() {
 
     override fun doInitData() {
         super.doInitData()
+        parent_ll?.setPadding(0, Util.getStatusBarHeight(context), 0, 0)
         initFragments()
         initViewPager()
     }

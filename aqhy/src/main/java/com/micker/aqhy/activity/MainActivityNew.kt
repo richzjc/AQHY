@@ -32,7 +32,6 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
     override fun doGetContentViewId() = R.layout.tail_activity_main_new1
 
     override fun doInitSubViews(view: View) {
-        parent_ll?.setPadding(0, Util.getStatusBarHeight(this), 0, 0)
         initTextToSpeech(application)
         initFragments()
         initViewPager()

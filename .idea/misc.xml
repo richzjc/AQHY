@@ -37,6 +37,7 @@
         <entry key="home/src/main/res/menu/bottom.xml" value="0.28229166666666666" />
         <entry key="home/src/main/res/menu/bottom_new.xml" value="0.27760416666666665" />
         <entry key="user/src/main/res/layout/aqhy_fragment_user.xml" value="0.2703125" />
+        <entry key="user/src/main/res/layout/tail_view_user_header.xml" value="0.246875" />
       </map>
     </option>
   </component>

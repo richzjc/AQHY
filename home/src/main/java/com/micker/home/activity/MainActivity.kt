@@ -21,7 +21,7 @@ import java.util.*
 
 @BindRouter(urls = [SECOND_STAGE_ROUTER])
 class MainActivity : BaseActivity<Any, BasePresenter<Any>>() {
-    private val titles by lazy { arrayOf("首页", "灵感", "个人") }
+    private val titles by lazy { arrayOf("首页", "灵感") }
     private val duration: Int = 800
     lateinit var mFragments: MutableList<Fragment>
     override fun doGetContentViewId() = R.layout.tail_activity_main
@@ -38,7 +38,6 @@ class MainActivity : BaseActivity<Any, BasePresenter<Any>>() {
             when (item.itemId) {
                 R.id.menu_home -> tab = 0
                 R.id.menu_cart -> tab = 1
-                R.id.menu_about -> tab = 2
             }
             addAnimation(tab)
             viewPager?.currentItem = tab
@@ -100,7 +99,6 @@ class MainActivity : BaseActivity<Any, BasePresenter<Any>>() {
         mFragments = ArrayList()
         mFragments.add(HomeFragment())
         mFragments.add(InspirationFragment())
-        mFragments.add(UserFragment())
     }
 
 }
