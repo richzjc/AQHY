@@ -39,7 +39,7 @@ class FiveStageFragment : BaseRecyclerViewFragment<FiveStageModel, Any, BasePres
 
     override fun doInitData() {
         super.doInitData()
-
+        adapter?.setData(null)
         val api = FiveApi(arguments, object : ResponseListener<String>{
             override fun onSuccess(data: String?, isCache: Boolean) {
                 if(!TextUtils.isEmpty(data)){
