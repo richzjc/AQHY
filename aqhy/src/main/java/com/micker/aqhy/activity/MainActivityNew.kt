@@ -30,6 +30,7 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
     lateinit var mFragments: MutableList<Fragment>
     private val duration: Int = 800
     override fun doGetContentViewId() = R.layout.tail_activity_main_new1
+    override fun isNeedSwipeBack() = false
 
     override fun doInitSubViews(view: View) {
         initTextToSpeech(application)
