@@ -22,6 +22,7 @@ class UserPresenter : BasePresenter<UserCallback>(){
         val rightText = ResourceUtils.getResStringFromId(R.string.icon_arrow_right)
 
         list.add(UserItemEntity( "我的创作", USER_MY_WORKS, true, 0, rightText))
+        list.add(UserItemEntity( "官网", "https://yy0914.netlify.app/", false, 0, rightText))
         list.add(UserItemEntity("设置", USER_MAIN_SETTING_ACTIVITY, false, 0, rightText))
         if(AccountManager.isLogin()) {
             val item = UserItemEntity("退出登录", "", false, ScreenUtils.dip2px(5f), "")
