@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/parent_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/parent_ll"
->
+        android:orientation="vertical">
 
     <com.micker.core.widget.NoScrollViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-    />
+            android:layout_weight="1" />
 
-    <View android:layout_width="match_parent"
-          android:layout_height="0.5dp"
-          android:background="@color/color_e6e6e6"
-    />
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_e6e6e6" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigationView"
-            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:background="@color/white"
             app:itemIconTint="@color/icon_color_tint"
             app:itemTextColor="@color/icon_color_tint"
-            app:menu="@menu/bottom_new"
-    />
+            app:menu="@menu/bottom_new" />
 </LinearLayout>

@@ -31,7 +31,7 @@ public abstract class AbstractApi<T> implements BaseApi<T> {
     public boolean isNeedToast = true;
     protected String cacheExtra;
     protected long cacheTime = 0;
-    protected boolean isNeedRefresh = false;
+    protected boolean isNeedRefresh = true;
     protected boolean ignoreExpired = false;
     private StringRequest request;
 

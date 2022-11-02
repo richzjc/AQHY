@@ -71,31 +71,24 @@ public class RpcStringRequest extends StringRequest {
         NetResponse netResponse;
         try {
             String parsed = new String(response.data, "UTF-8");
-            JSONObject jsonObject = null;
+            JSONObject jsonObject = new JSONObject(parsed);
+            if (jsonObject.has("code")) {
+                int code = jsonObject.optInt("code");
+                if (code != 20000) {
+                    throw new ParseError(new NetworkResponse(code,
+                            response.data, response.headers, response.notModified));
+                } else {
+                    parsed = jsonObject.optString("data");
+                }
+            }
             try {
-                jsonObject = new JSONObject(parsed);
-                if (jsonObject.has("succ")) {
-                    int code = jsonObject.optInt("succ");
-                    if (code != 1) {
-                        throw new ParseError(new NetworkResponse(code,
-                                response.data, response.headers, response.notModified));
-                    } else {
-                        parsed = jsonObject.optString("result");
-                    }
-                }
-                try {
-                    Object o = getApiParser().parse(parsed);
-                    netResponse = new NetResponse(response.isCache, o);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    throw new ParseError(response);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
                 Object o = getApiParser().parse(parsed);
                 netResponse = new NetResponse(response.isCache, o);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new ParseError(response);
             }
-        } catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException | JSONException e) {
             e.printStackTrace();
             throw new ParseError(response);
         }

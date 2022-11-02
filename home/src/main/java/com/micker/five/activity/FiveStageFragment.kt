@@ -2,6 +2,7 @@ package com.micker.five.activity
 
 import android.graphics.Color
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.fastjson.JSON
@@ -13,6 +14,7 @@ import com.micker.five.api.FiveApi
 import com.micker.five.model.FiveStageModel
 import com.micker.helper.file.CacheUtils
 import com.micker.helper.system.ScreenUtils
+import com.micker.rpc.ResponseListener
 import com.wallstreetcn.rpc.coroutines.getDeffer
 import com.wallstreetcn.rpc.coroutines.requestData
 
@@ -38,13 +40,19 @@ class FiveStageFragment : BaseRecyclerViewFragment<FiveStageModel, Any, BasePres
     override fun doInitData() {
         super.doInitData()
 
-        requestData {
-            val data = getDeffer(FiveApi(arguments)).data
-            if(TextUtils.isEmpty(data)){
-                adapter?.setData(JSON.parseArray(data, FiveStageModel::class.java))
-            }else{
-                adapter?.setData(ArrayList<FiveStageModel>())
+        val api = FiveApi(arguments, object : ResponseListener<String>{
+            override fun onSuccess(data: String?, isCache: Boolean) {
+                if(!TextUtils.isEmpty(data)){
+                    adapter?.setData(JSON.parseArray(data, FiveStageModel::class.java))
+                }else{
+                    adapter?.setData(ArrayList<FiveStageModel>())
+                }
             }
-        }
+
+            override fun onErrorResponse(code: Int, error: String?) {
+                Log.e("code", "code = ${code}")
+            }
+        })
+        api.start()
     }
 }
