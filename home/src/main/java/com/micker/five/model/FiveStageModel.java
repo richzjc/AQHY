@@ -8,6 +8,7 @@ import com.micker.data.IDifference;
 public class FiveStageModel implements Parcelable, IDifference {
     public String title;
     public String videoUrl;
+    public String imageUrl;
 
     public FiveStageModel(){
 
@@ -16,12 +17,14 @@ public class FiveStageModel implements Parcelable, IDifference {
     protected FiveStageModel(Parcel in) {
         title = in.readString();
         videoUrl = in.readString();
+        imageUrl = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(videoUrl);
+        dest.writeString(imageUrl);
     }
 
     @Override

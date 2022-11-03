@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import com.micker.core.adapter.BaseRecycleViewHolder
+import com.micker.core.imageloader.ImageLoadManager
 import com.micker.five.model.FiveStageModel
 import com.micker.global.VIDEO_FULL_SCREEN_PLAY_ACTION
 import com.micker.helper.router.RouterHelper
@@ -43,30 +44,6 @@ class FiveStageHolder(context: Context?) : BaseRecycleViewHolder<FiveStageModel>
     override fun doBindData(content: FiveStageModel?) {
         super.content = content
         itemView?.title?.text = content?.title
-        showFirstFrame(content?.videoUrl)
-    }
-
-
-    fun showFirstFrame(url: String?) {
-        RxUtils.just(url)
-            .map { s -> FirstFrameUtils.getFirstFrame(s) }
-            .observeOn(AndroidSchedulers.mainThread()).subscribeOn(RxUtils.getSchedulerIo())
-            .subscribe(Consumer<Bitmap?> { t ->
-                if (t != null) {
-                    val realHeight = (t.height * 1f / t.width) * ScreenUtils.dip2px(100f)
-                    var params = itemView?.image?.layoutParams as? LinearLayout.LayoutParams
-                    if (params == null)
-                        params =
-                            LinearLayout.LayoutParams(ScreenUtils.dip2px(100f), realHeight.toInt())
-                    params.width = ScreenUtils.dip2px(100f)
-                    params.height = realHeight.toInt()
-                    itemView?.image?.layoutParams = params
-                    itemView?.image?.setImageBitmap(t)
-                }
-            }, object : Consumer<Throwable?> {
-                override fun accept(t: Throwable?) {
-                    Log.i("@@@", t?.message ?: "")
-                }
-            })
+        ImageLoadManager.loadImage(content?.imageUrl, itemView.image, 0)
     }
 }

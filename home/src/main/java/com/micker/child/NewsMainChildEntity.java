@@ -12,6 +12,7 @@ public class NewsMainChildEntity implements Parcelable, IDifference {
     public String stage;
     public String desc;
     public String router;
+    public float ratio;
 
     public NewsMainChildEntity(){
 
@@ -24,6 +25,7 @@ public class NewsMainChildEntity implements Parcelable, IDifference {
         stage = in.readString();
         desc = in.readString();
         router = in.readString();
+        ratio = in.readFloat();
     }
 
     public static final Creator<NewsMainChildEntity> CREATOR = new Creator<NewsMainChildEntity>() {
@@ -51,6 +53,7 @@ public class NewsMainChildEntity implements Parcelable, IDifference {
         dest.writeString(stage);
         dest.writeString(desc);
         dest.writeString(router);
+        dest.writeFloat(ratio);
     }
 
     @Override

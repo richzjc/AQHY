@@ -11,6 +11,7 @@ class NewsMainChildFragment : BaseWaterfallFragment<NewsMainChildEntity, Any, Ba
 
     override fun doInitSubViews(view: View?) {
         super.doInitSubViews(view)
+        titleBar?.visibility = View.GONE
         ptrRecyclerView?.setCanRefresh(false)
         ptrRecyclerView?.isEnableLoadMore = false
         recycleView?.setIsEndless(false)
