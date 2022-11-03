@@ -21,7 +21,6 @@ class NewsMainChildFragment : BaseWaterfallFragment<NewsMainChildEntity, Any, Ba
     override fun onLoadMore(page: Int) {
     }
 
-    override fun doInitAdapter(): BaseRecycleAdapter<*, *> {
+    override fun doInitAdapter() = null
 
-    }
 }

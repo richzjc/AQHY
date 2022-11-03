@@ -43,7 +43,12 @@ class VideoFragment : BaseFragment<Any, BasePresenter<Any>>() {
         fragment1.arguments = bundle1
         mFragments.add(fragment1)
 
-        mFragments.add(FiveStageFragment())
+        val fragment2 = FiveStageFragment()
+        val bundle2 = Bundle()
+        bundle2.putString("apiPath", "http://yuanyuan0914.top/config/video_safe.json")
+        fragment2.arguments = bundle2
+        mFragments.add(fragment2)
+
         mFragments.add(FiveStageFragment())
         mFragments.add(FiveStageFragment())
         mFragments.add(FiveStageFragment())
