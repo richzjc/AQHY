@@ -1,14 +1,12 @@
 package com.micker
 
 import androidx.fragment.app.Fragment
+import com.micker.child.NewsMainChildFragment
 import com.micker.core.adapter.BaseFragmentAdapter
 import com.micker.core.base.BaseFragment
 import com.micker.core.base.BasePresenter
 import com.micker.helper.Util
 import com.micker.home.R
-import com.micker.home.fragment.HomeFragment
-import com.micker.home.fragment.InspirationFragment
-import com.micker.user.fragment.UserFragment
 import kotlinx.android.synthetic.main.aqhy_fragment_main_tablayout.*
 import java.util.*
 

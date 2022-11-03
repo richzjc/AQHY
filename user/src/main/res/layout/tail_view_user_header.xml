@@ -19,7 +19,7 @@
             android:layout_height="80dp"
             app:actualImageResource="@drawable/default_img"
             app:roundAsCircle="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             app:roundingBorderColor="@color/color_e6e6e6"
             app:roundingBorderPadding="@dimen/margin_dp2"
             app:roundingBorderWidth="@dimen/margin_dp2"
