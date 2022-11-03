@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.text.TextUtils
 import com.micker.core.imageloader.ImageLoadManager
 import com.micker.core.imageloader.ProgressResponseListener
+import com.micker.helper.image.ImageUtlFormatHelper
 import com.micker.helper.router.RouterHelper
 import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
@@ -24,20 +25,21 @@ class NewsMainChildHolder(context: Context?) : BaseRecycleViewHolder<NewsMainChi
     override fun doBindData(content: NewsMainChildEntity?) {
         super.content = content
         if (!TextUtils.isEmpty(content?.imageUrl)) {
+            val imageUrl = ImageUtlFormatHelper.formatImageFactory(content?.imageUrl, ScreenUtils.getScreenWidth()/2, 0)
             if (super.content.ratio <= 0) {
-                ImageLoadManager.loadBitmap(super.content.imageUrl, object : ProgressResponseListener<Bitmap>{
+                ImageLoadManager.loadBitmap(imageUrl, object : ProgressResponseListener<Bitmap>{
                     override fun onComplete(source: Bitmap?) {
                         if(source != null){
                             val ratio = source.width * 1f/source.height
                             content?.ratio = ratio
                             itemView?.image?.aspectRatio = ratio
-                            ImageLoadManager.loadRoundImage(content?.imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
+                            ImageLoadManager.loadRoundImage(imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
                         }
                     }
                 })
             } else {
                 itemView?.image?.aspectRatio = super.content.ratio
-                ImageLoadManager.loadRoundImage(super.content.imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
+                ImageLoadManager.loadRoundImage(imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
             }
         }
 

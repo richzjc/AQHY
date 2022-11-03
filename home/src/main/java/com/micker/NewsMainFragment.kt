@@ -40,8 +40,23 @@ class NewsMainFragment : BaseFragment<Any, BasePresenter<Any>>(){
         bundle1.putString("json", "chinese.json")
         fragment1.arguments = bundle1
         mFragments.add(fragment1)
-        mFragments.add(NewsMainChildFragment())
-        mFragments.add(NewsMainChildFragment())
-        mFragments.add(NewsMainChildFragment())
+
+        val fragment2 = NewsMainChildFragment()
+        val bundle2 = Bundle()
+        bundle2.putString("json", "math.json")
+        fragment2.arguments = bundle2
+        mFragments.add(fragment2)
+
+        val fragment3 = NewsMainChildFragment()
+        val bundle3 = Bundle()
+        bundle3.putString("json", "english.json")
+        fragment3.arguments = bundle3
+        mFragments.add(fragment3)
+
+        val fragment4 = NewsMainChildFragment()
+        val bundle4 = Bundle()
+        bundle4.putString("json", "other.json")
+        fragment4.arguments = bundle4
+        mFragments.add(fragment4)
     }
 }

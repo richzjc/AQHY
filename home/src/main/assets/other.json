@@ -4,7 +4,7 @@
     "title" : "图像填色",
     "stage" : "所有年龄段",
     "desc" : "绘画，审美观，感知颜色的乐趣",
-    "imageUrl" : "http://yuanyuan0914.top/image/chinese/first_stage_find_word.jpg",
+    "imageUrl" : "http://yuanyuan0914.top/image/chinese/two_stage_1.png",
     "router" : "wscn://aqhy.com/second/stage/action"
   },
   {
@@ -12,7 +12,7 @@
     "title" : "拼图游戏",
     "stage" : "所有年龄段",
     "desc" : "培养逻辑推理能力，观察能力",
-    "imageUrl" : "http://yuanyuan0914.top/image/chinese/first_stage_find_word.jpg",
+    "imageUrl" : "http://yuanyuan0914.top/image/chinese/four_stage_1.png",
     "router" : "wscn://aqhy.com/four/stage/action"
   }
 ]

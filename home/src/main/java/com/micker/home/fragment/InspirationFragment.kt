@@ -52,7 +52,8 @@ class InspirationFragment :
         adapter?.setData(null)
         titleBar.setIconBackVisible(View.INVISIBLE)
         mPresenter.loadData(true)
-        mPresenter.loadBanner()
+        //TODO 下面的banner先不要去掉，当作广告位
+//        mPresenter.loadBanner()
     }
 
     override fun addItemDecoration() {

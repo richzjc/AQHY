@@ -9,6 +9,7 @@ import com.micker.core.adapter.BaseRecycleViewHolder
 import com.micker.core.imageloader.ImageLoadManager
 import com.micker.five.model.FiveStageModel
 import com.micker.global.VIDEO_FULL_SCREEN_PLAY_ACTION
+import com.micker.helper.image.ImageUtlFormatHelper
 import com.micker.helper.router.RouterHelper
 import com.micker.helper.rx.RxUtils
 import com.micker.helper.system.ScreenUtils
@@ -44,6 +45,7 @@ class FiveStageHolder(context: Context?) : BaseRecycleViewHolder<FiveStageModel>
     override fun doBindData(content: FiveStageModel?) {
         super.content = content
         itemView?.title?.text = content?.title
-        ImageLoadManager.loadImage(content?.imageUrl, itemView.image, 0)
+        val imageUrl = ImageUtlFormatHelper.formatImageFactory(content?.imageUrl, ScreenUtils.dip2px(100f), 0)
+        ImageLoadManager.loadImage(imageUrl, itemView.image, 0)
     }
 }
