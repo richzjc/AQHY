@@ -33,6 +33,8 @@
         <entry key="home/src/main/res/layout/aqhy_fragment_main.xml" value="0.25364583333333335" />
         <entry key="home/src/main/res/layout/aqhy_fragment_main_tablayout.xml" value="0.27760416666666665" />
         <entry key="home/src/main/res/layout/aqhy_recycler_item_five_stage.xml" value="0.20416666666666666" />
+        <entry key="home/src/main/res/layout/aqhy_recycler_item_home_category_list.xml" value="0.22708333333333333" />
+        <entry key="home/src/main/res/layout/aqhy_recycler_item_news_main_child.xml" value="0.22708333333333333" />
         <entry key="home/src/main/res/layout/live_room_activity_full_player.xml" value="0.25052083333333336" />
         <entry key="home/src/main/res/layout/live_room_view_video_controller_por.xml" value="0.25052083333333336" />
         <entry key="home/src/main/res/layout/tail_activity_main.xml" value="0.28802083333333334" />

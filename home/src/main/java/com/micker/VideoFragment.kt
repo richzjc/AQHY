@@ -13,7 +13,7 @@ import java.util.*
 
 class VideoFragment : BaseFragment<Any, BasePresenter<Any>>() {
 
-    private val titles by lazy { arrayOf("家庭教育", "安全知识", "百科知识", "经典语录", "励志语录") }
+    private val titles by lazy { arrayOf("家庭教育", "安全知识", "百科知识", "写作素材", "励志语录") }
     lateinit var mFragments: MutableList<Fragment>
 
     override fun doGetContentViewId(): Int {
@@ -49,8 +49,18 @@ class VideoFragment : BaseFragment<Any, BasePresenter<Any>>() {
         fragment2.arguments = bundle2
         mFragments.add(fragment2)
 
-        mFragments.add(FiveStageFragment())
-        mFragments.add(FiveStageFragment())
+        val fragment3 = FiveStageFragment()
+        val bundle3 = Bundle()
+        bundle3.putString("apiPath", "http://yuanyuan0914.top/config/video_baike.json")
+        fragment3.arguments = bundle3
+        mFragments.add(fragment3)
+
+        val fragment4 = FiveStageFragment()
+        val bundle4 = Bundle()
+        bundle4.putString("apiPath", "http://yuanyuan0914.top/config/video_classic.json")
+        fragment4.arguments = bundle4
+        mFragments.add(fragment4)
+
         mFragments.add(FiveStageFragment())
     }
 }
