@@ -10,22 +10,10 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="#1478f0"
-            style="?android:progressBarStyle" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_dp10"
-            android:gravity="center"
-            android:textColor="#333333"
-            android:textSize="@dimen/text_size_15"
-            android:visibility="gone" />
+        <com.micker.core.widget.IOSLoadingView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                />
     </LinearLayout>
 </RelativeLayout>

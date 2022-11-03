@@ -1,16 +1,15 @@
 package com.micker.core.adapter;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.util.Log;
+
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleRegistry;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import com.micker.helper.system.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +22,16 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
     protected static final int TYPE_HEADER_START = 1000;
     protected static final int TYPE_FOOTER = 2000;
     protected static final int TYPE_EMPTY_START = 3000;
+    protected static final int TYPE_LOADING = 4000;
 
     private List<View> mHeaderViews = new ArrayList<>();
     private View mHeaderView;
     private View mFooterView;
     private View mEmptyView;
+    private View mLoadingView;
     private AdapterDataDelegate<D> delegate;
     protected String editTextColor;
+    private boolean needSkeleton;
 
     public BaseRecycleAdapter() {
         super();
@@ -45,25 +47,28 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
     }
 
     @Override
-    public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         if (holder instanceof HeaderHolder) {
-            ((HeaderHolder)holder).doBindData();
             return;
         } else if (holder instanceof FooterHolder) {
 
             return;
         } else if (holder instanceof EmptyHolder) {
-            ((EmptyHolder) holder).bindData();
             return;
         }
         if (holder instanceof BaseRecycleViewHolder) {
             try {
                 binderItemHolder((T) holder, getListItemPosition(position));
+                ((LifecycleRegistry) ((BaseRecycleViewHolder) holder).getLifecycle()).handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    protected boolean isLoadSketon() {
+        return delegate.isEmpty();
     }
 
     public boolean dataIsNullOrEmpty() {
@@ -77,6 +82,15 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
         notifyDataSetChanged();
     }
 
+    public void setLoadingView(View loadingView) {
+        mLoadingView = loadingView;
+        notifyDataSetChanged();
+    }
+
+    public View getLoadingView() {
+        return mLoadingView;
+    }
+
     public void setEmptyView(View emptyView) {
         mEmptyView = emptyView;
         notifyDataSetChanged();
@@ -87,7 +101,7 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
     }
 
     @Override
-    public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER_START) {
             View v = mHeaderView;
             return new HeaderHolder(v);
@@ -97,15 +111,21 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
         } else if (viewType == TYPE_EMPTY_START) {
             View v = mEmptyView;
             return new EmptyHolder(v);
+        } else if (viewType == TYPE_LOADING) {
+            View v = mLoadingView;
+            return new EmptyHolder(v);
         }
         T holder = createListItemView(parent, viewType);
+        if (holder instanceof BaseRecycleViewHolder)
+            ((LifecycleRegistry) ((BaseRecycleViewHolder) holder).getLifecycle()).handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         return holder;
     }
 
     @Override
     public int getItemCount() {
         int size = getListItemCount();
-        if (size == 0 && delegate.isEmpty()) {
+        // int headerFooterCount = getHeadViewSize() + getFooterViewSize();
+        if (size == 0 && delegate.isEmpty() && !needSkeleton && null != mLoadingView) {
             return 1;
         }
         if (size == 0 && delegate.isListEmpty() && null != mEmptyView) {
@@ -121,6 +141,8 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
         if (position < getHeadViewSize()) {
             mHeaderView = mHeaderViews.get(position);
             return TYPE_HEADER_START;
+        } else if (delegate.isEmpty() && null != mLoadingView && !needSkeleton) {
+            return TYPE_LOADING;
         } else if (size == 0 && delegate.isListEmpty() && null != mEmptyView) {
             return TYPE_EMPTY_START;
         } else if (position >= getHeadViewSize() + getListItemCount()) {
@@ -141,6 +163,14 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
 
     public void setData(List<D> data) {
         delegate.setData(data);
+    }
+
+    public void setDataNew(List<D> data) {
+        delegate.setDataNew(data);
+    }
+
+    public void onlySetData(List<D> data) {
+        delegate.onlySetData(data);
     }
 
     public void notifyItemChanged() {
@@ -194,10 +224,9 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
 
     //add a header to the adapter
     public void addHeader(View header) {
-        Log.i("addHeader", String.valueOf(mHeaderViews.contains(header)));
         if (!mHeaderViews.contains(header)) {
             mHeaderViews.add(header);
-            notifyDataSetChanged();
+            notifyItemInserted(mHeaderViews.size() - 1);
         }
     }
 
@@ -210,6 +239,7 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
     }
 
     public void removeAllHeader() {
+        //  notifyItemRangeRemoved(0, mHeaderViews.size());
         mHeaderViews.clear();
         notifyDataSetChanged();
     }
@@ -231,33 +261,15 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
 
         HeaderHolder(View itemView) {
             super(itemView);
-//            setFullSpan();
+            setFullSpan();
         }
 
-        public void doBindData(){
+        void setFullSpan() {
             ViewGroup.LayoutParams lp = itemView.getLayoutParams();
-            if (lp != null) {
-                StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, lp.height);
-                layoutParams.setFullSpan(true);
-                itemView.setLayoutParams(layoutParams);
-            }else{
-                StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.setFullSpan(true);
-                itemView.setLayoutParams(layoutParams);
+            if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
+                StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
+                p.setFullSpan(true);
             }
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            builder.append("V2     holderName = ")
-                    .append(getClass().getSimpleName())
-                    .append("; holderView = ")
-                    .append(itemView.getClass().getSimpleName())
-                    .append("; holderItemViewType = " + getItemViewType());
-            return builder.toString();
         }
     }
 
@@ -274,22 +286,9 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
                 p.setFullSpan(true);
             }
         }
-
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            builder.append("V2     holderName = ")
-                    .append(getClass().getSimpleName())
-                    .append("; holderView = ")
-                    .append(itemView.getClass().getSimpleName())
-                    .append("; holderItemViewType = " + getItemViewType());
-            return builder.toString();
-        }
     }
 
     protected static class EmptyHolder extends RecyclerView.ViewHolder {
-        AnimatorSet animatorSet;
-
         EmptyHolder(View itemView) {
             super(itemView);
             setFullSpan();
@@ -300,43 +299,6 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
             if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
                 StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
                 p.setFullSpan(true);
-            }
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            builder.append("V2     holderName = ")
-                    .append(getClass().getSimpleName())
-                    .append("; holderView = ")
-                    .append(itemView.getClass().getSimpleName())
-                    .append("; holderItemViewType = " + getItemViewType());
-            return builder.toString();
-        }
-
-        public void bindData() {
-            showAnimation();
-        }
-
-        public void detachView() {
-            disAnimation();
-        }
-
-        public void showAnimation() {
-            ObjectAnimator animator1 = ObjectAnimator.ofFloat(itemView, "alpha", 0, 1);
-            ObjectAnimator animator2 = ObjectAnimator.ofFloat(itemView, "scaleX", 0, 1);
-            ObjectAnimator animator3 = ObjectAnimator.ofFloat(itemView, "scaleY", 0, 1);
-            if (animatorSet != null)
-                animatorSet.cancel();
-            animatorSet = new AnimatorSet();
-            animatorSet.setDuration(500);
-            animatorSet.playTogether(animator1, animator2, animator3);
-            animatorSet.start();
-        }
-
-        public void disAnimation() {
-            if (animatorSet != null) {
-                animatorSet.cancel();
             }
         }
     }
@@ -357,8 +319,7 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
         super.onViewRecycled(holder);
         if (holder instanceof BaseRecycleViewHolder) {
             ((BaseRecycleViewHolder) holder).onDetachView();
-        } else if (holder instanceof EmptyHolder) {
-            ((EmptyHolder) holder).detachView();
+            ((LifecycleRegistry) ((BaseRecycleViewHolder) holder).getLifecycle()).handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
         }
     }
 
@@ -392,6 +353,14 @@ public abstract class BaseRecycleAdapter<D, T extends RecyclerView.ViewHolder> e
 
     public void removeEntity(D item) {
         delegate.removeItem(item);
+    }
+
+    public void removeEntity(int position) {
+        List<D> mDataCursor = delegate.getData();
+        if (mDataCursor != null && position >= 0 && position < mDataCursor.size()) {
+            mDataCursor.remove(position);
+            notifyItemChanged();
+        }
     }
 
     public void diffDetectMoves(boolean diffDetectMoves) {

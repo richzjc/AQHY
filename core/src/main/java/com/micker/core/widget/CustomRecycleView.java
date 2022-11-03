@@ -14,6 +14,7 @@ import com.micker.core.adapter.RVLinearLayoutManager;
 import com.micker.core.callback.IViewHolder;
 import com.micker.core.holder.DefaultEmptyViewHolder;
 import com.micker.core.holder.DefaultFooterViewHolder;
+import com.micker.core.holder.DefaultLoadingViewHolder;
 import com.micker.core.widget.endless.EndlessRecyclerAdapter;
 import com.micker.core.widget.endless.EndlessRecyclerOnScrollListener;
 import com.micker.core.widget.endless.ILoadMorePageListener;
@@ -29,6 +30,7 @@ public class CustomRecycleView extends FrameLayout {
     private EndlessRecyclerOnScrollListener listener;
     private DefaultEmptyViewHolder viewHolder;
     private IViewHolder footerViewHolder;
+    private IViewHolder loadingViewHolder;
     private boolean isEndless = true;
     private EndlessRecyclerAdapter mAdapter;
     public SplashView splashView;
@@ -56,6 +58,7 @@ public class CustomRecycleView extends FrameLayout {
         itemAnimator.setSupportsChangeAnimations(false);
         recyclerView.setItemAnimator(itemAnimator);
         viewHolder = new DefaultEmptyViewHolder(this);
+        loadingViewHolder = new DefaultLoadingViewHolder(this);
         footerViewHolder = new DefaultFooterViewHolder(this);
         setListener();
         setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
@@ -105,6 +108,7 @@ public class CustomRecycleView extends FrameLayout {
         if (adapter instanceof BaseRecycleAdapter) {
             BaseRecycleAdapter mRecycleAdapter = (BaseRecycleAdapter) adapter;
             mRecycleAdapter.setEmptyView(viewHolder.getView());
+            mRecycleAdapter.setLoadingView(loadingViewHolder.getView());
             mAdapter = new EndlessRecyclerAdapter(mRecycleAdapter);
             addFooter();
             if (lookup != null) {

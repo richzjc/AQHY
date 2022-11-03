@@ -2,9 +2,12 @@ package com.micker.core.adapter;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListUpdateCallback;
+
 import com.micker.helper.TLog;
+
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,8 @@ class AdapterDataDelegate<D> {
     private List<Object> mData;
     private List<D> mDataCursor;
     private BaseRecycleAdapter<D, ?> mAdapter;
+    private int skeletonCount = 10;
+    private boolean isNeedSkeleton = false;
     private boolean diffDetectMoves = false;
 
 
@@ -28,7 +33,12 @@ class AdapterDataDelegate<D> {
     }
 
     public void setData(List<D> data) {
-        TLog.i(TAG + "  notifyDataSetChanged: data.size() = " + (data == null ? 0 : data.size()));
+        mDataCursor = data;
+        copyData();
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void setDataNew(List<D> data) {
         boolean isNeedNotifyDataSetChange;
         if (mDataCursor != null && data != null) {
             mDataCursor = data;
@@ -48,6 +58,12 @@ class AdapterDataDelegate<D> {
         }
     }
 
+
+    public void onlySetData(List<D> data) {
+        mDataCursor = data;
+        copyData();
+    }
+
     private void copyData() {
         try {
             if (mDataCursor != null && !mDataCursor.isEmpty()) {
@@ -64,13 +80,17 @@ class AdapterDataDelegate<D> {
             }
             for (D entity : mDataCursor) {
                 Parcel parcel = Parcel.obtain();
-                ((Parcelable) entity).writeToParcel(parcel, 0);
-                parcel.setDataPosition(0);
-                Constructor<?> constructor = entity.getClass().getDeclaredConstructor(Parcel.class);
-                constructor.setAccessible(true);
-                D dateEntity = (D) constructor.newInstance(parcel);
-                mData.add(dateEntity);
-                parcel.recycle();
+                if (entity instanceof Parcelable) {
+                    ((Parcelable) entity).writeToParcel(parcel, 0);
+                    parcel.setDataPosition(0);
+                    Constructor<?> constructor = entity.getClass().getDeclaredConstructor(Parcel.class);
+                    constructor.setAccessible(true);
+                    D dateEntity = (D) constructor.newInstance(parcel);
+                    mData.add(dateEntity);
+                    parcel.recycle();
+                } else {
+                    mData.add(entity);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,8 +147,6 @@ class AdapterDataDelegate<D> {
             if (notifyCount == 0 && mData != null) {
                 notifyCount++;
                 diffUtils();
-            } else {
-                notifyCount++;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,7 +154,6 @@ class AdapterDataDelegate<D> {
     }
 
     private void diffUtils() {
-        TLog.i(TAG + "  diffUtils：" + notifyCount);
         if (mDataCursor == null) {
             mDataCursor = new ArrayList<>();
         }
@@ -215,7 +232,7 @@ class AdapterDataDelegate<D> {
     }
 
     public boolean isListEmpty() {
-        return mDataCursor == null || (mDataCursor != null && mDataCursor.isEmpty());
+        return mDataCursor != null && mDataCursor.isEmpty();
     }
 
     public int getListSize() {

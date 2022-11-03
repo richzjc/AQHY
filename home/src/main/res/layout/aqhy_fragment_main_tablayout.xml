@@ -29,7 +29,7 @@
                 android:layout_toLeftOf="@+id/imgChannel"
                 app:tabGravity="center"
                 app:tabIndicator="@drawable/order_drawable_rectangle_1482f0"
-                app:tabIndicatorColor="@color/day_mode_theme_color_1478f0"
+                app:tabIndicatorColor="@color/color_1482f0"
                 app:tabIndicatorFullWidth="false"
                 app:tabIndicatorHeight="3dp"
                 app:tabIndicatorWidth="@dimen/margin_dp17"

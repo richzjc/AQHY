@@ -15,6 +15,7 @@
         <entry key="aqhy/src/main/res/menu/bottom_new.xml" value="0.2171875" />
         <entry key="core/src/main/res/drawable/order_drawable_rectangle_1482f0.xml" value="0.29375" />
         <entry key="core/src/main/res/layout/aqhy_fragment_waterfall.xml" value="0.21666666666666667" />
+        <entry key="core/src/main/res/layout/base_dialog_loading.xml" value="0.32135416666666666" />
         <entry key="core/src/main/res/layout/base_fragment_dialog_loading.xml" value="0.20416666666666666" />
         <entry key="global/src/main/res/layout/global_dialog_select_pic.xml" value="0.35833333333333334" />
         <entry key="home/src/main/res/drawable/drawable_main_grid_item_bg.xml" value="0.184375" />

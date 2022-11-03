@@ -20,7 +20,9 @@ import com.wallstreetcn.rpc.coroutines.requestData
 
 class FiveStageFragment : BaseRecyclerViewFragment<FiveStageModel, Any, BasePresenter<Any>>(){
 
+    private var list : List<FiveStageModel>? = null
     override fun onRefresh() {
+        loadData()
     }
 
     override fun onLoadMore(page: Int) {
@@ -30,7 +32,7 @@ class FiveStageFragment : BaseRecyclerViewFragment<FiveStageModel, Any, BasePres
 
     override fun doInitSubViews(view: View) {
         super.doInitSubViews(view)
-        ptrRecyclerView?.setCanRefresh(false)
+        ptrRecyclerView?.setCanRefresh(true)
         recycleView?.setIsEndless(false)
 
         val itemDecoration = DividerItemDecoration(LinearLayoutManager.VERTICAL, ScreenUtils.dip2px(1f), Color.parseColor("#eeeeee"), 0)
@@ -40,17 +42,27 @@ class FiveStageFragment : BaseRecyclerViewFragment<FiveStageModel, Any, BasePres
     override fun doInitData() {
         super.doInitData()
         adapter?.setData(null)
+        if(list != null && list!!.isNotEmpty())
+            adapter?.setData(list)
+        else
+            loadData()
+    }
+
+    private fun loadData(){
         val api = FiveApi(arguments, object : ResponseListener<String>{
             override fun onSuccess(data: String?, isCache: Boolean) {
                 if(!TextUtils.isEmpty(data)){
-                    adapter?.setData(JSON.parseArray(data, FiveStageModel::class.java))
+                    list = JSON.parseArray(data, FiveStageModel::class.java)
+                    adapter?.setData(list)
                 }else{
                     adapter?.setData(ArrayList<FiveStageModel>())
                 }
+                ptrRecyclerView.onRefreshComplete()
             }
 
             override fun onErrorResponse(code: Int, error: String?) {
                 Log.e("code", "code = ${code}")
+                ptrRecyclerView.onRefreshComplete()
             }
         })
         api.start()
