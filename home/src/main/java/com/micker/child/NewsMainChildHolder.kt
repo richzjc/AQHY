@@ -15,7 +15,7 @@ class NewsMainChildHolder(context: Context?) : BaseRecycleViewHolder<NewsMainChi
     init {
         itemView?.setOnClickListener {
             if (!TextUtils.isEmpty(super.content?.router))
-                RouterHelper.open(super.content.imageUrl, mContext)
+                RouterHelper.open(super.content.router, mContext)
         }
     }
 
@@ -31,18 +31,18 @@ class NewsMainChildHolder(context: Context?) : BaseRecycleViewHolder<NewsMainChi
                             val ratio = source.width * 1f/source.height
                             content?.ratio = ratio
                             itemView?.image?.aspectRatio = ratio
-                            ImageLoadManager.loadRoundImage(content?.imageUrl, itemView.image, 0, ScreenUtils.dip2px(5f))
+                            ImageLoadManager.loadRoundImage(content?.imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
                         }
                     }
                 })
             } else {
                 itemView?.image?.aspectRatio = super.content.ratio
-                ImageLoadManager.loadRoundImage(super.content.imageUrl, itemView.image, 0, ScreenUtils.dip2px(5f))
+                ImageLoadManager.loadRoundImage(super.content.imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
             }
         }
 
         itemView?.title?.text = content?.title
-        itemView?.stage?.text = content?.stage
+        itemView?.stage?.text = "${content?.stage}"
         itemView?.desc?.text = content?.desc
     }
 }

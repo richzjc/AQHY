@@ -1,5 +1,6 @@
 package com.micker
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.micker.child.NewsMainChildFragment
 import com.micker.core.adapter.BaseFragmentAdapter
@@ -34,7 +35,11 @@ class NewsMainFragment : BaseFragment<Any, BasePresenter<Any>>(){
 
     private fun initFragments() {
         mFragments = ArrayList()
-        mFragments.add(NewsMainChildFragment())
+        val fragment1 = NewsMainChildFragment()
+        val bundle1 = Bundle()
+        bundle1.putString("json", "chinese.json")
+        fragment1.arguments = bundle1
+        mFragments.add(fragment1)
         mFragments.add(NewsMainChildFragment())
         mFragments.add(NewsMainChildFragment())
         mFragments.add(NewsMainChildFragment())

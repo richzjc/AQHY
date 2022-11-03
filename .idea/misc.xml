@@ -18,6 +18,7 @@
         <entry key="core/src/main/res/layout/base_dialog_loading.xml" value="0.32135416666666666" />
         <entry key="core/src/main/res/layout/base_fragment_dialog_loading.xml" value="0.20416666666666666" />
         <entry key="global/src/main/res/layout/global_dialog_select_pic.xml" value="0.35833333333333334" />
+        <entry key="home/src/main/res/drawable/aqhy_drawable_home_category_list_bottom.xml" value="0.37037037037037035" />
         <entry key="home/src/main/res/drawable/drawable_main_grid_item_bg.xml" value="0.184375" />
         <entry key="home/src/main/res/drawable/first_stage_btn_bg.xml" value="0.2861111111111111" />
         <entry key="home/src/main/res/drawable/layer_drawable_first_stage_item.xml" value="0.33611111111111114" />
