@@ -10,6 +10,12 @@ android {
         targetSdkVersion ANDROID_TARGET_VERSION
         versionCode 1
         versionName "1.0"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
     lintOptions {
         abortOnError false

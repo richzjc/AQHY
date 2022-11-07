@@ -10,6 +10,7 @@ import com.micker.six.model.SixListModel
 import com.micker.six.model.SixModel
 import com.pawegio.kandroid.sp
 import kotlin.math.abs
+import kotlin.random.Random
 
 class SixStageView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -27,26 +28,31 @@ class SixStageView @JvmOverloads constructor(
     private var leftRectList: List<Rect>? = null
     private var rightRectList: List<Rect>? = null
     private var resultRectList: List<Rect>? = null
+    private var rectMap: HashMap<Rect, Rect>? = null
+    private var wordHeight = 0
 
     init {
         paint = Paint()
         linePaint = Paint()
         paint?.isAntiAlias = true
-        paint?.textSize = sp(16).toFloat()
+        paint?.textSize = sp(26).toFloat()
         linePaint?.isAntiAlias = true
+        paint?.isFakeBoldText = true
         paint?.color = Color.parseColor("#333333")
         linePaint?.color = Color.BLACK
         linePaint?.strokeWidth = ScreenUtils.dip2px(5f).toFloat()
-        lineGap = ScreenUtils.dip2px(15f)
+        lineGap = ScreenUtils.dip2px(40f)
         padding = ScreenUtils.dip2px(10f)
+        rectMap = HashMap()
+        paths = ArrayList()
     }
 
     fun bindData(listModel: SixListModel) {
         this.listModel = listModel
         startIndex = 0
         paths?.clear()
-        if (paths == null)
-            paths = ArrayList()
+        rectMap?.clear()
+        invalidate()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -55,6 +61,7 @@ class SixStageView @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, realHeightMeasureSpec)
         var rect = Rect()
         paint?.getTextBounds(tempStr, 0, tempStr.length, rect)
+        wordHeight = abs(rect.bottom - rect.top)
         showCount =
             Math.floor((measuredHeight * 1.0 - padding * 2) / (lineGap + abs(rect.bottom - rect.top)))
                 .toInt()
@@ -72,18 +79,47 @@ class SixStageView @JvmOverloads constructor(
             var sixModelList = ArrayList<SixModel>()
             if (showCount >= listModel!!.list.size)
                 sixModelList.addAll(listModel!!.list)
-            else{
+            else {
                 val endIndex = startIndex + showCount
-                if(endIndex <= listModel!!.list.size){
-                    sixModelList.addAll(listModel!!.list.subList(startIndex, startIndex + showCount))
-                }else{
+                if (endIndex <= listModel!!.list.size) {
+                    sixModelList.addAll(
+                        listModel!!.list.subList(
+                            startIndex,
+                            startIndex + showCount
+                        )
+                    )
+                } else {
                     sixModelList.addAll(listModel!!.list.subList(startIndex, listModel!!.list.size))
-                    sixModelList.addAll(listModel!!.list.subList(0, showCount - (listModel!!.list.size - startIndex)))
+                    sixModelList.addAll(
+                        listModel!!.list.subList(
+                            0,
+                            showCount - (listModel!!.list.size - startIndex)
+                        )
+                    )
                 }
             }
 
+            var leftBaseLineList = ArrayList<Int>()
+            var rightBaseLineList = ArrayList<Int>()
+            var startBaseLine = padding + wordHeight
+            sixModelList?.forEach {
+                leftBaseLineList.add(startBaseLine)
+                rightBaseLineList.add(startBaseLine)
+                startBaseLine += (lineGap + wordHeight)
+            }
+
+            sixModelList?.forEach {
+                val leftRandIndex = Random.nextInt(leftBaseLineList.size)
+                val rightRandIndex = Random.nextInt(rightBaseLineList.size)
+                canvas?.drawText(it.leftTitle, padding.toFloat(), leftBaseLineList[leftRandIndex].toFloat(), paint!!)
+                leftBaseLineList.removeAt(leftRandIndex)
 
 
+                val rightRect = Rect()
+                paint?.getTextBounds(it.rightTitle, 0, it.rightTitle.length, rightRect)
+                canvas?.drawText(it.rightTitle, (measuredWidth - padding - abs(rightRect.right - rightRect.left)).toFloat(), rightBaseLineList[rightRandIndex].toFloat(), paint!!)
+                rightBaseLineList.removeAt(rightRandIndex)
+            }
         }
     }
 }

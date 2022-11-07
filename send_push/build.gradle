@@ -35,6 +35,12 @@ android {
         packagingOptions {
             exclude "lib/arm64-v8a/libimagepipeline.so"
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
 
     lintOptions {

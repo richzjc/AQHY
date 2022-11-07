@@ -63,7 +63,7 @@ task clean(type: Delete) {
 
 
 def supportVersion = '1.2.0-alpha02'
-def routerVersion = "0.4.1"
+def routerVersion = "1.0.0"
 def stethoVersion = "1.5.1"
 
 ext {
@@ -81,8 +81,8 @@ ext {
     ]
 
     router = [
-            router        : "com.github.leifzhang:RouterLib:${routerVersion}",
-            routerCompiler: "com.github.leifzhang:compiler:${routerVersion}"
+            router        : "com.github.richzjc:routerlib:1.0.1",
+            routerCompiler: "com.github.richzjc:router_compiler:${routerVersion}"
     ]
 
     basic = [

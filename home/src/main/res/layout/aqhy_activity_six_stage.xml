@@ -17,10 +17,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_dp15"
-            android:layout_marginTop="@dimen/margin_dp30"
+            android:layout_marginTop="@dimen/margin_dp50"
             android:layout_marginRight="@dimen/margin_dp15"
             android:gravity="center"
             android:orientation="horizontal">
+
+        <com.micker.core.widget.ShareTextView
+                android:id="@+id/bihua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/first_stage_btn_bg"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_dp15"
+                android:paddingTop="@dimen/margin_dp5"
+                android:paddingRight="@dimen/margin_dp15"
+                android:paddingBottom="@dimen/margin_dp5"
+                android:text="选择"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:visibility="invisible" />
 
 
         <com.micker.core.widget.ShareTextView
@@ -63,6 +83,7 @@
             android:id="@+id/stage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/func_parent"
             android:layout_marginTop="@dimen/margin_dp25" />
-    
+
 </RelativeLayout>

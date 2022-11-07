@@ -1,3 +1,52 @@
 {
-  "汉字" : []
+  "数字" : [
+    {
+      "leftTitle" : "一",
+      "rightTitle" : "1"
+    },
+    {
+      "leftTitle" : "二",
+      "rightTitle" : "2"
+    },
+    {
+      "leftTitle" : "三",
+      "rightTitle" : "3"
+    },
+    {
+      "leftTitle" : "四",
+      "rightTitle" : "4"
+    },
+    {
+      "leftTitle" : "五",
+      "rightTitle" : "5"
+    },
+    {
+      "leftTitle" : "六",
+      "rightTitle" : "6"
+    },
+    {
+      "leftTitle" : "七",
+      "rightTitle" : "7"
+    },
+    {
+      "leftTitle" : "八",
+      "rightTitle" : "8"
+    },
+    {
+      "leftTitle" : "九",
+      "rightTitle" : "9"
+    },
+    {
+      "leftTitle" : "十",
+      "rightTitle" : "10"
+    },
+    {
+      "leftTitle" : "百",
+      "rightTitle" : "100"
+    },
+    {
+      "leftTitle" : "千",
+      "rightTitle" : "1000"
+    }
+  ]
 }
