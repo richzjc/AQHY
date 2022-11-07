@@ -43,5 +43,9 @@
         <activity
                 android:name="com.micker.five.activity.FullScreenPlayActivity"
                 android:screenOrientation="portrait" />
+
+        <activity android:name="com.micker.six.activity.SixActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 </manifest>
