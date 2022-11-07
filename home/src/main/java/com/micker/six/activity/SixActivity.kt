@@ -21,8 +21,7 @@ import kotlin.random.Random
 class SixActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
     override fun doGetContentViewId() = R.layout.aqhy_activity_six_stage
-
-
+    override fun isNeedSwipeBack() =  false
     override fun doInitSubViews(view: View) {
         super.doInitSubViews(view)
         initBg()
