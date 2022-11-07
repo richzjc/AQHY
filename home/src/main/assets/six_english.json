@@ -1,0 +1,108 @@
+{
+  "字母练习" : [
+    {
+      "leftTitle" : "A",
+      "rightTitle" : "a"
+    },
+    {
+      "leftTitle" : "B",
+      "rightTitle" : "b"
+    },
+    {
+      "leftTitle" : "C",
+      "rightTitle" : "c"
+    },
+    {
+      "leftTitle" : "D",
+      "rightTitle" : "d"
+    },
+    {
+      "leftTitle" : "E",
+      "rightTitle" : "e"
+    },
+    {
+      "leftTitle" : "F",
+      "rightTitle" : "f"
+    },
+    {
+      "leftTitle" : "G",
+      "rightTitle" : "g"
+    },
+    {
+      "leftTitle" : "H",
+      "rightTitle" : "h"
+    },
+    {
+      "leftTitle" : "I",
+      "rightTitle" : "i"
+    },
+    {
+      "leftTitle" : "J",
+      "rightTitle" : "j"
+    },
+    {
+      "leftTitle" : "K",
+      "rightTitle" : "k"
+    },
+    {
+      "leftTitle" : "L",
+      "rightTitle" : "l"
+    },
+    {
+      "leftTitle" : "M",
+      "rightTitle" : "m"
+    },
+    {
+      "leftTitle" : "N",
+      "rightTitle" : "n"
+    },
+    {
+      "leftTitle" : "O",
+      "rightTitle" : "o"
+    },
+    {
+      "leftTitle" : "P",
+      "rightTitle" : "p"
+    },
+    {
+      "leftTitle" : "Q",
+      "rightTitle" : "q"
+    },
+    {
+      "leftTitle" : "R",
+      "rightTitle" : "r"
+    },
+    {
+      "leftTitle" : "S",
+      "rightTitle" : "s"
+    },
+    {
+      "leftTitle" : "T",
+      "rightTitle" : "t"
+    },
+    {
+      "leftTitle" : "U",
+      "rightTitle" : "u"
+    },
+    {
+      "leftTitle" : "V",
+      "rightTitle" : "v"
+    },
+    {
+      "leftTitle" : "W",
+      "rightTitle" : "w"
+    },
+    {
+      "leftTitle" : "X",
+      "rightTitle" : "x"
+    },
+    {
+      "leftTitle" : "Y",
+      "rightTitle" : "y"
+    },
+    {
+      "leftTitle" : "Z",
+      "rightTitle" : "z"
+    }
+  ]
+}
