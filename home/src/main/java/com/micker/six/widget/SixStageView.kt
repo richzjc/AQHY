@@ -90,7 +90,6 @@ class SixStageView @JvmOverloads constructor(
     }
 
     fun next() {
-        startIndex += showCount
         if(listModel?.list != null){
             if(startIndex + showCount < listModel!!.list.size)
                 startIndex += showCount

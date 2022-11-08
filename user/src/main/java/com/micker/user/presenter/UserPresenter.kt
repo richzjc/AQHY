@@ -2,10 +2,8 @@ package com.micker.user.presenter
 
 import android.view.View
 import com.micker.core.base.BasePresenter
-import com.micker.data.constant.USER_MAIN_ABOUNT_ACTIVITY
+import com.micker.data.constant.*
 import com.micker.data.constant.USER_MAIN_SETTING_ACTIVITY
-import com.micker.data.constant.USER_MY_WORKS
-import com.micker.data.constant.USER_SHARE_SETTING
 import com.micker.global.user.AccountManager
 import com.micker.helper.ResourceUtils
 import com.micker.helper.router.RouterHelper
@@ -52,6 +50,15 @@ class UserPresenter : BasePresenter<UserCallback>(){
             RouterHelper.open("http://yuanyuan0914.top/protocal/aqhy_privacy.html", it?.context)
         }
         list.add(item)
+
+
+        item = UserItemEntity("个人信息", USER_MAIN_SETTING_ACTIVITY, false, 0, rightText)
+        item.onClickListener = View.OnClickListener {
+            RouterHelper.open(USER_MAIN_PERSONAL_MSG_ACTIVITY, it?.context)
+        }
+        list.add(item)
+
+
         list.add(UserItemEntity("关于我们", USER_MAIN_ABOUNT_ACTIVITY, false, 0, rightText))
         list.add(UserItemEntity("版本", "", false, 0, EquipmentUtils.getVersionName()))
         if(AccountManager.isLogin()) {
