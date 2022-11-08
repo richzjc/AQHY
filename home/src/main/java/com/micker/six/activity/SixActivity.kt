@@ -45,4 +45,20 @@ class SixActivity : BaseActivity<Any, BasePresenter<Any>>() {
         val index = Random.nextInt(size)
         ImageLoadManager.loadImage(imagesArry[index], bg, 0, false)
     }
+
+    override fun doInitData() {
+        super.doInitData()
+        setListener()
+    }
+
+
+    private fun setListener(){
+        next?.setOnClickListener {
+            stage?.next()
+        }
+
+        reset?.setOnClickListener {
+            stage?.reset()
+        }
+    }
 }

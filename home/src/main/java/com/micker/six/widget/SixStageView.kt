@@ -25,15 +25,17 @@ class SixStageView @JvmOverloads constructor(
     private var lineGap: Int = 0
     private var tempStr = "大"
     private var showCount = 0
-    private var padding = 0
-    private var resultRectList: List<Rect>? = null
+    private var leftPadding = 0
+    private var rightPadding = 0
+    private var bottomPadding = 0
+    private var resultRectList: ArrayList<Rect>? = null
     private var rectMap: HashMap<Rect, Rect>? = null
     private var wordHeight = 0
     private var sixModelList: ArrayList<SixModel>? = null
     private var outerLeftBaseLineList = ArrayList<Int>()
     private var outerRightBaseLineList = ArrayList<Int>()
-    private var resultRect : Rect? = null
-    private var resultLeftRect : Rect? = null
+    private var resultRect: Rect? = null
+    private var resultLeftRect: Rect? = null
 
     private var path: Path? = null
     private var downX: Float = 0f
@@ -51,7 +53,9 @@ class SixStageView @JvmOverloads constructor(
         linePaint?.style = Paint.Style.STROKE
         linePaint?.strokeWidth = ScreenUtils.dip2px(3f).toFloat()
         lineGap = ScreenUtils.dip2px(40f)
-        padding = ScreenUtils.dip2px(20f)
+        leftPadding = ScreenUtils.dip2px(10f)
+        rightPadding = ScreenUtils.dip2px(20f)
+        bottomPadding = ScreenUtils.dip2px(80f)
         rectMap = HashMap()
         paths = ArrayList()
         resultRectList = ArrayList()
@@ -62,16 +66,54 @@ class SixStageView @JvmOverloads constructor(
         startIndex = 0
         paths?.clear()
         rectMap?.clear()
+        resultRectList?.clear()
+        resultRect = null
+        resultLeftRect = null
         sixModelList?.clear()
         outerLeftBaseLineList?.clear()
         outerRightBaseLineList?.clear()
-        initSixModelList()
+        initSixModelList(true)
+        invalidate()
+    }
+
+    fun reset() {
+        paths?.clear()
+        rectMap?.clear()
+        sixModelList?.clear()
+        resultRectList?.clear()
+        resultRect = null
+        resultLeftRect = null
+        outerLeftBaseLineList?.clear()
+        outerRightBaseLineList?.clear()
+        initSixModelList(true)
+        invalidate()
+    }
+
+    fun next() {
+        startIndex += showCount
+        if(listModel?.list != null){
+            if(startIndex + showCount < listModel!!.list.size)
+                startIndex += showCount
+            else
+                startIndex = showCount - (listModel!!.list.size - startIndex)
+        }else{
+            startIndex = 0
+        }
+        paths?.clear()
+        rectMap?.clear()
+        sixModelList?.clear()
+        resultRectList?.clear()
+        resultRect = null
+        resultLeftRect = null
+        outerLeftBaseLineList?.clear()
+        outerRightBaseLineList?.clear()
+        initSixModelList(true)
         invalidate()
     }
 
 
-    private fun initSixModelList() {
-        if (showCount > 0 && (sixModelList == null || sixModelList!!.isEmpty()) && listModel?.list != null) {
+    private fun initSixModelList(isForce: Boolean) {
+        if (showCount > 0 && (sixModelList == null || sixModelList!!.isEmpty() || isForce) && listModel?.list != null) {
             var sixModelList = ArrayList<SixModel>()
             if (showCount >= listModel!!.list.size)
                 sixModelList.addAll(listModel!!.list)
@@ -103,7 +145,7 @@ class SixStageView @JvmOverloads constructor(
         if (sixModelList != null && sixModelList!!.isNotEmpty()) {
             var leftBaseLineList = ArrayList<Int>()
             var rightBaseLineList = ArrayList<Int>()
-            var startBaseLine = padding + wordHeight
+            var startBaseLine = rightPadding + wordHeight
             sixModelList?.forEach {
                 leftBaseLineList.add(startBaseLine)
                 rightBaseLineList.add(startBaseLine)
@@ -130,12 +172,12 @@ class SixStageView @JvmOverloads constructor(
                 val realLeftRect = Rect()
                 realLeftRect.left = 0
                 realLeftRect.top = leftBaseLineList[leftRandIndex] - wordHeight - temp
-                realLeftRect.right = padding + abs(leftRect.right - leftRect.left) + padding
+                realLeftRect.right = leftPadding + abs(leftRect.right - leftRect.left) + rightPadding
                 realLeftRect.bottom = leftBaseLineList[leftRandIndex] + temp
 
                 val realRightRect = Rect()
                 realRightRect.left =
-                    measuredWidth - padding - abs(rightRect.right - rightRect.left) - padding
+                    measuredWidth - rightPadding - abs(rightRect.right - rightRect.left) - leftPadding
                 realRightRect.top = rightBaseLineList[rightRandIndex] - wordHeight - temp
                 realRightRect.right = measuredWidth
                 realRightRect.bottom = rightBaseLineList[rightRandIndex] + temp
@@ -159,11 +201,13 @@ class SixStageView @JvmOverloads constructor(
             paint?.getTextBounds(tempStr, 0, tempStr.length, rect)
             wordHeight = abs(rect.bottom - rect.top)
             showCount =
-                Math.floor((measuredHeight * 1.0 - padding * 2) / (lineGap + abs(rect.bottom - rect.top)))
+                Math.floor((measuredHeight * 1.0 - leftPadding  - bottomPadding) / (lineGap + abs(rect.bottom - rect.top)))
                     .toInt()
+            if(showCount > 7)
+                showCount = 7
         }
 
-        initSixModelList()
+        initSixModelList(false)
     }
 
 
@@ -172,20 +216,31 @@ class SixStageView @JvmOverloads constructor(
             path = null
             downX = event.x
             downY = event.y
-            if(!checkHasDraw(downX, downY) && checkClickInRect(downX, downY)){
+            if (!checkHasDraw(downX, downY) && checkClickInRect(downX, downY)) {
                 path = Path()
                 path?.moveTo(downX, downY)
             }
         } else if (event?.action == MotionEvent.ACTION_UP) {
             path?.lineTo(event!!.x, event.y)
-            if(checkResultIsSucc(event.x, event.y) && resultLeftRect != null && resultRect != null){
+            if (checkResultIsSucc(
+                    event.x,
+                    event.y
+                ) && resultLeftRect != null && resultRect != null
+            ) {
                 path = Path()
-                path?.moveTo(resultLeftRect!!.right.toFloat(), (resultLeftRect!!.top + resultLeftRect!!.bottom).toFloat()/2)
-                path?.lineTo(resultRect!!.left.toFloat(), (resultRect!!.top + resultRect!!.bottom).toFloat()/2)
+                path?.moveTo(
+                    resultLeftRect!!.right.toFloat(),
+                    (resultLeftRect!!.top + resultLeftRect!!.bottom).toFloat() / 2
+                )
+                path?.lineTo(
+                    resultRect!!.left.toFloat(),
+                    (resultRect!!.top + resultRect!!.bottom).toFloat() / 2
+                )
                 paths?.add(path!!)
+                resultRectList?.add(resultLeftRect!!)
                 path = null
                 playErrorSuccAlarm(getContext(), true)
-            }else{
+            } else {
                 path = null
                 playErrorSuccAlarm(getContext(), false)
             }
@@ -199,10 +254,10 @@ class SixStageView @JvmOverloads constructor(
         return true
     }
 
-    private fun checkClickInRect(downx : Float, downY : Float) : Boolean{
+    private fun checkClickInRect(downx: Float, downY: Float): Boolean {
         var result = false
         rectMap?.keys?.forEach {
-            if(downx >= it.left && downx <= it.right && downY >= it.top && downY <= it.bottom){
+            if (downx >= it.left && downx <= it.right && downY >= it.top && downY <= it.bottom) {
                 result = true
                 resultRect = rectMap?.get(it)
                 resultLeftRect = it
@@ -211,18 +266,18 @@ class SixStageView @JvmOverloads constructor(
         return result
     }
 
-    private fun checkResultIsSucc(downx: Float, downY: Float) : Boolean{
+    private fun checkResultIsSucc(downx: Float, downY: Float): Boolean {
         var result = false
-        if(resultRect != null && downx >= resultRect!!.left && downx <= resultRect!!.right && downY >= resultRect!!.top && downY <= resultRect!!.bottom){
+        if (resultRect != null && downx >= resultRect!!.left && downx <= resultRect!!.right && downY >= resultRect!!.top && downY <= resultRect!!.bottom) {
             result = true
         }
         return result
     }
 
-    private fun checkHasDraw(downx : Float, downY : Float) : Boolean {
+    private fun checkHasDraw(downx: Float, downY: Float): Boolean {
         var result = false
         resultRectList?.forEach {
-            if(downx >= it.left && downx <= it.right && downY >= it.top && downY <= it.bottom){
+            if (downx >= it.left && downx <= it.right && downY >= it.top && downY <= it.bottom) {
                 result = true
             }
         }
@@ -235,7 +290,7 @@ class SixStageView @JvmOverloads constructor(
             sixModelList?.forEachIndexed { index, it ->
                 canvas?.drawText(
                     it.leftTitle,
-                    padding.toFloat(),
+                    leftPadding.toFloat(),
                     outerLeftBaseLineList.get(index).toFloat(),
                     paint!!
                 )
@@ -244,7 +299,7 @@ class SixStageView @JvmOverloads constructor(
                 paint?.getTextBounds(it.rightTitle, 0, it.rightTitle.length, rightRect)
                 canvas?.drawText(
                     it.rightTitle,
-                    (measuredWidth - padding - abs(rightRect.right - rightRect.left)).toFloat(),
+                    (measuredWidth - leftPadding - abs(rightRect.right - rightRect.left)).toFloat(),
                     outerRightBaseLineList.get(index).toFloat(),
                     paint!!
                 )
@@ -256,7 +311,7 @@ class SixStageView @JvmOverloads constructor(
             canvas?.drawPath(it, linePaint!!)
         }
 
-        if(path != null)
+        if (path != null)
             canvas?.drawPath(path!!, linePaint!!)
     }
 }
