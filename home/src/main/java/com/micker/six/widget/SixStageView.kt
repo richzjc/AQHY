@@ -242,7 +242,6 @@ class SixStageView @JvmOverloads constructor(
                 playErrorSuccAlarm(getContext(), true)
             } else {
                 path = null
-//                playErrorSuccAlarm(getContext(), false)
             }
 
         } else if (event?.action == MotionEvent.ACTION_MOVE) {
