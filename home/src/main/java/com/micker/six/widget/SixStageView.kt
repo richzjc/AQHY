@@ -53,7 +53,7 @@ class SixStageView @JvmOverloads constructor(
         linePaint?.style = Paint.Style.STROKE
         linePaint?.strokeWidth = ScreenUtils.dip2px(3f).toFloat()
         lineGap = ScreenUtils.dip2px(40f)
-        leftPadding = ScreenUtils.dip2px(10f)
+        leftPadding = ScreenUtils.dip2px(30f)
         rightPadding = ScreenUtils.dip2px(20f)
         bottomPadding = ScreenUtils.dip2px(80f)
         rectMap = HashMap()
@@ -88,6 +88,7 @@ class SixStageView @JvmOverloads constructor(
         initSixModelList(true)
         invalidate()
     }
+
 
     fun next() {
         if(listModel?.list != null){
@@ -202,8 +203,8 @@ class SixStageView @JvmOverloads constructor(
             showCount =
                 Math.floor((measuredHeight * 1.0 - leftPadding  - bottomPadding) / (lineGap + abs(rect.bottom - rect.top)))
                     .toInt()
-            if(showCount > 7)
-                showCount = 7
+            if(showCount > 5)
+                showCount = 5
         }
 
         initSixModelList(false)
@@ -241,7 +242,7 @@ class SixStageView @JvmOverloads constructor(
                 playErrorSuccAlarm(getContext(), true)
             } else {
                 path = null
-                playErrorSuccAlarm(getContext(), false)
+//                playErrorSuccAlarm(getContext(), false)
             }
 
         } else if (event?.action == MotionEvent.ACTION_MOVE) {
