@@ -1,8 +1,6 @@
 package com.micker.rpc.manager;
 
-import com.tencent.msdk.dns.MSDKDnsResolver;
 import okhttp3.Dns;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -17,23 +15,23 @@ import java.util.List;
 public class WscnDns implements Dns {
     @Override
     public List<InetAddress> lookup(String hostname) throws UnknownHostException {
-        try {
-            String ips = MSDKDnsResolver.getInstance().getAddrByName(hostname);
-            List<InetAddress> list = new ArrayList<>();
-            if (ips != null) {
-                if (ips.contains(";")) {
-                    String[] ipArray = ips.split(";");
-                    for (String ip : ipArray) {
-                        list.add(InetAddress.getByName(ip));
-                    }
-                } else {
-                    list.add(InetAddress.getByName(ips));
-                }
-                return list;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String ips = MSDKDnsResolver.getInstance().getAddrByName(hostname);
+//            List<InetAddress> list = new ArrayList<>();
+//            if (ips != null) {
+//                if (ips.contains(";")) {
+//                    String[] ipArray = ips.split(";");
+//                    for (String ip : ipArray) {
+//                        list.add(InetAddress.getByName(ip));
+//                    }
+//                } else {
+//                    list.add(InetAddress.getByName(ips));
+//                }
+//                return list;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return Arrays.asList(InetAddress.getAllByName(hostname));
     }
 }

@@ -34,4 +34,5 @@ dependencies {
     api project(":core")
     api project(":helper")
     api project(":rpc")
+    implementation "com.github.richzjc:rxPermissionNew:1.0.4"
 }

@@ -11,6 +11,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.webkit.URLUtil;
+
+import androidx.fragment.app.FragmentActivity;
+
 import com.micker.helper.snack.MToastHelper;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -41,23 +44,22 @@ public class WebViewDownloadUtil {
     }
 
     private static void requestPermission(final String url, final String mimeType, final Context context) {
-        if(Build.VERSION.SDK_INT < 23){
+        if (Build.VERSION.SDK_INT < 23) {
             realDownload(url, mimeType, context);
         } else if (context.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             realDownload(url, mimeType, context);
-        } else if(context instanceof Activity) {
-            RxPermissions rxPermissions = new RxPermissions((Activity) context);
-            rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        } else if (context instanceof Activity) {
+            RxPermissionsNew.requestPermissions(
+                    (FragmentActivity) context,
+                    "该操作需获取本地文件读写权限，请确认下一步操作",
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnNext(new Consumer<Boolean>() {
-                        @Override
-                        public void accept(Boolean aBoolean) {
-                            if (aBoolean) {
-                                realDownload(url, mimeType, context);
-                            }
+                    .subscribe(aBoolean -> {
+                        if (aBoolean) {
+                            realDownload(url, mimeType, context);
                         }
-                    })
-                    .subscribe();
+                    });
         }
     }
 
