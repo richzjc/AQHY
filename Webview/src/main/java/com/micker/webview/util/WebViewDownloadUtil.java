@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.micker.helper.snack.MToastHelper;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.tbruyelle.rxpermissions3.RxPermissionsNew;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 

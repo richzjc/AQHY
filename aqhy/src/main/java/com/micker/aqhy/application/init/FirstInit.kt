@@ -19,9 +19,6 @@ class FirstInit {
     fun init(application: Context) {
         UtilsContextManager.getInstance().init(application as Application?).webViewActivity =
             WSCNWebViewActivity::class.java
-        if (!SharedPrefsUtil.getBoolean("needShowGuide", true))
-            BuglyInit.init(application)
-
 
         VolleyQueue.getInstance().factory = ErrorCodeFactory()
         ImageLoaderInit.init(application, ImageLoadOkHttpClient().okHttpClient)

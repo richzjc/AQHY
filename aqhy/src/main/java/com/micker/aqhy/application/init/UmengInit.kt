@@ -10,10 +10,8 @@ import com.umeng.commonsdk.UMConfigure
 
 class UmengInit {
     fun init(application: Context?) {
-        if (!SharedPrefsUtil.getBoolean("needShowGuide", true)) {
-            umengInit(application)
-            pushInit(application)
-        }
+        umengInit(application)
+        pushInit(application)
     }
 
     private fun umengInit(application: Context?) {

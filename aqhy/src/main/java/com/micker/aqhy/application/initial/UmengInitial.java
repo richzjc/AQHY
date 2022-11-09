@@ -14,7 +14,7 @@ public class UmengInitial implements Initializer<UmengInit> {
     @Override
     public UmengInit create(@NonNull Context context) {
         UmengInit init = new UmengInit();
-        init.init(context);
+//        init.init(context);
         return init;
     }
 

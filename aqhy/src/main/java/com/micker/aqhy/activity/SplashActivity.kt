@@ -12,6 +12,8 @@ import android.os.Handler
 import android.util.Log
 import android.view.animation.DecelerateInterpolator
 import com.micker.aqhy.R
+import com.micker.aqhy.application.BuglyInit
+import com.micker.aqhy.application.init.UmengInit
 import com.micker.aqhy.callback.SplashCallback
 import com.micker.aqhy.dialog.UserPrivacyDialog
 import com.micker.data.model.aqhy.LaunchConfigEntity
@@ -61,6 +63,9 @@ class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCa
                 sendMsg()
             }
             dialog?.show(supportFragmentManager, "userPrivacy")
+        }else{
+            BuglyInit.init(this)
+            UmengInit().init(this)
         }
 
 
