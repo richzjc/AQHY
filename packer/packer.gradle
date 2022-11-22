@@ -12,7 +12,7 @@ localProperties.load(new FileInputStream(localPropertiesFile))
 
 ext {
     // 签名文件
-    KEY_PATH = "${rootProject.rootDir}/packer/key/wallstreetcn_key.key" //密钥路径
+    KEY_PATH = "${rootProject.rootDir}/packer/key/aqhy.jks" //密钥路径
     KEY_PASS = keystoreProperties['STORE_PASSWORD'] // 密钥密码
     KEY_ALIAS = keystoreProperties['KEY_ALIAS'] // 密钥别名
     KEY_ALIAS_PASS = keystoreProperties['KEY_PASSWORD'] // 别名密码
