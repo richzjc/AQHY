@@ -64,34 +64,34 @@ task AphroditeJiaguRelease() {
 
 
 ///** 重新(对齐)签名 */
-//task reSignAphroditeApk() {
-//    def appName = "Aphrodite"
-//    if (!appName) {
-//        println("--------------------appName 为空--------------------")
-//        throw new FileNotFoundException('appName is empty and cannot reSignApk')
-//    }
-//    println("--------------------重新对齐、签名--------------------")
-//    //commandLine "sh","-c", "{zipalign工具的文件路径} -v -p 4  {已加固的apk文件路径} {对齐后输出的apk文件路径}"
-//    //commandLine "sh", "-c", "{apksigner工具的文件路径} sign --ks {签名文件的位置} --ks-key-alias {alias别名} --ks-pass pass:{签名文件存储的密码} --key-pass pass:{alias密码} --out {签名后输出的apk文件} {对齐后输出的apk文件路径}"
-//    //已加固apk路径
-//    def jiagu360ApkPath = "${project.buildDir}/bakApk/wscn/${appName}-release_" + "${APP_VERSION}".replace(".", "") + "_jiagu.apk"
-//    //定义对齐后生成文件路径
-//    def zipalignPath = "${project.buildDir}/bakApk/wscn/${appName}-release_" + "${APP_VERSION}".replace(".", "") + "_jiagu_zipalign.apk"
-//    println("开始将加固apk文件对齐......")
-//    exec {
-//        commandLine "sh", "-c", "${ZIP_ALIGN_PATH} -v -p 4 ${jiagu360ApkPath} ${zipalignPath}"
-//    }
-//    println("加固apk文件对齐后路径：${zipalignPath}")
-//    println("开始生成新签名apk文件......")
-//    def finalApkPath = "${project.buildDir}/bakApk/wscn/${appName}-jiagu-release.apk"
-//    exec {
-//        //commandLine "sh", "-c", "{apksigner工具的文件路径} sign --ks {签名文件的位置} --ks-key-alias {alias别名} --ks-pass pass:{签名文件存储的密码} --key-pass pass:{alias密码} --out {签名后输出的apk文件} {源apk文件路径}"
-//        //commandLine "sh", "-c", "${APK_SIGNER_PATH} sign --ks ${KEY_PATH} --ks-key-alias ${KEY_ALIAS} --ks-pass pass:${KEY_PASS} --key-pass pass:${KEY_ALIAS_PASS} --out ${finalApkPath} ${zipalignPath}"
-//        commandLine "sh", "-c", "java -jar ${APK_SIGNER_PATH} sign --ks ${KEY_PATH} --ks-key-alias ${KEY_ALIAS} --ks-pass pass:${KEY_PASS} --key-pass pass:${KEY_ALIAS_PASS} --out ${finalApkPath} ${zipalignPath}"
-//    }
-//    println("--------------------重新签名文件输出--------------------")
-//    println("最终加固重签后apk文件目录: $finalApkPath")
-//}
+task reSignAphroditeApk() {
+    def appName = "aqhy"
+    if (!appName) {
+        println("--------------------appName 为空--------------------")
+        throw new FileNotFoundException('appName is empty and cannot reSignApk')
+    }
+    println("--------------------重新对齐、签名--------------------")
+    //commandLine "sh","-c", "{zipalign工具的文件路径} -v -p 4  {已加固的apk文件路径} {对齐后输出的apk文件路径}"
+    //commandLine "sh", "-c", "{apksigner工具的文件路径} sign --ks {签名文件的位置} --ks-key-alias {alias别名} --ks-pass pass:{签名文件存储的密码} --key-pass pass:{alias密码} --out {签名后输出的apk文件} {对齐后输出的apk文件路径}"
+    //已加固apk路径
+    def jiagu360ApkPath = "${project.buildDir}/bakApk/wscn/${appName}-release_" + "${APP_VERSION}".replace(".", "") + "_jiagu.apk"
+    //定义对齐后生成文件路径
+    def zipalignPath = "${project.buildDir}/bakApk/wscn/${appName}-release_" + "${APP_VERSION}".replace(".", "") + "_jiagu_zipalign.apk"
+    println("开始将加固apk文件对齐......")
+    exec {
+        commandLine "sh", "-c", "${ZIP_ALIGN_PATH} -v -p 4 ${jiagu360ApkPath} ${zipalignPath}"
+    }
+    println("加固apk文件对齐后路径：${zipalignPath}")
+    println("开始生成新签名apk文件......")
+    def finalApkPath = "${project.buildDir}/bakApk/wscn/${appName}-jiagu-release.apk"
+    exec {
+        //commandLine "sh", "-c", "{apksigner工具的文件路径} sign --ks {签名文件的位置} --ks-key-alias {alias别名} --ks-pass pass:{签名文件存储的密码} --key-pass pass:{alias密码} --out {签名后输出的apk文件} {源apk文件路径}"
+        //commandLine "sh", "-c", "${APK_SIGNER_PATH} sign --ks ${KEY_PATH} --ks-key-alias ${KEY_ALIAS} --ks-pass pass:${KEY_PASS} --key-pass pass:${KEY_ALIAS_PASS} --out ${finalApkPath} ${zipalignPath}"
+        commandLine "sh", "-c", "java -jar ${APK_SIGNER_PATH} sign --ks ${KEY_PATH} --ks-key-alias ${KEY_ALIAS} --ks-pass pass:${KEY_PASS} --key-pass pass:${KEY_ALIAS_PASS} --out ${finalApkPath} ${zipalignPath}"
+    }
+    println("--------------------重新签名文件输出--------------------")
+    println("最终加固重签后apk文件目录: $finalApkPath")
+}
 
 
 /**

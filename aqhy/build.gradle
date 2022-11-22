@@ -12,8 +12,8 @@ allOpen {
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOL_VERSION
     defaultConfig {
         applicationId "com.micker.aqhy"
         minSdkVersion ANDROID_MIN_VERSION
