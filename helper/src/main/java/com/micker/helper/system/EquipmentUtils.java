@@ -42,19 +42,7 @@ public class EquipmentUtils {
      * @return
      */
     public static String getIMEI() {
-        String imei;
-        try {
-            TelephonyManager telephonyManager = (TelephonyManager) getApplication().getSystemService(Context.TELEPHONY_SERVICE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                imei = telephonyManager.getImei();
-            } else {
-                imei = telephonyManager.getDeviceId();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            imei = "";
-        }
-        return imei;
+        return DeviceIdKit.getDeviceId(UtilsContextManager.getInstance().getApplication());
     }
 
     public static String getAndroidId() {

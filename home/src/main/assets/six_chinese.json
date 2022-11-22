@@ -47,6 +47,30 @@
     {
       "leftTitle" : "千",
       "rightTitle" : "1000"
+    },
+    {
+      "leftTitle" : "爸",
+      "rightTitle" : "爸"
+    },
+    {
+      "leftTitle" : "妈",
+      "rightTitle" : "妈"
+    },
+    {
+      "leftTitle" : "爷",
+      "rightTitle" : "爷"
+    },
+    {
+      "leftTitle" : "奶",
+      "rightTitle" : "奶"
+    },
+    {
+      "leftTitle" : "左",
+      "rightTitle" : "右"
+    },
+    {
+      "leftTitle" : "里",
+      "rightTitle" : "外"
     }
   ]
 }
