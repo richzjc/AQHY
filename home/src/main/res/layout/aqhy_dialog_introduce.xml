@@ -12,6 +12,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#333333"
+            android:paddingLeft="@dimen/margin_dp15"
+            android:paddingRight="@dimen/margin_dp15"
+            android:paddingBottom="@dimen/margin_dp10"
+            android:paddingTop="@dimen/margin_dp10"
             android:textSize="@dimen/text_size_16" />
 
 
