@@ -3,6 +3,7 @@ package com.micker
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.micker.child.NewsMainChildFragment
+import com.micker.child.dialog.IntroduceDialog
 import com.micker.core.adapter.BaseFragmentAdapter
 import com.micker.core.base.BaseFragment
 import com.micker.core.base.BasePresenter
@@ -24,6 +25,14 @@ class NewsMainFragment : BaseFragment<Any, BasePresenter<Any>>(){
         parent_ll?.setPadding(0, Util.getStatusBarHeight(context), 0, 0)
         initFragments()
         initViewPager()
+        setListener()
+    }
+
+    private fun setListener(){
+        imgChannel?.setOnClickListener {
+            val dialog = IntroduceDialog()
+            dialog.show(childFragmentManager, "introduce")
+        }
     }
 
     private fun initViewPager() {
