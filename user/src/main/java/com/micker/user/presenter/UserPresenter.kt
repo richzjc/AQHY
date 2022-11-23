@@ -58,6 +58,12 @@ class UserPresenter : BasePresenter<UserCallback>(){
         }
         list.add(item)
 
+        item = UserItemEntity("第三方SDK目录", USER_MAIN_SETTING_ACTIVITY, false, 0, rightText)
+        item.onClickListener = View.OnClickListener {
+            RouterHelper.open("https://yy0914.netlify.app/aqhy_sdk.html", it?.context)
+        }
+        list.add(item)
+
 
         list.add(UserItemEntity("关于我们", USER_MAIN_ABOUNT_ACTIVITY, false, 0, rightText))
         list.add(UserItemEntity("版本", "", false, 0, EquipmentUtils.getVersionName()))

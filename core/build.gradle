@@ -45,7 +45,8 @@ dependencies {
     api rootProject.ext.thirdlib.tabLayout
     api rootProject.ext.thirdlib.swipemenurecyclerview
     api rootProject.ext.rx.rx2permissions
-    api rootProject.ext.thirdlib.umengAnalytics
+    api rootProject.ext.thirdlib.common
+    api rootProject.ext.thirdlib.umengasms
     api 'com.rm:rmswitch:1.2.2'
     api 'com.rengwuxian.materialedittext:library:2.1.4'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41"

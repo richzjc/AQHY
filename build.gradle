@@ -113,8 +113,8 @@ ext {
             chipslayoutmanager   : 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar',
             gestureviews         : 'com.alexvasilkov:gesture-views:2.5.2',
             tabLayout            : 'com.github.richzjc:Tablayout:1.0.8',
-            common               : "com.umeng.sdk:common:1.5.3",
-            umengAnalytics       : "com.umeng.sdk:analytics:7.5.3",
+            common               : 'com.umeng.umsdk:common:9.5.1',
+            umengasms            : 'com.umeng.umsdk:asms:1.6.3',
             newGuide             : 'com.github.huburt-Hu:NewbieGuide:v2.4.0',
             packerNg             : 'com.mcxiaoke.packer-ng:helper:2.0.1'
     ]
