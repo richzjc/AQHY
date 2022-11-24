@@ -48,6 +48,15 @@ allprojects {
             url 'https://maven-wscn.awtmt.com/repository/mobile-public/'
         }
 
+
+        maven {
+            url "https://repos.xiaomi.com/maven"
+            credentials {
+                username 'mimo-developer'
+                password 'AKCp8ih1PFG9tV8qaLyws67dLGZi8udFM39SfsHgihN15cgsiRvHuxj8JzFmuZjaViVeNawaA'
+            }
+        }
+
         google()
         jcenter()
         mavenCentral()

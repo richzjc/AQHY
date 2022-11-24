@@ -495,3 +495,45 @@ native <methods>;
 -keep class **.R$* {  *;  }
 
 -keep class com.micker.aqhy.application.initial.*
+
+
+# mimo SDK
+-keep class com.miui.zeus.mimo.sdk.* {
+    *;
+}
+-keep class com.miui.analytics.** { *; }
+-keep class com.xiaomi.analytics.* { public protected *; }
+-keep class * extends android.os.IInterface{
+    *;
+}
+ -keep public class * implements java.io.Serializable {*;}
+# gson
+-keepattributes Signature
+-keepattributes *Annotation*
+-dontwarn sun.misc.**
+-keep class com.google.gson.examples.android.model.** { <fields>; }
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+-keepclassmembers,allowobfuscation class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+
+# glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule {
+ <init>(...);
+}
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
+  *** rewind();
+}
+# keep 商店sdk START
+-keep class com.market.** { *; }
+-keep class com.xiaomi.market.** { *; }
+-dontwarn com.market.**
+-dontwarn com.xiaomi.market.**
+# keep 商店sdk END
