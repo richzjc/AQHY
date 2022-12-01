@@ -20,7 +20,6 @@ import com.micker.data.model.aqhy.LaunchConfigEntity
 import com.micker.aqhy.presenter.SplashPresenter
 import com.micker.core.base.BaseActivity
 import com.micker.core.imageloader.ImageLoadManager
-import com.micker.global.const.imagesArry
 import com.micker.helper.SharedPrefsUtil
 import com.micker.helper.system.ScreenUtils
 import kotlinx.android.synthetic.main.tail_activity_splash.*
@@ -52,9 +51,6 @@ class SplashActivity : BaseActivity<SplashCallback, SplashPresenter>(), SplashCa
     override fun doInitData() {
         super.doInitData()
         img.setActualImageResource(0)
-        val size = imagesArry.size
-        val index = Random.nextInt(size)
-        ImageLoadManager.loadImage(imagesArry[index], img, 0, false)
 //        mPresenter?.requestImgs()
 
         if (SharedPrefsUtil.getBoolean("userPrivacy", true)) {

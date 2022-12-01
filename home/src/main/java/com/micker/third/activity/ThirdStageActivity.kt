@@ -12,11 +12,9 @@ import com.micker.first.callback.NanduCallback
 import com.micker.first.callback.SuccCallback
 import com.micker.first.dialog.NanduDialog
 import com.micker.global.THIRD_STAGE_ROUTER
-import com.micker.global.const.imagesArry
 import com.micker.helper.SharedPrefsUtil
 import com.micker.home.R
 import kotlinx.android.synthetic.main.aqhy_activity_third_stage.*
-import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 @BindRouter(urls = [THIRD_STAGE_ROUTER])
@@ -55,18 +53,6 @@ class ThirdStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
     }
 
     override fun doGetContentViewId() = R.layout.aqhy_activity_third_stage
-
-    override fun doInitSubViews(view: View) {
-        super.doInitSubViews(view)
-        initBg()
-    }
-
-    private fun initBg() {
-        val size = imagesArry.size
-        val index = Random.nextInt(size)
-        ImageLoadManager.loadImage(imagesArry[index], bg, 0, false)
-    }
-
 
     override fun doInitData() {
         super.doInitData()

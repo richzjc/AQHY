@@ -5,13 +5,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <com.micker.core.imageloader.WscnImageView
-            android:id="@+id/bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:actualImageScaleType="centerCrop" />
-
-
     <LinearLayout
             android:id="@+id/func_parent"
             android:layout_width="match_parent"

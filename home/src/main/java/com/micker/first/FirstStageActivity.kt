@@ -16,12 +16,8 @@ import com.micker.first.callback.SuccCallback
 import com.micker.first.dialog.DiyDialog
 import com.micker.first.dialog.NanduDialog
 import com.micker.global.FIRST_STAGE_ROUTER
-import com.micker.global.const.imagesArry
-import com.micker.global.util.ShapeDrawable
-import com.micker.helper.ResourceUtils
 import com.micker.helper.SharedPrefsUtil
 import com.micker.helper.file.CacheUtils
-import com.micker.helper.system.ScreenUtils
 import com.micker.home.R
 import kotlinx.android.synthetic.main.aqhy_activity_first_stage.*
 import kotlin.random.Random
@@ -125,16 +121,8 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
     override fun doInitSubViews(view: View) {
         super.doInitSubViews(view)
-        initBg()
         ImageLoadManager.loadImage(R.drawable.drawable_first_stage_hint, iv_hint, 0)
     }
-
-    private fun initBg() {
-        val size = imagesArry.size
-        val index = Random.nextInt(size)
-        ImageLoadManager.loadImage(imagesArry[index], bg, 0, false)
-    }
-
 
     override fun doInitData() {
         super.doInitData()

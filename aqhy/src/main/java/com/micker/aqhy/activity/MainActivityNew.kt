@@ -121,12 +121,4 @@ class MainActivityNew : BaseActivity<Any, BasePresenter<Any>>() {
         textSpeechclose()
         super.onDestroy()
     }
-//
-//    private fun initListener(){
-//        first_stage?.setOnClickListener { RouterHelper.open(FIRST_STAGE_ROUTER, this) }
-//        second_stage?.setOnClickListener { RouterHelper.open(SECOND_STAGE_ROUTER, this) }
-//        third_stage?.setOnClickListener { RouterHelper.open(THIRD_STAGE_ROUTER, this) }
-//        four_stage?.setOnClickListener { RouterHelper.open(FOUR_STAGE_ROUTER, this) }
-//        five_stage?.setOnClickListener { RouterHelper.open(FIVE_STAGE_ROUTER, this) }
-//    }
 }

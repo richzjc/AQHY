@@ -1,7 +1,10 @@
 package com.micker.core.base
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Shader
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.transition.Slide
@@ -33,6 +36,14 @@ abstract class BaseActivity<V, T : BasePresenter<V>> : SwipeBackActivity() {
         AppManager.getAppManager().addActivity(this)
         if (doGetContentViewId() > 0)
             setContentView(doGetContentViewId())
+
+        val bgBitmap =
+            BitmapFactory.decodeResource(resources, R.drawable.live_drawable_share_bg)
+        val bimapDrawable = BitmapDrawable(resources, bgBitmap)
+        bimapDrawable.tileModeY = Shader.TileMode.REPEAT
+        bimapDrawable.tileModeX = Shader.TileMode.REPEAT
+        val content = window?.decorView?.findViewById<View>(android.R.id.content)
+        content?.background = bimapDrawable
 
         swipeBackLayout?.setEnableGesture(isNeedSwipeBack())
         mViewQuery.setActivity(this)

@@ -19,7 +19,6 @@ import com.micker.first.callback.SuccCallback
 import com.micker.first.dialog.NanduDialog
 import com.micker.four.dialog.PreviewDialog
 import com.micker.global.FOUR_STAGE_ROUTER
-import com.micker.global.const.imagesArry
 import com.micker.global.const.pingTuArr
 import com.micker.global.dialog.selectPicFromCameraOrPic
 import com.micker.helper.ResourceUtils
@@ -102,18 +101,6 @@ class FourStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
     }
 
     override fun doGetContentViewId() = R.layout.aqhy_activity_four_stage
-
-    override fun doInitSubViews(view: View) {
-        super.doInitSubViews(view)
-        initBg()
-    }
-
-    private fun initBg() {
-        val size = imagesArry.size
-        val index = Random.nextInt(size)
-        ImageLoadManager.loadImage(imagesArry[index], bg, 0, false)
-    }
-
 
     override fun doInitData() {
         super.doInitData()

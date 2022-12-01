@@ -1,9 +1,5 @@
 package com.micker.global.const
 
-val imagesArry = arrayOf(
-    "https://img-qn-2.51miz.com/preview/photo/00/01/52/28/P-1522868-7279CE76O.jpg!/quality/90/unsharp/true/compress/true/format/webp/fh/320"
-)
-
 val pingTuArr = arrayOf(
     "https://img1.baidu.com/it/u=148829709,733519125&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500",
     "https://img2.baidu.com/it/u=4004216957,1323209998&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500",
