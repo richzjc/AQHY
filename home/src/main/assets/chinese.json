@@ -1,10 +1,10 @@
 [
   {
     "id" : "1",
-    "title" : "文字寻找",
+    "title" : "汉字积累",
     "stage" : "学前教育",
     "desc" : "培养观察力，积累识字量",
-    "imageUrl" : "http://yuanyuan0914.top/image/chinese/first_stage_find_word.jpg",
+    "imageUrl" : "first_stage_logo",
     "router" : "wscn://aqhy.com/first/stage/action"
   },
   {
@@ -12,7 +12,7 @@
     "title" : "越味连线",
     "stage" : "学前教育",
     "desc" : "培养观察力，积累识字量，动手能力",
-    "imageUrl" : "http://yuanyuan0914.top/image/chinese/six_link.jpg",
+    "imageUrl" : "six_stage_logo",
     "router" : "wscn://aqhy.com/six/stage/action?json=six_chinese"
   }
 ]

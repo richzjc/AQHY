@@ -3,9 +3,12 @@ package com.micker.child
 import com.micker.core.adapter.BaseRecycleViewHolder
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.text.TextUtils
 import com.micker.core.imageloader.ImageLoadManager
 import com.micker.core.imageloader.ProgressResponseListener
+import com.micker.helper.ReflectionUtils
+import com.micker.helper.ResourceUtils
 import com.micker.helper.image.ImageUtlFormatHelper
 import com.micker.helper.router.RouterHelper
 import com.micker.helper.system.ScreenUtils
@@ -24,7 +27,7 @@ class NewsMainChildHolder(context: Context?) : BaseRecycleViewHolder<NewsMainChi
 
     override fun doBindData(content: NewsMainChildEntity?) {
         super.content = content
-        if (!TextUtils.isEmpty(content?.imageUrl)) {
+        if (!TextUtils.isEmpty(content?.imageUrl) && content!!.imageUrl.startsWith("http")) {
             val imageUrl = ImageUtlFormatHelper.formatImageFactory(content?.imageUrl, ScreenUtils.getScreenWidth()/2, 0)
             if (super.content.ratio <= 0) {
                 ImageLoadManager.loadBitmap(imageUrl, object : ProgressResponseListener<Bitmap>{
@@ -37,10 +40,16 @@ class NewsMainChildHolder(context: Context?) : BaseRecycleViewHolder<NewsMainChi
                         }
                     }
                 })
-            } else {
+            }else {
                 itemView?.image?.aspectRatio = super.content.ratio
                 ImageLoadManager.loadRoundImage(imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
             }
+        } else if(!TextUtils.isEmpty(content?.imageUrl)){
+            val id = ResourceUtils.getDrawableId(mContext, content?.imageUrl)
+            val drawable = ResourceUtils.getResDrawableFromID(id)
+            val ratio = drawable.intrinsicWidth * 1f/drawable.intrinsicHeight
+            itemView?.image?.aspectRatio = ratio
+            ImageLoadManager.loadImage(id, itemView.image, 0)
         }
 
         itemView?.title?.text = content?.title
