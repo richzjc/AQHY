@@ -36,13 +36,13 @@ class NewsMainChildHolder(context: Context?) : BaseRecycleViewHolder<NewsMainChi
                             val ratio = source.width * 1f/source.height
                             content?.ratio = ratio
                             itemView?.image?.aspectRatio = ratio
-                            ImageLoadManager.loadRoundImage(imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
+                            ImageLoadManager.loadImage(imageUrl, itemView.image, R.drawable.default_img)
                         }
                     }
                 })
             }else {
                 itemView?.image?.aspectRatio = super.content.ratio
-                ImageLoadManager.loadRoundImage(imageUrl, itemView.image, R.drawable.default_img, ScreenUtils.dip2px(5f))
+                ImageLoadManager.loadImage(imageUrl, itemView.image, R.drawable.default_img)
             }
         } else if(!TextUtils.isEmpty(content?.imageUrl)){
             val id = ResourceUtils.getDrawableId(mContext, content?.imageUrl)
