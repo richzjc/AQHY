@@ -1,7 +1,10 @@
 package com.micker.first
 
+import android.graphics.Rect
+import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.micker.core.base.BasePresenter
 import com.micker.core.base.BaseRecyclerViewActivity
 import com.micker.first.adapter.ChildWordAdapter
@@ -39,9 +42,31 @@ class ChineseWordListActivity :
             val bihua = it.toInt()
             val lenght = value.length
             (0 until lenght)?.forEach {
-                list.add(ChineseWordModel(bihua, charArr[it].toString()))
+                val str = charArr[it].toString()
+                if (!TextUtils.equals(str, "\\") && !TextUtils.equals("n", str) && !TextUtils.equals("\n", str))
+                    list.add(ChineseWordModel(bihua, str))
             }
         }
         adapter?.setData(list)
+    }
+
+
+    class GridItemOffset(val padding: Int) : RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            super.getItemOffsets(outRect, view, parent, state)
+            val itemPosition = parent.getChildAdapterPosition(view)
+            if (itemPosition == RecyclerView.NO_POSITION) {
+                return
+            }
+
+
+            outRect.set(0, 0, 0, padding)
+        }
     }
 }
