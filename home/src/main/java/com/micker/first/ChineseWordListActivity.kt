@@ -10,6 +10,7 @@ import com.micker.core.base.BaseRecyclerViewActivity
 import com.micker.first.adapter.ChildWordAdapter
 import com.micker.first.model.ChineseWordModel
 import com.micker.helper.file.CacheUtils
+import com.micker.helper.system.ScreenUtils
 
 class ChineseWordListActivity :
     BaseRecyclerViewActivity<ChineseWordModel, Any, BasePresenter<Any>>() {
@@ -18,8 +19,11 @@ class ChineseWordListActivity :
         super.doInitSubViews(view)
         recycleView.setIsEndless(false)
         ptrRecyclerView?.setCanRefresh(false)
-        recycleView.setLayoutManager(GridLayoutManager(this, 8))
+        recycleView.setLayoutManager(GridLayoutManager(this, 7))
+        recycleView?.addItemDecoration(GridItemOffset())
         titleBar?.title = "文字列表"
+        val padding = ScreenUtils.dip2px(10f)
+        recycleView.setPadding(padding, padding, padding, padding)
     }
 
     override fun onRefresh() {
@@ -51,7 +55,7 @@ class ChineseWordListActivity :
     }
 
 
-    class GridItemOffset(val padding: Int) : RecyclerView.ItemDecoration() {
+    class GridItemOffset() : RecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(
             outRect: Rect,
@@ -66,7 +70,11 @@ class ChineseWordListActivity :
             }
 
 
-            outRect.set(0, 0, 0, padding)
+
+            if(itemPosition%8 == 7)
+                outRect.right = 0
+
+            outRect.bottom = ScreenUtils.dip2px(10f)
         }
     }
 }
