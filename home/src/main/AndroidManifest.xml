@@ -47,5 +47,9 @@
         <activity android:name="com.micker.six.activity.SixActivity"
             android:screenOrientation="portrait"
             />
+
+        <activity android:name="com.micker.first.ChineseWordListActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 </manifest>

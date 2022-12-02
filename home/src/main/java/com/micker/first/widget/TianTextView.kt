@@ -15,17 +15,23 @@ class TianTextView @JvmOverloads constructor(
 ) : AppCompatTextView(context, attrs) {
 
     private var paint: Paint? = null
-
+    private var virtualPaint : Paint? = null
     init {
         paint = Paint()
         paint?.isAntiAlias = true
+        paint?.strokeWidth = ScreenUtils.dip2px(1f).toFloat()
+        paint?.color = ResourceUtils.getColor(R.color.day_mode_text_color1_333333)
+
+        virtualPaint = Paint()
+        virtualPaint?.isAntiAlias = true
+
     }
 
     override fun onDraw(canvas: Canvas?) {
-        paint?.strokeWidth = ScreenUtils.dip2px(1f).toFloat()
-        paint?.color = ResourceUtils.getColor(R.color.day_mode_text_color1_333333)
-        val rect = RectF(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat())
-        canvas?.drawRect(rect, paint!!)
+//        paint?.strokeWidth = ScreenUtils.dip2px(1f).toFloat()
+//        paint?.color = ResourceUtils.getColor(R.color.day_mode_text_color1_333333)
+//        val rect = RectF(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat())
+//        canvas?.drawRect(rect, paint!!)
 
         super.onDraw(canvas)
     }

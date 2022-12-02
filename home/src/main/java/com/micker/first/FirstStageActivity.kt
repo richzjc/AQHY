@@ -1,5 +1,6 @@
 package com.micker.first
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -164,9 +165,11 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
         }
 
         diy.setOnClickListener {
-            val diyDialog = DiyDialog()
-            diyDialog?.diyCallback = diyCallback
-            diyDialog.show(supportFragmentManager, "diy")
+//            val diyDialog = DiyDialog()
+//            diyDialog?.diyCallback = diyCallback
+//            diyDialog.show(supportFragmentManager, "diy")
+            val intent = Intent(this, ChineseWordListActivity::class.java)
+            startActivity(intent)
         }
     }
 }
