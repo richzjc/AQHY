@@ -12,6 +12,7 @@ import com.micker.helper.Util
 import com.micker.home.R
 import com.micker.home.fragment.HomeFragment
 import com.micker.home.fragment.InspirationFragment
+import com.pawegio.kandroid.hide
 import com.richzjc.library.TabLayout
 import kotlinx.android.synthetic.main.aqhy_fragment_main_tablayout.*
 import java.util.*
@@ -22,6 +23,7 @@ class MainActivity : BaseActivity<Any, BasePresenter<Any>>() {
     lateinit var mFragments: MutableList<Fragment>
     override fun doGetContentViewId() = R.layout.aqhy_fragment_main_tablayout
     override fun doInitSubViews(view: View) {
+        imgChannel?.hide(true)
         parent_ll?.setPadding(0, Util.getStatusBarHeight(this), 0, 0)
         tabLayout?.tabGravity = TabLayout.GRAVITY_CENTER
         tabLayout?.tabMode = TabLayout.MODE_FIXED

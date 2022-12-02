@@ -119,11 +119,6 @@ class FirstStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
     override fun doGetContentViewId() = R.layout.aqhy_activity_first_stage
 
-    override fun doInitSubViews(view: View) {
-        super.doInitSubViews(view)
-        ImageLoadManager.loadImage(R.drawable.drawable_first_stage_hint, iv_hint, 0)
-    }
-
     override fun doInitData() {
         super.doInitData()
         setListener()

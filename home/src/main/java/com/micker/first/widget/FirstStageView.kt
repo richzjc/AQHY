@@ -28,7 +28,7 @@ class FirstStageView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs) {
 
     init {
-        setBackgroundResource(R.drawable.shape_first_stage_bg)
+        setBackgroundResource(R.drawable.third_stage_bg)
     }
 
     var jieShu: Int = 3

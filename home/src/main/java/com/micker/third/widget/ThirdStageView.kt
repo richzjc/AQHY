@@ -75,7 +75,6 @@ class ThirdStageView @JvmOverloads constructor(
                                 if (emptShareTv == lastShareTv) {
                                     if (TextUtils.equals(checkResult(), resultStr)) {
                                         playErrorSuccAlarm(getContext(), true)
-//                                      //TODO 添加烟花效果
                                     } else {
                                         playClickAlarm(getContext())
                                     }
