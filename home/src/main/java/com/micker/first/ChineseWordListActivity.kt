@@ -5,12 +5,15 @@ import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.micker.core.base.BasePresenter
 import com.micker.core.base.BaseRecyclerViewActivity
 import com.micker.first.adapter.ChildWordAdapter
 import com.micker.first.model.ChineseWordModel
 import com.micker.helper.file.CacheUtils
 import com.micker.helper.system.ScreenUtils
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter
+import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration
 
 class ChineseWordListActivity :
     BaseRecyclerViewActivity<ChineseWordModel, Any, BasePresenter<Any>>() {
@@ -19,12 +22,13 @@ class ChineseWordListActivity :
         super.doInitSubViews(view)
         recycleView.setIsEndless(false)
         ptrRecyclerView?.setCanRefresh(false)
-        recycleView.setLayoutManager(GridLayoutManager(this, 7))
+        recycleView.setLayoutManager(StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL))
         recycleView?.addItemDecoration(GridItemOffset())
         titleBar?.title = "文字列表"
         val padding = ScreenUtils.dip2px(10f)
         recycleView.setPadding(padding, padding, padding, padding)
     }
+
 
     override fun onRefresh() {
     }
