@@ -27,16 +27,6 @@ class FirstInit {
         HostManager.setBaseUrl(BASE_URL)
         Router.sharedRouter().attachApplication(application)
         initToken()
-        copyData(application)
-    }
-
-    private fun copyData(context: Context?) {
-        val file = context?.getDatabasePath("poetry.db")
-        if (file?.exists() == true)
-            FileUtil.deleteFile(file.absolutePath)
-        val path = file?.absolutePath ?:""
-        val stream = CacheUtils.getFileFromAssets("seven/poetry.db")
-        FileUtil.writeFile(path, stream)
     }
 
 

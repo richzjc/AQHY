@@ -2,8 +2,8 @@ package com.micker.seven.adapter
 
 import android.view.ViewGroup
 import com.micker.core.adapter.BaseRecycleAdapter
-import com.micker.seven.db.SevenModelEnitity
 import com.micker.seven.holder.PoetryListViewHolder
+import com.micker.seven.model.SevenModelEnitity
 
 class PoetryListAdapter : BaseRecycleAdapter<SevenModelEnitity, PoetryListViewHolder>() {
 
