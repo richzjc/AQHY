@@ -1,6 +1,7 @@
 package com.wallstreetcn.quotes.stocksearch.room
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
 import com.micker.seven.db.SevenModelEnitity
 
 @Dao
