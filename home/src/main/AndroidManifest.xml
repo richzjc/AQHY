@@ -51,5 +51,13 @@
         <activity android:name="com.micker.first.ChineseWordListActivity"
             android:screenOrientation="portrait"
             />
+        
+        <activity android:name="com.micker.seven.activity.SevenActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="com.micker.seven.activity.PoetryListActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 </manifest>

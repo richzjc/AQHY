@@ -5,6 +5,8 @@ import com.mcxiaoke.packer.helper.PackerNg
 import com.micker.aqhy.application.UmengConfig
 import com.micker.helper.ResourceUtils
 import com.micker.helper.SharedPrefsUtil
+import com.micker.helper.file.CacheUtils
+import com.micker.helper.file.FileUtil
 import com.micker.push.UmengPushAdapter
 import com.umeng.commonsdk.UMConfigure
 
@@ -13,6 +15,8 @@ class UmengInit {
         umengInit(application)
         pushInit(application)
     }
+
+
 
     private fun umengInit(application: Context?) {
         val umengKey = ResourceUtils.getMetaDateFromName("UMENG_APPKEY")

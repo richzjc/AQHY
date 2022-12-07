@@ -11,6 +11,8 @@ import com.micker.data.constant.BASE_URL
 import com.micker.global.user.AccountManager
 import com.micker.helper.SharedPrefsUtil
 import com.micker.helper.UtilsContextManager
+import com.micker.helper.file.CacheUtils
+import com.micker.helper.file.FileUtil
 import com.micker.rpc.VolleyQueue
 import com.micker.rpc.host.HostManager
 import com.micker.webview.Template.WSCNWebViewActivity
@@ -25,7 +27,18 @@ class FirstInit {
         HostManager.setBaseUrl(BASE_URL)
         Router.sharedRouter().attachApplication(application)
         initToken()
+        copyData(application)
     }
+
+    private fun copyData(context: Context?) {
+        val file = context?.getDatabasePath("poetry.db")
+        if (file?.exists() == true)
+            FileUtil.deleteFile(file.absolutePath)
+        val path = file?.absolutePath ?:""
+        val stream = CacheUtils.getFileFromAssets("seven/poetry.db")
+        FileUtil.writeFile(path, stream)
+    }
+
 
     private fun initToken() {
         val map = mutableMapOf<String, String?>()

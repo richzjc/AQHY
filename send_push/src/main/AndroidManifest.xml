@@ -45,15 +45,7 @@
                 android:name="UMENG_MESSAGE_SCRET"
                 android:value="${UMENG_MESSAGE_SCRET}"/>
 
-        <provider
-                android:authorities="${applicationId}.androidx-startup"
-                android:name="androidx.startup.InitializationProvider"
-                android:exported="false"
-                tools:node="merge">
-            <meta-data
-                    android:name="com.richzjc.send_push.initial.UmengInitial"
-                    android:value="@string/androidx_startup"/>
-        </provider>
+
     </application>
 
 </manifest>
