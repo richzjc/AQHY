@@ -8,6 +8,7 @@ import com.micker.seven.model.SevenModelEnitity
 class PoetryListAdapter : BaseRecycleAdapter<SevenModelEnitity, PoetryListViewHolder>() {
 
     override fun binderItemHolder(holder: PoetryListViewHolder?, position: Int) {
+        holder?.bindPosition = position
         holder?.doBindData(get(position))
     }
 
