@@ -49,10 +49,6 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
             resultList.clear()
             resultList.addAll(list)
         }
-
-        resultList.forEach {
-            TLog.e("@@@", "${it}")
-        }
     }
 
 }
