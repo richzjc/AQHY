@@ -8,6 +8,7 @@ import com.micker.helper.snack.MToastHelper
 import com.micker.home.R
 import com.micker.seven.const.list
 import com.micker.seven.model.SevenModelEnitity
+import kotlinx.android.synthetic.main.aqhy_activity_seven_stage.*
 import java.util.regex.Pattern
 
 class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
@@ -16,7 +17,7 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
         intent.getIntExtra("position", 0)
     }
 
-    override fun doGetContentViewId() = R.layout.aqhy_activity_first_stage
+    override fun doGetContentViewId() = R.layout.aqhy_activity_seven_stage
 
     override fun doInitSubViews(view: View) {
         super.doInitSubViews(view)
@@ -49,6 +50,7 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
             resultList.clear()
             resultList.addAll(list)
         }
+        poetry?.bindData(resultList)
     }
 
 }
