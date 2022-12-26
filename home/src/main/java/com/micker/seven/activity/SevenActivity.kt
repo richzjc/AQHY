@@ -23,6 +23,7 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
         super.doInitSubViews(view)
         val entity = list[position]
         regex(entity)
+        title_view?.text= "${entity.title}\n ---${entity.author}"
     }
 
     private fun regex(entity: SevenModelEnitity) {

@@ -26,7 +26,7 @@ class TianTextView @JvmOverloads constructor(
 
         virtualPaint = Paint()
         virtualPaint?.isAntiAlias = true
-        virtualPaint?.setColor(ResourceUtils.getColor(R.color.day_mode_text_color3_999999))
+        virtualPaint?.setColor(Color.parseColor("#50999999"))
         virtualPaint?.setStyle(Paint.Style.STROKE)
         gravity = Gravity.CENTER
     }
