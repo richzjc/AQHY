@@ -13,17 +13,45 @@ import java.util.regex.Pattern
 
 class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
-    private val position by lazy {
-        intent.getIntExtra("position", 0)
-    }
-
     override fun doGetContentViewId() = R.layout.aqhy_activity_seven_stage
 
     override fun doInitSubViews(view: View) {
         super.doInitSubViews(view)
+        updateData()
+        setListener()
+    }
+
+    private fun updateData() {
+        var position = intent.getIntExtra("position", 0)
         val entity = list[position]
         regex(entity)
-        title_view?.text= "${entity.title}\n ---${entity.author}"
+        title_view?.text = "${entity.title}\n ---${entity.author}"
+    }
+
+    private fun setListener() {
+        last?.setOnClickListener {
+            var position = intent.getIntExtra("position", 0)
+            var newPosition = position - 1
+            if(newPosition < 0)
+                newPosition = list.size - 1
+
+            intent.putExtra("position", newPosition)
+            updateData()
+        }
+
+        next?.setOnClickListener {
+            var position = intent.getIntExtra("position", 0)
+            var newPosition = position + 1
+            if(newPosition >= list.size)
+                newPosition = 0
+
+            intent.putExtra("position", newPosition)
+            updateData()
+        }
+
+        play?.setOnClickListener {
+
+        }
     }
 
     private fun regex(entity: SevenModelEnitity) {
@@ -45,7 +73,7 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
                 }
 
                 if (index < it.length) {
-                    list.add(it.substring(index, it.length))
+                    list.add(it.substring(index, it.length).replace(" ", ""))
                 }
             }
             resultList.clear()
