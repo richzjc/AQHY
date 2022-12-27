@@ -15,8 +15,8 @@ object TextToSpeechUtils {
             }
         }
 
-        mTextToSpeech?.setPitch(1.0f)
-        mTextToSpeech?.setSpeechRate(1.0f)
+        mTextToSpeech?.setPitch(1f)
+        mTextToSpeech?.setSpeechRate(1.5f)
     }
 
 

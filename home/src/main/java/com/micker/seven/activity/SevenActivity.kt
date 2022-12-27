@@ -13,6 +13,7 @@ import java.util.regex.Pattern
 
 class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
+    private var isPlay = false
     override fun doGetContentViewId() = R.layout.aqhy_activity_seven_stage
 
     override fun doInitSubViews(view: View) {
@@ -26,6 +27,7 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
         val entity = list[position]
         regex(entity)
         title_view?.text = "${entity.title}\n ---${entity.author}"
+        sv?.scrollTo(0, 0)
     }
 
     private fun setListener() {
@@ -37,6 +39,9 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
             intent.putExtra("position", newPosition)
             updateData()
+            isPlay = false
+            play?.text = "播放"
+            poetry?.updatePlayStatus(isPlay)
         }
 
         next?.setOnClickListener {
@@ -47,10 +52,19 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
             intent.putExtra("position", newPosition)
             updateData()
+            isPlay = false
+            play?.text = "播放"
+            poetry?.updatePlayStatus(isPlay)
         }
 
         play?.setOnClickListener {
+            isPlay = !isPlay
+            if(isPlay)
+                play?.text = "暂停"
+            else
+                play?.text = "播放"
 
+            poetry?.updatePlayStatus(isPlay)
         }
     }
 
@@ -80,6 +94,7 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
             resultList.addAll(list)
         }
         poetry?.bindData(resultList)
+
     }
 
 }
