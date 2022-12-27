@@ -57,23 +57,39 @@ class SevenPoetryView @JvmOverloads constructor(
 
     private fun play() {
         requestData {
+            var realOuterIndex = outerIndex
+            var realInnerIndex = innerIndex
             if (outerIndex <= -1) {
-                outerIndex = 0
-                innerIndex = 0
+                realOuterIndex = 0
+                realInnerIndex = 0
             }
             val splitStr = "。，？；！、"
-            (outerIndex until childCount)?.forEach {
+            (realOuterIndex until childCount)?.forEach {
+                if(!isPlay)
+                    return@forEach
+                outerIndex = it
                 val rowView = getChildAt(it) as SevenPoetryRowView
                 val rowChildCount = rowView.childCount
-                (innerIndex until rowChildCount)?.forEach {
+                (realInnerIndex until rowChildCount)?.forEach {
+                    if(!isPlay)
+                        return@forEach
+
                     val tianTv = rowView.getChildAt(it) as? TianTextView
                     val text = tianTv?.text
                     if(isPlay && !TextUtils.isEmpty(text) && !splitStr.contains(text!!)){
+                        innerIndex = it
                         textSpeak(text.toString())
                         playAnimation(tianTv)
                         delay(1000L)
+
+                        if(outerIndex == childCount - 1 && innerIndex >= (rowView.childCount - 2)){
+                            outerIndex = -1
+                            innerIndex = -1
+                        }
+
                     }
                 }
+                realInnerIndex = 0
             }
         }
     }
