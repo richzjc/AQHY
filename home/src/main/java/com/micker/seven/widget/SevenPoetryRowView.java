@@ -17,6 +17,7 @@ import com.micker.home.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SevenPoetryRowView extends FrameLayout {
 
@@ -57,6 +58,49 @@ public class SevenPoetryRowView extends FrameLayout {
             list.get(i).setText(String.valueOf(poetry.charAt(i)));
             list.get(i).setTextColor(ResourceUtils.getColor(R.color.day_mode_text_color1_333333));
             list.get(i).setGravity(Gravity.CENTER);
+            list.get(i).setVisibility(View.VISIBLE);
+            addView(list.get(i));
+        }
+    }
+
+    public void bindDataTestBottom(String poetry) {
+        this.bindData = poetry;
+        int childCount = getChildCount();
+        List<TianTextView> list = new ArrayList<>();
+        for (int i = 0; i < childCount; i++) {
+            list.add((TianTextView) getChildAt(i));
+        }
+        removeAllViews();
+        String splitStr = "。，？；！、";
+        List<String> charList = new ArrayList<>();
+        int poetryLenth = poetry.length();
+        for (int i = 0; i < poetryLenth; i++) {
+            String value = String.valueOf(poetry.charAt(i));
+            if (!splitStr.contains(value)) {
+                charList.add(value);
+            }
+        }
+
+        int size = charList.size();
+        if (childCount < size) {
+            for (int i = childCount; i < size; i++) {
+                list.add(new TianTextView(getContext()));
+            }
+        }
+
+        if (list.size() > size) {
+            list = list.subList(0, size);
+        }
+
+
+        for (int i = 0; i < list.size(); i++) {
+            int index = new Random().nextInt(charList.size());
+            String value = charList.get(index);
+            charList.remove(value);
+            list.get(i).setText(value);
+            list.get(i).setVisibility(View.VISIBLE);
+            list.get(i).setTextColor(ResourceUtils.getColor(R.color.day_mode_text_color1_333333));
+            list.get(i).setGravity(Gravity.CENTER);
             addView(list.get(i));
         }
     }
@@ -88,7 +132,7 @@ public class SevenPoetryRowView extends FrameLayout {
             } else {
                 list.get(i).setTag(value);
             }
-
+            list.get(i).setVisibility(View.VISIBLE);
             list.get(i).setTextColor(ResourceUtils.getColor(R.color.day_mode_text_color1_333333));
             list.get(i).setGravity(Gravity.CENTER);
             addView(list.get(i));

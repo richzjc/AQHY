@@ -50,6 +50,6 @@ class SevenTestActivity : BaseActivity<Any, BasePresenter<Any>>() {
             resultList.clear()
             resultList.addAll(list)
         }
-        poetry?.bindDataTest(resultList)
+        poetry?.bindDataTest(resultList, row_view)
     }
 }

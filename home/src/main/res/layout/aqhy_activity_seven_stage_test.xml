@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -19,12 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_dp15"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:scrollbars="none">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
             <com.micker.seven.widget.SevenPoetryView
@@ -34,25 +33,26 @@
                     android:layout_marginLeft="@dimen/margin_dp15"
                     android:layout_marginRight="@dimen/margin_dp15"
                     android:layout_marginBottom="@dimen/margin_dp20" />
-
         </LinearLayout>
     </ScrollView>
 
     <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/text_size_15"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/margin_dp10"
             android:layout_marginTop="@dimen/margin_dp30"
-            android:layout_marginRight="@dimen/margin_dp15"
-            android:layout_marginBottom="@dimen/margin_dp15"
+            android:layout_marginRight="@dimen/margin_dp10"
+            android:layout_marginBottom="@dimen/margin_dp5"
+            android:layout_weight="1"
+            android:background="@drawable/drawable_seven_test_bottom"
             android:padding="@dimen/margin_dp5"
-            >
+            android:paddingRight="@dimen/margin_dp5">
 
         <com.micker.seven.widget.SevenPoetryRowView
                 android:id="@+id/row_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
     </FrameLayout>
-
-
 </LinearLayout>

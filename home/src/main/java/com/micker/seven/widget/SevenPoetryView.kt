@@ -4,11 +4,14 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Color
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.LinearLayout
+import com.micker.aqhy.util.playErrorSuccAlarm
 import com.micker.first.widget.TianTextView
 import com.micker.helper.ResourceUtils
 import com.micker.helper.speak.TextToSpeechUtils.textSpeak
@@ -25,6 +28,7 @@ class SevenPoetryView @JvmOverloads constructor(
     private var outerIndex: Int = -1
     private var innerIndex: Int = -1
     private var isPlay: Boolean = false
+    private var rowView: SevenPoetryRowView? = null
 
     init {
         orientation = VERTICAL
@@ -47,8 +51,9 @@ class SevenPoetryView @JvmOverloads constructor(
         }
     }
 
-    fun bindDataTest(list: List<String>) {
+    fun bindDataTest(list: List<String>, rowView: SevenPoetryRowView) {
         this.list = list
+        this.rowView = rowView
         outerIndex = -1
         innerIndex = -1
         removeAllViews()
@@ -60,6 +65,67 @@ class SevenPoetryView @JvmOverloads constructor(
                     params.topMargin = ScreenUtils.dip2px(15f)
                 view.bindDataTest(value)
                 addView(view, params)
+            }
+        }
+
+        playTest()
+    }
+
+    private fun playTest() {
+        requestData {
+            var realOuterIndex = outerIndex
+            var realInnerIndex = innerIndex
+            if (outerIndex <= -1) {
+                realOuterIndex = 0
+                realInnerIndex = 0
+            }
+            val splitStr = "。，？；！、"
+            (realOuterIndex until childCount)?.forEach {
+                outerIndex = it
+                bindBottomData()
+                val rowView = getChildAt(it) as SevenPoetryRowView
+                val rowChildCount = rowView.childCount
+                (realInnerIndex until rowChildCount)?.forEach {
+                    val tianTv = rowView.getChildAt(it) as? TianTextView
+                    val text = tianTv?.tag?.toString()
+                    if (!TextUtils.isEmpty(text) && !splitStr.contains(text!!)) {
+                        innerIndex = it
+                        textSpeak(text.toString())
+                        while (!TextUtils.equals(text?.trim(), tianTv.text?.toString()?.trim())){
+                            playAnimation(tianTv)
+                            delay(1000L)
+                        }
+                        if (outerIndex == childCount - 1 && innerIndex >= (rowView.childCount - 2)) {
+                            outerIndex = -1
+                            innerIndex = -1
+                        }
+
+                    }
+                }
+                realInnerIndex = 0
+            }
+        }
+    }
+
+    private fun bindBottomData(){
+        rowView?.bindDataTestBottom(list?.get(outerIndex))
+        val size = rowView?.childCount ?: 0
+        if(size > 0){
+            val listener = OnClickListener {
+                val text = (it as? TianTextView)?.text?.toString()?.trim()
+                val rowView = getChildAt(outerIndex) as? SevenPoetryRowView
+                val tianTextView = rowView?.getChildAt(innerIndex) as? TianTextView
+                val tagValue = tianTextView?.tag?.toString()?.trim()
+                if(TextUtils.equals(text, tagValue)){
+                    tianTextView?.text = text
+                    it.visibility = View.INVISIBLE
+                }else{
+                    playErrorSuccAlarm(getContext(), false)
+                }
+            }
+
+            (0 until size)?.forEach {
+                rowView?.getChildAt(it)?.setOnClickListener(listener)
             }
         }
     }
@@ -82,24 +148,24 @@ class SevenPoetryView @JvmOverloads constructor(
             }
             val splitStr = "。，？；！、"
             (realOuterIndex until childCount)?.forEach {
-                if(!isPlay)
+                if (!isPlay)
                     return@forEach
                 outerIndex = it
                 val rowView = getChildAt(it) as SevenPoetryRowView
                 val rowChildCount = rowView.childCount
                 (realInnerIndex until rowChildCount)?.forEach {
-                    if(!isPlay)
+                    if (!isPlay)
                         return@forEach
 
                     val tianTv = rowView.getChildAt(it) as? TianTextView
                     val text = tianTv?.text
-                    if(isPlay && !TextUtils.isEmpty(text) && !splitStr.contains(text!!)){
+                    if (isPlay && !TextUtils.isEmpty(text) && !splitStr.contains(text!!)) {
                         innerIndex = it
                         textSpeak(text.toString())
                         playAnimation(tianTv)
                         delay(1000L)
 
-                        if(outerIndex == childCount - 1 && innerIndex >= (rowView.childCount - 2)){
+                        if (outerIndex == childCount - 1 && innerIndex >= (rowView.childCount - 2)) {
                             outerIndex = -1
                             innerIndex = -1
                         }
@@ -134,7 +200,7 @@ class SevenPoetryView @JvmOverloads constructor(
 
         val totalSet = AnimatorSet()
         totalSet.playSequentially(set1, set2)
-        totalSet.addListener(object : Animator.AnimatorListener{
+        totalSet.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {
                 tianTv.setTextColor(ResourceUtils.getColor(R.color.day_mode_theme_color_1478f0))
             }
