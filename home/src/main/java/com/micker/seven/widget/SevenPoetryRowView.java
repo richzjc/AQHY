@@ -20,6 +20,8 @@ import java.util.List;
 
 public class SevenPoetryRowView extends FrameLayout {
 
+    public String bindData;
+
     public SevenPoetryRowView(@NonNull Context context) {
         super(context);
     }
@@ -33,6 +35,7 @@ public class SevenPoetryRowView extends FrameLayout {
     }
 
     public void bindData(String poetry) {
+        this.bindData = poetry;
         int childCount = getChildCount();
         List<TianTextView> list = new ArrayList<>();
         for (int i = 0; i < childCount; i++) {
@@ -52,6 +55,40 @@ public class SevenPoetryRowView extends FrameLayout {
 
         for (int i = 0; i < list.size(); i++) {
             list.get(i).setText(String.valueOf(poetry.charAt(i)));
+            list.get(i).setTextColor(ResourceUtils.getColor(R.color.day_mode_text_color1_333333));
+            list.get(i).setGravity(Gravity.CENTER);
+            addView(list.get(i));
+        }
+    }
+
+    public void bindDataTest(String poetry) {
+        this.bindData = poetry;
+        int childCount = getChildCount();
+        List<TianTextView> list = new ArrayList<>();
+        for (int i = 0; i < childCount; i++) {
+            list.add((TianTextView) getChildAt(i));
+        }
+        removeAllViews();
+        int size = poetry.length();
+        if (childCount < size) {
+            for (int i = childCount; i < size; i++) {
+                list.add(new TianTextView(getContext()));
+            }
+        }
+
+        if (list.size() > size) {
+            list = list.subList(0, size);
+        }
+
+        String splitStr = "。，？；！、";
+        for (int i = 0; i < list.size(); i++) {
+            String value = String.valueOf(poetry.charAt(i));
+            if (splitStr.contains(value)) {
+                list.get(i).setText(value);
+            } else {
+                list.get(i).setTag(value);
+            }
+
             list.get(i).setTextColor(ResourceUtils.getColor(R.color.day_mode_text_color1_333333));
             list.get(i).setGravity(Gravity.CENTER);
             addView(list.get(i));

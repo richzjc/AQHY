@@ -47,6 +47,23 @@ class SevenPoetryView @JvmOverloads constructor(
         }
     }
 
+    fun bindDataTest(list: List<String>) {
+        this.list = list
+        outerIndex = -1
+        innerIndex = -1
+        removeAllViews()
+        if (list != null) {
+            list.forEachIndexed { index, value ->
+                val view = SevenPoetryRowView(context)
+                val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                if (index > 0)
+                    params.topMargin = ScreenUtils.dip2px(15f)
+                view.bindDataTest(value)
+                addView(view, params)
+            }
+        }
+    }
+
     fun updatePlayStatus(isPlay: Boolean) {
         this.isPlay = isPlay
         if (isPlay) {

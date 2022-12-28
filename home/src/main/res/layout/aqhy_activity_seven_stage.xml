@@ -28,7 +28,7 @@
                 android:paddingBottom="@dimen/margin_dp5"
                 android:text="上一首"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="@dimen/text_size_15" />
 
         <View
                 android:layout_width="0dp"
@@ -48,7 +48,27 @@
                 android:paddingBottom="@dimen/margin_dp5"
                 android:text="播放"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="@dimen/text_size_15" />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:visibility="invisible" />
+
+        <com.micker.core.widget.ShareTextView
+                android:id="@+id/test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/first_stage_btn_bg"
+                android:gravity="center"
+                android:paddingLeft="@dimen/margin_dp15"
+                android:paddingTop="@dimen/margin_dp5"
+                android:paddingRight="@dimen/margin_dp15"
+                android:paddingBottom="@dimen/margin_dp5"
+                android:text="测验"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_15" />
 
         <View
                 android:layout_width="0dp"
@@ -68,7 +88,7 @@
                 android:paddingBottom="@dimen/margin_dp5"
                 android:text="下一首"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="@dimen/text_size_15" />
     </LinearLayout>
 
     <TextView
@@ -105,6 +125,5 @@
 
         </LinearLayout>
     </ScrollView>
-
 
 </RelativeLayout>

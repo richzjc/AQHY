@@ -1,5 +1,6 @@
 package com.micker.seven.activity
 
+import android.content.Intent
 import android.view.View
 import com.micker.core.base.BaseActivity
 import com.micker.core.base.BasePresenter
@@ -34,7 +35,7 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
         last?.setOnClickListener {
             var position = intent.getIntExtra("position", 0)
             var newPosition = position - 1
-            if(newPosition < 0)
+            if (newPosition < 0)
                 newPosition = list.size - 1
 
             intent.putExtra("position", newPosition)
@@ -47,7 +48,7 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
         next?.setOnClickListener {
             var position = intent.getIntExtra("position", 0)
             var newPosition = position + 1
-            if(newPosition >= list.size)
+            if (newPosition >= list.size)
                 newPosition = 0
 
             intent.putExtra("position", newPosition)
@@ -59,12 +60,20 @@ class SevenActivity : BaseActivity<Any, BasePresenter<Any>>() {
 
         play?.setOnClickListener {
             isPlay = !isPlay
-            if(isPlay)
+            if (isPlay)
                 play?.text = "暂停"
             else
                 play?.text = "播放"
 
             poetry?.updatePlayStatus(isPlay)
+        }
+
+        test?.setOnClickListener {
+            isPlay = false
+            poetry?.updatePlayStatus(isPlay)
+            val intent = Intent(this, SevenTestActivity::class.java)
+            intent.putExtras(getIntent())
+            startActivity(intent)
         }
     }
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_dp60"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="bold" />
+
+    <ScrollView
+            android:id="@+id/sv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_dp15"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <com.micker.seven.widget.SevenPoetryView
+                    android:id="@+id/poetry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_dp15"
+                    android:layout_marginRight="@dimen/margin_dp15"
+                    android:layout_marginBottom="@dimen/margin_dp20" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_size_15"
+            android:layout_marginTop="@dimen/margin_dp30"
+            android:layout_marginRight="@dimen/margin_dp15"
+            android:layout_marginBottom="@dimen/margin_dp15"
+            android:padding="@dimen/margin_dp5"
+            >
+
+        <com.micker.seven.widget.SevenPoetryRowView
+                android:id="@+id/row_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </FrameLayout>
+
+
+</LinearLayout>
