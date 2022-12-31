@@ -62,5 +62,9 @@
         <activity
                 android:name="com.micker.seven.activity.SevenTestActivity"
                 android:screenOrientation="portrait" />
+
+        <activity android:name="com.micker.eight.activity.EightStageActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 </manifest>

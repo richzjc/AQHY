@@ -1,10 +1,18 @@
 [
   {
     "id" : "1",
-    "title" : "数字华容首",
+    "title" : "数字华容道",
     "stage" : "所有年龄段",
     "desc" : "认识数字，培养逻辑推理能力",
     "imageUrl" : "http://yuanyuan0914.top/image/chinese/third_stage_math.jpg",
     "router" : "wscn://aqhy.com/third/stage/action"
+  },
+  {
+    "id" : "2",
+    "title" : "数一下有多少苹果",
+    "stage" : "学前教育",
+    "desc" : "学会数数",
+    "imageUrl" : "http://yuanyuan0914.top/image/chinese/third_stage_math.jpg",
+    "router" : "wscn://aqhy.com/eight/stage/action"
   }
 ]

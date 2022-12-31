@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.micker.eight.widget.EightAppleView
+            android:id="@+id/eight_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        />
+
+
+    <com.micker.core.widget.ShareTextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/first_stage_btn_bg"
+            android:gravity="center"
+            android:paddingLeft="@dimen/margin_dp15"
+            android:paddingTop="@dimen/margin_dp5"
+            android:paddingRight="@dimen/margin_dp15"
+            android:paddingBottom="@dimen/margin_dp5"
+            android:text="开始"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="@dimen/margin_dp25"
+            android:textSize="20dp" />
+
+</FrameLayout>
