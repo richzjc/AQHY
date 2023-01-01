@@ -25,7 +25,6 @@ class EightStageActivity : BaseActivity<Any, BasePresenter<Any>>() {
                 start?.text = "开始"
                 isStart = false
             }else{
-                eight_view?.start()
                 start?.text = "结束"
                 isStart = true
             }

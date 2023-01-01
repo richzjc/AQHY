@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
 import com.micker.core.imageloader.ImageLoadManager
@@ -23,12 +24,11 @@ class EightAppleView @JvmOverloads constructor(
 
     private var count: Int = 0
     private var drawable: Drawable? = null
-    private var drawableHeight = ScreenUtils.dip2px(50f)
+    private var drawableHeight = ScreenUtils.dip2px(80f)
     private var drawableWidth = 0
     private var widgetCount: Int = 0
     private val viewList = ArrayList<WscnImageView>()
-    private var isStart = false
-
+    private var isStart : Boolean = false
 
     init {
         drawable = ResourceUtils.getResDrawableFromID(R.drawable.eight_apple)
@@ -36,14 +36,24 @@ class EightAppleView @JvmOverloads constructor(
     }
 
     fun start() {
-        isStart = true
         count = 0
-        if (childCount < widgetCount*2) {
-            (childCount until (widgetCount*2))?.forEach {
+        if (childCount < widgetCount * 2) {
+            (childCount until (widgetCount * 2))?.forEach {
                 val params = LayoutParams(drawableWidth, drawableHeight)
                 val imageView = WscnImageView(context)
+
                 ImageLoadManager.loadCircleImage(R.drawable.eight_apple, imageView, 0, 0)
                 addView(imageView, params)
+                imageView?.setOnClickListener {
+                    try {
+                        it.animation?.cancel()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                    it.visibility = View.INVISIBLE
+                    count += 1
+                }
             }
         }
 
@@ -53,28 +63,33 @@ class EightAppleView @JvmOverloads constructor(
         }
 
         requestData {
-            while (isStart && viewList.size > 0){
-                count += 1
+            while (viewList.size > 0) {
                 val firstView = viewList[0]
                 viewList.remove(firstView)
                 val randomX = Random.nextInt(measuredWidth - drawableWidth)
                 firstView.layout(randomX, -drawableHeight, randomX + drawableWidth, 0)
                 addAnimation(firstView)
-                delay(1000L)
+                delay(800L)
             }
         }
     }
 
-    private fun addAnimation(imageView : WscnImageView){
+    private fun addAnimation(imageView: WscnImageView) {
         val scaleXAnimation = ObjectAnimator.ofFloat(imageView, "rotation", 0f, 360f)
         scaleXAnimation.repeatCount = -1
-        val scaleYAnimation = ObjectAnimator.ofFloat(imageView, "translationY", -drawableHeight * 1f, measuredHeight * 1f + drawableHeight)
+        val scaleYAnimation = ObjectAnimator.ofFloat(
+            imageView,
+            "translationY",
+            -drawableHeight * 1f,
+            measuredHeight * 1f + drawableHeight
+        )
         val set1 = AnimatorSet()
         set1.playTogether(scaleXAnimation, scaleYAnimation)
         set1.duration = widgetCount * 1000L
         set1.interpolator = LinearInterpolator()
-        scaleYAnimation.addListener(object : Animator.AnimatorListener{
+        scaleYAnimation.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {
+                imageView.visibility = View.VISIBLE
             }
 
             override fun onAnimationEnd(animation: Animator?) {
@@ -92,13 +107,17 @@ class EightAppleView @JvmOverloads constructor(
     }
 
     fun end() {
-        isStart = false
+
     }
 
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         widgetCount = Math.floor(measuredHeight * 1.0 / (drawableHeight * 2)).toInt()
+        if(widgetCount > 0 && !isStart){
+            isStart = true
+            start()
+        }
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
