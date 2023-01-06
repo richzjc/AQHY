@@ -101,7 +101,6 @@ class EightAppleView @JvmOverloads constructor(
 
             override fun onAnimationRepeat(animation: Animator?) {
             }
-
         })
         set1.start()
     }
